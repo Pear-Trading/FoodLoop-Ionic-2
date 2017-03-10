@@ -1,0 +1,8 @@
+<!-- index page as a tab page-->
+
+  <ion-tabs  [selectedIndex]="mySelectedIndex">
+    <ion-tab tabIcon="md-home" tabTitle="Home" [root]="tab1Root" [rootParams]="username"></ion-tab>
+    <ion-tab tabIcon= "md-stats" tabTitle="Ranking" [root]="tab2Root" [rootParams]="username"></ion-tab>
+    <ion-tab tabIcon="md-settings" tabTitle="Settings" [root]="tab3Root"></ion-tab>
+    <ion-tab tabIcon="md-heart" tabTitle="About" [root]="tab4Root"></ion-tab>
+  </ion-tabs>

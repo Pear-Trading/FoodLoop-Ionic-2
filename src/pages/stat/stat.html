@@ -1,0 +1,118 @@
+<!-- this page is a navgation page for all gamify elements -->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>My Personal overview</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <!-- display inter-tab for controlling chart display -->
+  <ion-row class="innerTab">
+    <ion-segment [(ngModel)]="innerTabCtrl" color="primary">
+      <ion-segment-button value="Chart"> Chart </ion-segment-button>
+      <ion-segment-button value="List" > List </ion-segment-button>
+    </ion-segment>
+  </ion-row>
+
+  <div [ngSwitch]="innerTabCtrl">
+
+    <!-- Graphic representation of the data-->
+    <div *ngSwitchCase="'Chart'" ng-init="initCharts()">
+      <ion-card>
+        <div class="cardHeader"> My rank </div>
+        <div class="cardContent"> 
+          <canvas #lineCanvas></canvas>
+        </div>
+      </ion-card>  
+    </div>
+  
+  <!-- Text representation of the data -->
+  <div *ngSwitchCase="'List'"> 
+
+    <!-- First section -->
+    <ion-card> 
+      <div class="cardHeader yellowCard"> My rank </div>
+      <div class="cardContent">
+        <div class="cardItem"> 
+            <div class="cardItemHeader"> My position in leader board 
+              <span class="cardItemHeaderRight"> 1 </span> </div>
+              <div class="cardItemContent"> 
+                  Your previous position in leader board is 3 
+              </div>
+        </div>
+      </div>
+    </ion-card><!-- First section end -->
+ 
+  <!-- Second section -->
+  <ion-card>
+    <!-- Spent -->
+    <div class="cardHeader purpleCard"> My spent </div>
+    <div class="cardContent"> 
+      
+      <!-- item -->
+      <div class="cardItem"> 
+        <div class="cardItemHeader"> Daily
+          <span class="cardItemHeaderRight"> £30 </span> </div>
+        <div class="cardItemContent"> </div>
+      </div>      
+      
+      <!-- item -->
+      <div class="cardItem"> 
+        <div class="cardItemHeader"> Weekly
+          <span class="cardItemHeaderRight"> £60 </span> 
+        </div>
+        <div class="cardItemContent"> </div>
+      </div>
+
+      <!-- item -->
+      <div class="cardItem"> 
+        <div class="cardItemHeader"> Monthly
+          <span class="cardItemHeaderRight"> £90 </span> 
+        </div>
+        <div class="cardItemContent"></div>
+      </div>
+    </div><!-- card-content-end-->
+  </ion-card><!-- Second section end -->
+
+  <!-- Third section -->
+  <ion-card>
+    <!-- respent -->
+    <div class="cardHeader blueCard"> My re-spent </div>
+    <div class="cardContent"> 
+      
+      <!-- item -->
+      <div class="cardItem"> 
+        <div class="cardItemHeader"> Daily re-spent
+          <span class="cardItemHeaderRight"> £10 </span> </div>
+        <div class="cardItemContent"> 
+    
+        </div>
+      </div>      
+
+      <!-- item -->
+      <div class="cardItem"> 
+        <div class="cardItemHeader"> Weekly re-spent
+          <span class="cardItemHeaderRight"> £20 </span> </div>
+        <div class="cardItemContent"> 
+    
+        </div>
+      </div>
+      
+      <!-- item -->
+      <div class="cardItem"> 
+        <div class="cardItemHeader"> Monthly re-spent
+          <span class="cardItemHeaderRight"> £30 </span> </div>
+        <div class="cardItemContent"> 
+    
+        </div>
+      </div>
+    </div><!-- card content end -->
+  </ion-card><!-- Third section end -->
+
+  </div><!-- Graphic representation end -->
+</div><!-- ngSwitch end-->
+ 
+</ion-content>

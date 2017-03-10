@@ -1,0 +1,51 @@
+<ion-content> 
+<div padding>
+  <ion-segment color="primary" mode="md" [(ngModel)]="listType">
+    <ion-segment-button value="All">
+      All
+    </ion-segment-button>
+    <ion-segment-button value="Local">
+      Local
+    </ion-segment-button>
+    <ion-segment-button value="Monthly">
+      Monthly
+    </ion-segment-button>
+  </ion-segment>
+
+  
+  <div [ngSwitch]="listType" class="listCtrl">
+
+    <ion-list *ngSwitchCase="'All'"  >
+      <ion-item [ngClass]="getClass(item)" *ngFor="let item of rankingData "  >
+  
+        <ion-grid>
+          <ion-row >
+            <!-- Current Position -->
+            <ion-col width-10><p>{{item.currentPos}}<p></ion-col>
+            <!-- Display position shift using different icon and color -->
+            <ion-col *ngIf="item.previousPos!=0" width-20><ion-icon [color]="getIconColor(item)" [name]="getIcon(item)"></ion-icon></ion-col>
+            <!-- if no position shift is made, display red -->
+            <ion-col *ngIf="item.previousPos==0"  width-20><ion-badge color="danger">NEW</ion-badge></ion-col> 
+            <!-- Display name based current user -->
+            <ion-col *ngIf="item.currentPos==currentPos"  width-50> <p>You<p> </ion-col> 
+            <ion-col *ngIf="item.currentPos!=currentPos" width-50>{{item.username}}</ion-col> 
+            
+            <ion-col width-20>{{item.pearPoint}}</ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-item> 
+    </ion-list> <!-- All -->
+
+    <ion-list *ngSwitchCase="'Monthly'">
+      <ion-item>
+        <h2>TO-DO</h2>
+      </ion-item>
+    </ion-list><!--Monthly-->
+
+  </div><!-- ng switch end -->
+
+</div><!-- padding end -->
+
+
+</ion-content>

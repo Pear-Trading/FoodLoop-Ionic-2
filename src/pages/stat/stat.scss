@@ -1,0 +1,54 @@
+page-stat {
+
+  .cardHeader{
+    background-color: orangered; 
+    color:white; 
+    font-size: 1.5em; 
+    padding: 16px; 
+  } 
+   
+  //  custom header color 
+  .blueCard{
+    background-color: dodgerblue;
+  }
+
+  .purpleCard{
+    background-color: mediumpurple;
+  }
+
+  .yellowCard{
+    background-color:yellowgreen;
+  }
+
+  .cardContent{
+    padding:16px; 
+    background-color: whitesmoke;
+  }
+
+  //  a card .cardItem consisted of 
+  // header 
+  // header right 
+  // main .cardContent
+  .cardItem{
+    .cardItemHeader{
+      background-color: whitesmoke;
+      color:black; 
+      font-size: 1.3em;
+      padding: 5px;
+    }
+
+    .cardItemHeaderRight{
+      float: right;
+      color:black;
+    }
+
+    .cardItemContent{
+      background-color: whitesmoke;
+      color:darkgray;
+      font-size: 1.0em; 
+      padding:5px; 
+    }
+    border-bottom: 1px solid lightgray; 
+  }
+
+}

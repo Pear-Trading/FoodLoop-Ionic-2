@@ -1,0 +1,34 @@
+page-ranking{
+  // display top three players in red 
+  .topThree{
+        p{
+          color:orangered; 
+          font-weight: bold;
+        }
+    }
+  // position list 
+  .listCtrl{
+    ion-list{
+      margin-top: 5px;
+      margin-left: -15px;
+    }
+  }
+  // position icon 
+  .pos{
+      margin-left:-30px;
+  }
+
+  // dispaly user in black and highlighted
+  .user{
+    background-color:#eafafa;
+    p{
+      font-weight: bold;
+      color:black;    
+    }
+    font-weight: bold;
+    color:black;
+  }
+}
+
+
+

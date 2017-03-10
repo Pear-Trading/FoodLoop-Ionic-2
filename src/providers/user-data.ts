@@ -1,0 +1,149 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import firebase from 'firebase';
+/*
+  this ts file handles the user-data, including login, logout event 
+  user-data management by storing data in the local storage 
+  other pages can import this page and call method to retrieve user-data 
+  such as getUsername()
+*/
+@Injectable()
+export class UserData {
+
+  /* Testing purpose, ideally, these variable should be initilizaed via calling */
+  /* server APIs */
+  /* myData stores user detail including email, fullname, username and invitation token */
+  /* rankingData stores ranking data including monthly spend of user */
+  /* testingData store all data required for testing */
+
+  public myData:any;
+  public rankingData: any;
+  public testingData;
+
+
+  /* Storage */
+  /* The data stored in storage is like cache data, the system should periodically update 
+  these data to maintain the latest state */
+  // Game data, set of personal goals, ongoing progress of a goal
+  // User data, set of personal data to be displayed, username, profile pic, theme color 
+
+
+  /* TESTING SECTION END*/
+
+  HAS_LOGGED_IN = 'hasLoggedIn';
+  constructor(
+    public events: Events,
+    public storage: Storage,  
+
+  ) {
+
+      /* Internal database for user testing, handles login, logoff and retrieves user-data */
+    this.testingData = {
+      test007: [ 
+        {"username": "testingc@test.com","password":"admin","token": "test007","fullname": "John Smtih","email" : "testingc@test.com","rankingID": "0"}
+      ],
+      ranking:[
+        {token:"d","ref":"testingc@test.com","username": "Dave Brookes","previousPos":1,"currentPos":1,"pearPoint":620.57,"retailerSpent":20,"receiptSubmitted":161,"firstStart":"20-Jun-15"},
+        
+        {token:"e","ref":"admin","username": "Michael Hallam","previousPos":2,"currentPos":2,"pearPoint":391.10,"retailerSpent":51,"receiptSubmitted":429,"firstStart":"1-Jun-15"},
+        
+        {token:"f","ref":"test003","username": "Steve Jenkins","previousPos":3,"currentPos":3,"pearPoint":208.62,"retailerSpent":13,"receiptSubmitted":97,"firstStart":"12-Feb-16"},
+        
+        {token:"g","ref":"test004","username": "Dawn Keyse","previousPos":5,"currentPos":4,"pearPoint":202.58,"retailerSpent":20,"receiptSubmitted":60,"firstStart":"1-Jun-15"},
+       
+        {token:"h","ref":"test005","username": "Beccy Whittle","previousPos":7,"currentPos":5,"pearPoint":173.20,"retailerSpent":12,"receiptSubmitted":64,"firstStart":"22-Jul-15"},
+      
+        {token:"i","ref":"test006","username": "Anna Clayton","previousPos":4,"currentPos":6,"pearPoint":169.93,"retailerSpent":18,"receiptSubmitted":51,"firstStart":"10-Jun-15"},
+
+        {token:"j","ref":"test007","username": "Emily Heath","previousPos":6,"currentPos":7,"pearPoint":147.39,"retailerSpent":5,"receiptSubmitted":65,"firstStart":"30-Jun-15"},
+        
+        {token:"k","ref":"test008","username": "Mark Keating","previousPos":9,"currentPos":8,"pearPoint":143.46,"retailerSpent":11,"receiptSubmitted":56,"firstStart":"14-Mar-16"},
+
+        {token:"l","ref":"test009","username": "Hannah Reade","previousPos":8,"currentPos":9,"pearPoint":138.77,"retailerSpent":9,"receiptSubmitted":40,"firstStart":"15-Jan-16"},
+
+        {token:"m","ref":"test010","username": "Tony Haslam","previousPos":10,"currentPos":10,"pearPoint":113.02,"retailerSpent":14,"receiptSubmitted":61,"firstStart":"10-Jun-15"},
+
+        {token:"w","ref":"test011","username": "Ruta Hallam","previousPos":11,"currentPos":11,"pearPoint":111.66,"retailerSpent":21,"receiptSubmitted":57,"firstStart":"17-Jun-15"},
+
+        {token:"m","ref":"test012","username": "Andrew Willis","previousPos":12,"currentPos":12,"pearPoint":91.88,"retailerSpent":3,"receiptSubmitted":13,"firstStart":"30-Apr-16"}
+      ],
+      tokens:[
+        {"tokenString":"test007"},
+        {"tokenString":"test008"},
+        {"tokenString":"test009"},
+        {"tokenString":"test0010"},
+        {"tokenString":"test0011"},
+      ]
+    };
+  /* Testing */
+
+}
+  
+  random_data(username,fullname){
+       return   {token:"d","ref":username,"username": fullname,"previousPos":1,"currentPos":1,"pearPoint":620.57,"retailerSpent":20,"receiptSubmitted":161,"firstStart":"20-Jun-15"};
+  }
+  
+  /* Login and log out events ****/
+  login(username: string ){
+    this.storage.set(this.HAS_LOGGED_IN,true);
+    this.setUsername(username);
+    this.events.publish('user:login')
+  } 
+  signup(username: string) {
+    this.storage.set(this.HAS_LOGGED_IN, true);
+    this.setUsername(username);
+    this.events.publish('user:signup');
+  };
+  logout() {
+    this.storage.remove(this.HAS_LOGGED_IN);
+    this.storage.remove('username');
+    this.events.publish('user:logout');
+  };
+  /* Login and log out events end ****/
+
+  /* Storage management and data access method */ 
+  getRankingData(){
+    return this.testingData.ranking;
+  }
+
+  getUsername() {
+    return this.storage.get('username').then((value) => {
+      return value;
+    });
+  };
+
+  setUsername(username: string) {
+    this.storage.set('username', username);
+  };
+
+  setSessionToken(token: string){
+    this.storage.set('SessionToken',token);
+  }
+
+  getSessionToken(){
+    return this.storage.get('SessionToken').then((value) => {
+      return value;
+    });
+  }
+  // return a promise
+  hasLoggedIn() {
+    return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
+      return value === true;
+    });
+  };
+  /* Storage management and data access method end */ 
+
+  /* Testing */
+  /* Gather data of the specified username and return packed data */
+  getMyData(username){
+    
+    var filtered = this.testingData.ranking.filter(function(item) { 
+      return item.ref === "admin";}); 
+      // console.log(filtered[1].username);
+      return new Promise((resolve,reject)=>resolve(filtered["0"]));
+  } 
+
+}
