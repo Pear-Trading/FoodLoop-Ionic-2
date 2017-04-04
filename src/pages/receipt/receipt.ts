@@ -34,7 +34,7 @@ export class ReceiptPage {
 
   storeList;
   historyStoreList; 
-  receiptList;  // pending receipt list
+  //receiptList;  // pending receipt list
   showHistoryList = false; 
   showAddStore = false;
   showList = false; 
@@ -61,11 +61,11 @@ export class ReceiptPage {
       {id:2,name:"Lemon Inc.", fullAddress: "223 Lemon Road,Lancaster,LA1 1AP"},
       {id:3,name:"Orange Inc.", fullAddress: "323 Orange Walk,Lancaster,LA1 1AP"},
     ];
-    this.receiptList = [
-      {id:1,storename:"Apple Inc.", amount:1.09,status:"pending",fullAddress: "123 Apple Street,Lancaster,LA1 1AP"},
-      {id:2,storename:"Lemon Inc.", amount:5.33,status:"pending",fullAddress: "223 Lemon Road,Lancaster,LA1 1AP"},
-      {id:3,storename:"Orange Inc.", amount:10.21,status:"pending",fullAddress: "323 Orange Walk,Lancaster,LA1 1AP"},
-    ];
+    //this.receiptList = [
+    // {id:1,storename:"Apple Inc.", amount:1.09,status:"pending",fullAddress: "123 Apple Street,Lancaster,LA1 1AP"},
+    // {id:2,storename:"Lemon Inc.", amount:5.33,status:"pending",fullAddress: "223 Lemon Road,Lancaster,LA1 1AP"},
+    // {id:3,storename:"Orange Inc.", amount:10.21,status:"pending",fullAddress: "323 Orange Walk,Lancaster,LA1 1AP"},
+    //];
   }
   //  Setting up variables required for this page, such as session token 
   ionViewDidLoad() {
