@@ -92,21 +92,28 @@ export class ReceiptPage {
   }
 
   initializeItems() {
-      var searchData = JSON.stringify({
-      searchName: this.storename, sessionToken: this.sessionToken});
+    var searchData = JSON.stringify({
+      searchName: this.storename,
+      sessionToken: this.sessionToken
+    });
 
-      this.peopleService.search(searchData).subscribe(
-       data => {
-          this.storeList = data.json().validated; 
-          // handle the case when the storelist is empty
-          if(this.storeList.length < 1 ) {
-            this.storeList = null;
-            this.showAddStore = true;
-          } 
-       },
-       error=> {
+    this.peopleService.search(searchData).subscribe(
+      data => {
+        if(data.json().validated.length > 0) {
+          this.storeList = data.json().validated;
+        } else {
+          this.storeList = data.json().unvalidated;
+        }
+        // handle the case when the storelist is empty
+        if(this.storeList.length < 1 ) {
+          this.storeList = null;
+          this.showAddStore = true;
+        }
+      },
+      error => {
         console.log(error);
-      });
+      }
+    );
   }
 
   // show histry list when the input/storename is empty
@@ -228,8 +235,13 @@ export class ReceiptPage {
 
     // // File name only
     var filename = this.lastImage;
-    var myParams;
-    switch(this.transactionAdditionType){
+    var myParams = {
+      microCurrencyValue: this.amount,
+      // TODO This is hardcoded to 3, which is for when theres no ID for the backend
+      transactionAdditionType: 3,
+      organisationName: this.storename,
+    };
+    /*    switch(this.transactionAdditionType){
       case 1:
         myParams = {};
         break;
@@ -239,15 +251,18 @@ export class ReceiptPage {
       case 3: 
         myParams = {};
         break;
-    }
+    } */
     /******************************/
     var options = {
       fileKey: "file2",
       fileName: filename,
       chunkedMode: false,
-      mimeType: "multipart/form-data",
-      params: myParams
-    } 
+      // TODO This is wrong, defaults to image/jpeg.
+      // mimeType: "multipart/form-data",
+      params: {
+        json: JSON.stringify( myParams )
+      }
+    } ;
 
 
     const fileTransfer = new Transfer();
