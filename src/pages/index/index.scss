@@ -3,8 +3,18 @@ page-index {
 }
 .tabbar {
   justify-content: center;
-}
+  }
 
 .tab-button {
   max-width: 200px;
+  background: #a7cacb;
+  }
+
+
+.tabs-md .tab-button .tab-button-icon {
+  color: #8a7129;
 }
+
+.tabs-md .tab-button {
+  color: #8a7129;
+  }

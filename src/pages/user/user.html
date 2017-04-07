@@ -74,7 +74,7 @@
         <ion-row no-gutters>
           <ion-col >  
               <div (click)="navCtrl.push(statPage)" class="cardItem"> 
-                <div class="cardItemHeader"> My Spent </div>
+                <div class="cardItemHeader">Current Spend</div>
                 <div class="cardItemContent"> £88.88 </div>
               </div>
           </ion-col>
@@ -82,9 +82,10 @@
   </div>
 
 
+  
    <div class="cardContent"> 
      <ion-grid>
-        <ion-row> 
+<!--        <ion-row> 
            <ion-col width-50> 
               <button ion-button full large block outline [navPush]="gamePage">
                   <ion-icon name="cube"></ion-icon>
@@ -96,7 +97,7 @@
                   <ion-icon name="cube"></ion-icon>
                      Shopping center </button>
            </ion-col>
-        </ion-row>
+        </ion-row> -->
      </ion-grid>
    </div>
 
@@ -108,8 +109,8 @@
   <ion-toolbar>
 
 
-  <button ion-button [navPush]="receiptPage"  large icon-right full > Enter a receipt
-  <ion-icon name="flame" md="md-flame" color="foodloop"> </ion-icon>
+  <button ion-button [navPush]="receiptPage"  large icon-right full > Add a<br />Receipt
+<!--  <ion-icon name="flame" md="md-flame" color="foodloop"> </ion-icon> -->
   </button>
 
   </ion-toolbar>

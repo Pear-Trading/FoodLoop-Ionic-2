@@ -3,9 +3,9 @@ page-user{
 
 .simpleDashBoard{
 
-	background-color: #2196F3; 
-	border-radius: 2dp;
-	
+	border-radius: 0dp;
+	background: #29526d;
+			
 	.greetingRow{
 	  padding-top: 10%;
 		height: 72dp;
@@ -14,11 +14,12 @@ page-user{
 			padding-bottom: 16dp;
 			padding: 16dp;
 			font-size: 24sp;
-			color:white;	
+			color:white;
+		
 		}
 		.subhead{
 			font-size: 12px;
-			color:palegreen;
+			color: #eac55e;
 		}
 		ion-item{
 			background-color: transparent;
@@ -32,7 +33,7 @@ page-user{
   }
   .statusRow{
     .header{
-      color: lightcyan;
+      color: #eaac5e;
       font-size: 1.5em;
       text-align: center;
     }
@@ -61,10 +62,10 @@ page-user{
   } 
 
   .cardContent{
-    padding:16px; 
+    padding: 16px; 
     background-color: whitesmoke;
-	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border-radius: 3px; /* 5px rounded corners */
+	box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
+    border-radius: 0px; /* 5px rounded corners */
 	  ion-row{
 		  margin-right: 0;
       margin-left: 0;
@@ -75,23 +76,23 @@ page-user{
   .cardItem{
 	  padding: 0px;
     .cardItemHeader{
-      background-color: #2196F3;
-      color:White; 
+      background-color: #74a7b8;
+      color: #efefef; 
       font-size: 1.3em;
       padding: 5px;
 	    text-align: center;
     }
 	
     .cardItemContent{
-      background-color: white;
-      color:black;
+      background-color: #efefef;
+      color: #1e4158;
       font-size: 2.0em; 
       padding:16px;
 	   text-align: center;  
     }
 
     border-bottom: 1px solid lightgray; 
-	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	  box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
     transition: 0.3s;
     border-radius: 5px;
     background-color: whitesmoke; 
@@ -100,13 +101,21 @@ page-user{
 /* Styling all the items in the footersection */
 .pearUpCtrl{
    button{
-    background-color: #3366cc;
+    background-color: #74a7b8;
     color: white;
-    box-shadow: 3px 3px 3px silver;
-	width: 90%;
-	margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	margin: 5px auto;
+	text-transform: none;
    }
 
+      button:active{
+    background-color: #1e4158;
+    color: white;
+    box-shadow: 0px 4px 8px #74a7b8;
+   }
 
 }
 }
