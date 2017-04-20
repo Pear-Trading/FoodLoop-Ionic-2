@@ -7,7 +7,7 @@ page-user{
 	background: #29526d;
 			
 	.greetingRow{
-	  padding-top: 10%;
+	  padding-top: 0px;
 		height: 72dp;
 		.title{
 			padding-top:    16dp;
@@ -18,7 +18,7 @@ page-user{
 		
 		}
 		.subhead{
-			font-size: 12px;
+			font-size: 12sp;
 			color: #eac55e;
 		}
 		ion-item{
@@ -48,6 +48,7 @@ page-user{
 
 	.innerChart{
 		background-color:white;
+		
 	}
 
 }
@@ -61,33 +62,32 @@ page-user{
     padding: 16px; 
   } 
 
-  .cardContent{
-    padding: 16px; 
-    background-color: whitesmoke;
+  .cardContent{ 
+    background: color($colors, primary);
 	box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
-    border-radius: 0px; /* 5px rounded corners */
-	  ion-row{
-		  margin-right: 0;
-      margin-left: 0;
-	  }
+    border-radius: 0px; /* 0px rounded corners */
   }
   
 
   .cardItem{
+
 	  padding: 0px;
+	  margin: 6px auto;
+	  min-width: 90%;
+	  
     .cardItemHeader{
       background-color: #74a7b8;
       color: #efefef; 
-      font-size: 1.3em;
+      font-size: 22sp;
       padding: 5px;
-	    text-align: center;
+	  text-align: center;
     }
 	
     .cardItemContent{
       background-color: #efefef;
       color: #1e4158;
-      font-size: 2.0em; 
-      padding:16px;
+      font-size: 28px; 
+      padding: 10px;
 	   text-align: center;  
     }
 
@@ -98,21 +98,25 @@ page-user{
     background-color: whitesmoke; 
   }
 
-/* Styling all the items in the footersection */
 .pearUpCtrl{
-   button{
+
+margin: 30px 10px 10px 10px;
+border-radius: 5px;
+background: #cfcfcf;
+   
+    button{
     background-color: #74a7b8;
     color: white;
-    box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
-	width: 100px;
-	height: 100px;
+	border: 1px solid rgba(255, 255, 255, .7);
+	width: 120px;
+	height: 120px;
 	border-radius: 100%;
 	margin: 5px auto;
 	text-transform: none;
    }
 
       button:active{
-    background-color: #1e4158;
+    background-color: #efefef;
     color: white;
     box-shadow: 0px 4px 8px #74a7b8;
    }
