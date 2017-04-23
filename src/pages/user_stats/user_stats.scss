@@ -84,46 +84,42 @@ page-user{
     }
 	
     .cardItemContent{
-      background-color: #efefef;
-      color: #1e4158;
-      font-size: 28px; 
-      padding: 10px;
-	   text-align: center;  
+		background-color: #efefef;
+		color: #1e4158;
+		font-size: 28px; 
+		padding: 10px;
+		text-align: center;  
     }
 
     border-bottom: 1px solid lightgray; 
-	box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
-    transition: 0.3s;
-    border-radius: 5px;
-    background-color: whitesmoke; 
+		box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
+		transition: 0.3s;
+		border-radius: 5px;
+		background-color: whitesmoke; 
   }
 
 .pearUpCtrl{
-	position: fixed;
-	bottom: 10%; 
-	left: 2px;
-	right: 2px;
-	border-radius: 5px;
-	background-color: #fff;
-	color: #666;
-	border: 1px solid rgba(220, 220, 220, 1);
+
+margin: 30px 10px 10px 10px;
+border-radius: 5px;
+background: #cfcfcf;
    
-		button{
-			background-color: #f5f5f5;
-			color: #666;
-			border: 1px solid rgba(220, 220, 220, 1);
-			width: 120px;
-			height: 120px;
-			border-radius: 100%;
-			margin: 5px auto;
-			text-transform: none;
-		}
+    button{
+    background-color: #74a7b8;
+    color: white;
+	border: 1px solid rgba(255, 255, 255, .7);
+	width: 120px;
+	height: 120px;
+	border-radius: 100%;
+	margin: 5px auto;
+	text-transform: none;
+   }
 
-		button:active{
-			background-color: #efefef;
-			color: white;
-			box-shadow: 0px 4px 8px #74a7b8;
-		}
+      button:active{
+    background-color: #efefef;
+    color: white;
+    box-shadow: 0px 4px 8px #74a7b8;
+   }
+
 }
-
 }

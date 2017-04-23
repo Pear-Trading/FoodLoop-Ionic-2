@@ -39,12 +39,21 @@
         </div>
       </ion-col>
     </ion-row>
-
+      </ion-grid>
 	  
+<div  class="pearUpCtrl">
+	<ion-grid>
+		<ion-row> 
+  <button ion-button [navPush]="receiptPage"  large icon-right full > Add a<br />Receipt
+<!--  <ion-icon name="flame" md="md-flame" color="foodloop"> </ion-icon> -->
+  </button>
+       </ion-row>
+	</ion-grid>
+</div>
 
 
-
-  <div class="cardContent">  
+<div class="cardContent">  
+	<ion-grid>
 		<ion-row>
 			<ion-col col-6>
               <div (click)="navCtrl.push(statPage)" class="cardItem"> 
@@ -59,20 +68,11 @@
               </div>
 			</ion-col>
         </ion-row>
-</div>
-	</ion-grid>
-
-<div  class="pearUpCtrl">
-	<ion-grid>
-		<ion-row> 
-  <button ion-button [navPush]="receiptPage"  large icon-right full > Add<br />Receipt
-<!--  <ion-icon name="flame" md="md-flame" color="foodloop"> </ion-icon> -->
-  </button>
-       </ion-row>
 	</ion-grid>
 </div>
 
-<!--
+
+     <!-- display inter-tab for controlling chart display -->
 	<ion-grid>
     <ion-row class="innerTab">
       <ion-segment [(ngModel)]="status" mode="md" >
@@ -82,6 +82,8 @@
       </ion-segment>
     </ion-row>
 
+    <!-- display charts -->
+    <!-- ideally, this would be a quick and simple grasp of user overview-->
 
     <ion-row class="innerChart" >
         <ion-slides pager (ionSlideDidChange)="slideChanged()"> 
@@ -101,8 +103,6 @@
 
     </ion-row>
 </ion-grid>
--->
-
  </div>
 
 
