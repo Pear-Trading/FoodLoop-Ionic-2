@@ -1,13 +1,16 @@
-<ion-content>
+	<ion-header>
+		<ion-toolbar color="header">
+			<button ion-button menuToggle >
+				<ion-icon item-right name='menu'></ion-icon>
+			</button>
+			<ion-title>
+				Home
+			</ion-title>
+		</ion-toolbar>
+	</ion-header>
 
-<ion-toolbar color="header">
-    <button ion-button menuToggle >
-    <ion-icon item-right name='menu'></ion-icon>
-    </button>
-	<button ion-button>
-	Help
-	</button>
-  </ion-toolbar>
+	
+<ion-content>
   
 
  <div class="userdashboard">
@@ -44,7 +47,7 @@
     <ion-row class="stat_button">
       <ion-segment [(ngModel)]="status" mode="md" >
         <ion-segment-button value="Total"  (ionSelect)="goToSlide(0)">Totals</ion-segment-button>
-        <ion-segment-button value="Top5"  (ionSelect)="goToSlide(1)">Top5</ion-segment-button>
+        <ion-segment-button value="Top5"  (ionSelect)="goToSlide(1)">Top 5</ion-segment-button>
         <ion-segment-button value="Chart" (ionSelect)="goToSlide(2)">Chart</ion-segment-button>
         <ion-segment-button value="Global"(ionSelect)="goToSlide(3)">Global</ion-segment-button>
         <ion-segment-button value="Ranks" (ionSelect)="goToSlide(4)">Ranks</ion-segment-button>

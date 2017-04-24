@@ -5,12 +5,12 @@ page-user{
 	.userdashboard{
 		margin: 0%;
 		border: 0px solid black;
-			padding: 0px 0px 10em 0px;
+		padding: 0px 0px 10em 0px;
 		
 		.greeting{
 			background: #29526d;
 			padding-top: 0px;
-
+			height: 10em;
 				.username{
 					font-size: 2em;
 					color:white;	
@@ -72,11 +72,11 @@ page-user{
 		background-color: whitesmoke;
 	  
 		.statboxheaderblue{
-			background-color: #74a7b8;
+			background-color: #0279c8;
 			border-radius: 5px 5px 0px 0px;
 			color: #ffffff; 
-			font-size: 1em;
-			padding: 2%;
+			font-size: .8em;
+			padding: 1%;
 			text-align: center;
 		}
 
@@ -84,8 +84,8 @@ page-user{
 			background-color: #cc6633;
 			border-radius: 5px 5px 0px 0px;
 			color: #ffffff; 
-			font-size: 1em;
-			padding: 2%;
+			font-size: .8em;
+			padding: 1%;
 			text-align: center;
 		}
 
@@ -93,15 +93,15 @@ page-user{
 			background-color: #336633;
 			border-radius: 5px 5px 0px 0px;
 			color: #ffffff; 
-			font-size: 1em;
-			padding: 2%;
+			font-size: .8em;
+			padding: 1%;
 			text-align: center;
 		}
 		
 		.statboxcontent{
 			color: #1e4158;
-			font-size: 1.3emem; 
-			padding: .5em;
+			font-size: 1em; 
+			padding: .2em;
 			text-align: center;  
 		}
 
@@ -115,6 +115,7 @@ page-user{
 		right: 0%;
 		background-color: rgba(204, 204, 204, .0);
 		height: 10em;
+		z-index: 99;
    
 		button{
 			margin: .1em auto;
@@ -151,3 +152,19 @@ ion-row {
 ion-col {
 	padding: 0px;
 }
+
+.swiper-pagination {
+    top: 93%;
+}
+
+.swiper-pagination-bullet:active {
+    background: #a7883c !important;
+}
+
+.swiper-pagination-bullet{
+    background: #29526d !important;
+    border-radius: 100%;
+    height: 7px;   
+    width: 7px;
+}
+
