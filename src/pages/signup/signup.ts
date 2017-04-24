@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, Loading ,LoadingController  } from 'ionic-angular';
-import { PeopleService} from '../../providers/people-service';
-import { UserData} from '../../providers/user-data';
+import { PeopleService } from '../../providers/people-service';
+import { UserData } from '../../providers/user-data';
 import { Validators, FormBuilder,FormGroup } from '@angular/forms'; // angular js 2 form dependency
 import { IndexPage } from '../index/index';
 import { LoginPage } from '../login/login';
@@ -14,8 +14,38 @@ import { LoginPage } from '../login/login';
 
 export class SignupPage {
   signup: FormGroup;
-  token: string;
-  submitForm: boolean = false; 
+  ageRanges: Object[];
+
+  constructor(
+    private fb: FormBuilder,
+    private ps: PeopleService
+  ) {
+    ps.getAgeRanges()
+      .subscribe(
+        result => this.ageRanges = result.ages,
+        () => console.log('Got Age Ranges!')
+      );
+
+    this.signup = this.fb.group({
+      token:        ['', [Validators.required]],
+      full_name:    ['', [Validators.required]],
+      display_name: ['', [Validators.required]],
+      email:        ['', [Validators.required]],
+      postcode:     ['', [Validators.required]],
+      age_range:    ['', [Validators.required]],
+      password:     ['', [Validators.required]],
+    });
+  }
+
+  onSubmit() {
+    console.log(this.signup.value, this.signup.valid);
+    // this.signup
+  }
+}
+  //token: string;
+  //  submitForm: boolean = false; 
+
+  /*
   constructor(
     private formBuilder: FormBuilder,
     public navCtrl: NavController,
@@ -23,10 +53,13 @@ export class SignupPage {
     private peopleService: PeopleService,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
-    public userData: UserData) {
-      
+    public userData: UserData
+  ) {
+
+    this.age_ranges = peopleService.age_range;
+
       this.token = navParams.get('token'); 
-      /* Specifying the sign up form and validation setting */
+      /* Specifying the sign up form and validation setting *
       this.signup = this.formBuilder.group({
       username:['',
          Validators.compose([
@@ -107,4 +140,4 @@ export class SignupPage {
         toast.present();
       });
   }
-}
+*/

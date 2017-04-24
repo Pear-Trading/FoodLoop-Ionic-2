@@ -2,13 +2,32 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+
 /* this provider handles the interaction between server and client */
  
 @Injectable()
 export class PeopleService {
+  api_url =  'https://dev.app.peartrade.org';
 
+  constructor(
+    private http: Http
+  ) {} 
 
-  
+  getAgeRanges () {
+    return this.http.get(
+      this.api_url + '/api/info/ages'
+    ).map( res => res.json() );
+  }
+
+  register (data) {
+    let register_url = this.api_url + 'register';
+
+    return this.http.post(
+      register_url,
+      data
+    ).map( res => res.json() );
+  }
+
   /* Links to server, these should be stored in config.js */
   foodloop_root_url = "http://app.peartrade.org/";
   foodloop_root_url_register = this.foodloop_root_url + "register";
@@ -20,17 +39,12 @@ export class PeopleService {
   foodloop_root_url_approve = this.foodloop_root_url + "admin-approve";
   foodloop_root_url_user_history = this.foodloop_root_url + "user-history";
 
-  constructor(public http: Http) {
-  } 
 
   getUserHistory(data){
     return this.http.post(this.foodloop_root_url_user_history,data);
   }
   search(data){
     return this.http.post(this.foodloop_root_url_search,data);
-  }
-  register(data){ 
-    return this.http.post(this.foodloop_root_url_register,data).map(res => res.json());
   }
 
   upload(data){ 

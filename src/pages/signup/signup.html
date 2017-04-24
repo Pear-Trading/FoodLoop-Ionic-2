@@ -10,9 +10,40 @@
 
 <!-- Defines each item in  a sign up page-->
 <ion-content padding>
-
   <form [formGroup]="signup">
-   
+    <ion-item>
+      <ion-label>Token</ion-label>
+      <ion-input type="text" formControlName="token"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Full Name</ion-label>
+      <ion-input type="text" formControlName="full_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Display Name</ion-label>
+      <ion-input type="text" formControlName="display_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Postcode</ion-label>
+      <ion-input type="text" formControlName="postcode"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Age Range</ion-label>
+      <ion-select type="text" formControlName="age_range">
+        <ion-option *ngFor="let range of ageRanges" [value]="range.id">{{ range.string }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="text" formControlName="password"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+<!--
     <ion-item>
       <ion-label>Username</ion-label>
       <ion-input type="text" formControlName="username"></ion-input>
@@ -85,7 +116,7 @@
     <div padding>
       <button ion-button (click)="signupForm()" full color="secondary">Sign up</button>
     </div>
-
   </form>
 
 </ion-content>
+-->
