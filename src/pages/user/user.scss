@@ -52,6 +52,12 @@ page-user{
 
 	}
 
+	.stat_button{
+		background: #a7883c;
+		height: 3em;
+	}
+	
+	
 	.currentstats{ 
 		padding: 10px 10px 0px 10px;
 	}
@@ -82,6 +88,15 @@ page-user{
 			padding: 2%;
 			text-align: center;
 		}
+
+		.statboxheadergreen{
+			background-color: #336633;
+			border-radius: 5px 5px 0px 0px;
+			color: #ffffff; 
+			font-size: 1em;
+			padding: 2%;
+			text-align: center;
+		}
 		
 		.statboxcontent{
 			color: #1e4158;
@@ -98,7 +113,7 @@ page-user{
 		bottom: 3em; 
 		left: 0%;
 		right: 0%;
-		background-color: rgba(51, 153, 204, .2);
+		background-color: rgba(204, 204, 204, .0);
 		height: 10em;
    
 		button{

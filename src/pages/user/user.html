@@ -41,11 +41,14 @@
     </ion-row>
 
 	  
-    <ion-row class="innerTab">
+    <ion-row class="stat_button">
       <ion-segment [(ngModel)]="status" mode="md" >
-        <ion-segment-button value="Weekly"  (ionSelect)="goToSlide(0)">Top Players</ion-segment-button>
-        <ion-segment-button value="Daily" (ionSelect)="goToSlide(1)">My Stat </ion-segment-button>
-        <ion-segment-button value="Monthly"(ionSelect)="goToSlide(2)">Overall</ion-segment-button>
+        <ion-segment-button value="Total"  (ionSelect)="goToSlide(0)">Totals</ion-segment-button>
+        <ion-segment-button value="Top5"  (ionSelect)="goToSlide(1)">Top5</ion-segment-button>
+        <ion-segment-button value="Chart" (ionSelect)="goToSlide(2)">Chart</ion-segment-button>
+        <ion-segment-button value="Global"(ionSelect)="goToSlide(3)">Global</ion-segment-button>
+        <ion-segment-button value="Ranks" (ionSelect)="goToSlide(4)">Ranks</ion-segment-button>
+        <ion-segment-button value="Awards"(ionSelect)="goToSlide(5)">Awards</ion-segment-button>
       </ion-segment>
     </ion-row>
 
@@ -113,6 +116,17 @@
 </div>
           </ion-slide>
           
+          <ion-slide>
+            <canvas #barCanvas></canvas> 
+          </ion-slide>
+          
+          <ion-slide>
+            <canvas #lineCanvas></canvas>
+          </ion-slide>
+          
+          <ion-slide>
+            <canvas #pieCanvas></canvas> 
+          </ion-slide>
 
 
           <ion-slide>
@@ -181,15 +195,15 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Best Rank</div>
-                <div class="statboxcontent"> 1 </div>
+                <div class="statboxheadergreen">Days Logged</div>
+                <div class="statboxcontent"> 105 of 123 </div>
               </div>
 			</ion-col> 
 			<ion-col width-10> 
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Best Spend (single)</div>
+                <div class="statboxheadergreen">Highest Spend</div>
                 <div class="statboxcontent"> £108.89 </div>
               </div>
 			</ion-col>
@@ -200,7 +214,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Best Week (Points)</div>
+                <div class="statboxheadergreen">Best Week (Points)</div>
                 <div class="statboxcontent"> 97 </div>
               </div>
 			</ion-col> 
@@ -208,8 +222,8 @@
 			</ion-col>			
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Best Month (Points)</div>
-                <div class="statboxcontent"> £108.89 </div>
+                <div class="statboxheadergreen">Best Month (Points)</div>
+                <div class="statboxcontent"> 256 </div>
               </div>
 			</ion-col>
         </ion-row>
@@ -219,21 +233,24 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Your Spend</div>
-                <div class="statboxcontent"> £88.88 </div>
+                <div class="statboxheadergreen">Hero Points</div>
+                <div class="statboxcontent"> 18,987 </div>
               </div>
 			</ion-col> 
 			<ion-col width-10> 
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Loop Total</div>
-                <div class="statboxcontent"> £108.89 </div>
+                <div class="statboxheadergreen">Hero Status</div>
+                <div class="statboxcontent"> Legendary </div>
               </div>
 			</ion-col>
         </ion-row>
 </div>
           </ion-slide>
+
+ 
+		  
         </ion-slides>
 </ion-row>
 
