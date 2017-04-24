@@ -10,64 +10,241 @@
   </ion-toolbar>
   
 
- <div class="simpleDashBoard">
+ <div class="userdashboard">
   <ion-grid>
-    <!-- Hello user -->
-    <ion-row class="greetingRow">  
-      <ion-item  no-lines>
-        <ion-avatar item-left><img src="assets/img/icon1.png"></ion-avatar>
-        <h1 class="title"> {{name}}</h1>
-        <h2 class="subhead"> {{email}}</h2>
-      </ion-item>
+    <ion-row class="greeting">  
+		<ion-col> 
+			<ion-item  no-lines>
+				<ion-avatar item-left><img src="assets/img/icon1.png"></ion-avatar>
+				<h1 class="username"> {{name}}</h1>
+				<h1 class="useremail"> {{email}}</h1>
+			</ion-item>
+		</ion-col>
     </ion-row>
 
 
     <!-- shows pear points -->
-    <ion-row class="statusRow">
-      <ion-col witdh-70 color="primary"> 
-        <div class="header">Points</div>
-        <div class="bigContent"> 
+    <ion-row class="pearstatus">
+      <ion-col> 
+        <div class="statusheader">My Points</div>
+        <div class="statuscontent"> 
           {{myPearPoints}} 
         </div>
-
       </ion-col>
  
-      <ion-col width-30 color="danger"> 
-        <div class="header">Rank</div>
-        <div class="bigContent"> 
+      <ion-col> 
+        <div class="statusheader">My Rank</div>
+        <div class="statuscontent"> 
           {{myRank}}
         </div>
       </ion-col>
     </ion-row>
 
 	  
+    <ion-row class="innerTab">
+      <ion-segment [(ngModel)]="status" mode="md" >
+        <ion-segment-button value="Weekly"  (ionSelect)="goToSlide(0)">Top Players</ion-segment-button>
+        <ion-segment-button value="Daily" (ionSelect)="goToSlide(1)">My Stat </ion-segment-button>
+        <ion-segment-button value="Monthly"(ionSelect)="goToSlide(2)">Overall</ion-segment-button>
+      </ion-segment>
+    </ion-row>
 
+    <!-- display charts -->
+    <!-- ideally, this would be a quick and simple grasp of user overview-->
 
-
-  <div class="cardContent">  
+    <ion-row class="innerChart" >
+        <ion-slides pager (ionSlideDidChange)="slideChanged()"> 
+          <ion-slide>
+  <div class="currentstats">  
 		<ion-row>
-			<ion-col col-6>
-              <div (click)="navCtrl.push(statPage)" class="cardItem"> 
-                <div class="cardItemHeader">Your Spend</div>
-                <div class="cardItemContent"> £88.88 </div>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderblue">Total Spend</div>
+                <div class="statboxcontent"> £88.88 </div>
               </div>
-			</ion-col> 
-			<ion-col col-6>
-              <div (click)="navCtrl.push(statPage)" class="cardItem"> 
-                <div class="cardItemHeader">Loop Total</div>
-                <div class="cardItemContent"> £108.89 </div>
+  			</ion-col>
+			<ion-col width-10> 
+			</ion-col>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderblue">Today's Spend</div>
+                <div class="statboxcontent"> £108.89 </div>
               </div>
 			</ion-col>
         </ion-row>
 </div>
+
+  <div class="currentstats">  
+		<ion-row>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderblue">This Week</div>
+                <div class="statboxcontent"> £88.88 </div>
+              </div>
+			</ion-col> 
+			<ion-col width-10> 
+			</ion-col>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderblue">This Month</div>
+                <div class="statboxcontent"> £108.89 </div>
+              </div>
+			</ion-col>
+        </ion-row>
+</div>
+
+  <div class="currentstats">  
+		<ion-row>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderblue">Global Spend</div>
+                <div class="statboxcontent"> £88.88 </div>
+              </div>
+			</ion-col> 
+			<ion-col width-10> 
+			</ion-col>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderblue">Global Average</div>
+                <div class="statboxcontent"> £108.89 </div>
+              </div>
+			</ion-col>
+        </ion-row>
+</div>
+          </ion-slide>
+          
+
+
+          <ion-slide>
+  <div class="currentstats">  
+		<ion-row>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Local Rank (week)</div>
+                <div class="statboxcontent"> 3 </div>
+              </div>
+			</ion-col> 
+			<ion-col width-10> 
+			</ion-col>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Global Rank (week)</div>
+                <div class="statboxcontent"> 130 </div>
+              </div>
+			</ion-col>
+        </ion-row>
+</div>
+
+  <div class="currentstats">  
+		<ion-row>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Local Rank (month)</div>
+                <div class="statboxcontent"> 3 </div>
+              </div>
+			</ion-col> 
+			<ion-col width-10> 
+			</ion-col>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Global Rank (month)</div>
+                <div class="statboxcontent"> 130 </div>
+              </div>
+			</ion-col>
+        </ion-row>
+</div>
+
+  <div class="currentstats">  
+		<ion-row>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Local Rank (year)</div>
+                <div class="statboxcontent"> 3 </div>
+              </div>
+			</ion-col> 
+			<ion-col width-10> 
+			</ion-col>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Global Rank (year)</div>
+                <div class="statboxcontent"> 130 </div>
+              </div>
+			</ion-col>
+        </ion-row>
+</div>
+          </ion-slide>
+          
+
+
+          <ion-slide>
+  <div class="currentstats">  
+		<ion-row>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Best Rank</div>
+                <div class="statboxcontent"> 1 </div>
+              </div>
+			</ion-col> 
+			<ion-col width-10> 
+			</ion-col>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Best Spend (single)</div>
+                <div class="statboxcontent"> £108.89 </div>
+              </div>
+			</ion-col>
+        </ion-row>
+</div>  
+
+<div class="currentstats">  
+		<ion-row>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Best Week (Points)</div>
+                <div class="statboxcontent"> 97 </div>
+              </div>
+			</ion-col> 
+			<ion-col width-10> 
+			</ion-col>			
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Best Month (Points)</div>
+                <div class="statboxcontent"> £108.89 </div>
+              </div>
+			</ion-col>
+        </ion-row>
+</div>
+
+<div class="currentstats">  
+		<ion-row>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Your Spend</div>
+                <div class="statboxcontent"> £88.88 </div>
+              </div>
+			</ion-col> 
+			<ion-col width-10> 
+			</ion-col>
+			<ion-col>
+              <div (click)="navCtrl.push(statPage)" class="statbox"> 
+                <div class="statboxheaderorange">Loop Total</div>
+                <div class="statboxcontent"> £108.89 </div>
+              </div>
+			</ion-col>
+        </ion-row>
+</div>
+          </ion-slide>
+        </ion-slides>
+</ion-row>
+
 	</ion-grid>
 
 <div  class="pearUpCtrl">
 	<ion-grid>
 		<ion-row> 
-  <button ion-button [navPush]="receiptPage"  large icon-right full > Add<br />Receipt
-<!--  <ion-icon name="flame" md="md-flame" color="foodloop"> </ion-icon> -->
-  </button>
+			<button ion-button [navPush]="receiptPage"  large icon-right full > Add<br />Receipt
+			<!--  <ion-icon name="flame" md="md-flame" color="foodloop"> </ion-icon> -->
+			</button>
        </ion-row>
 	</ion-grid>
 </div>
