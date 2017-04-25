@@ -69,7 +69,7 @@ export class ReceiptPage {
   }
   //  Setting up variables required for this page, such as session token 
   ionViewDidLoad() {
-    this.userData.getSessionToken().then(token => {
+    this.userData.getSessionKey().then(token => {
       this.sessionToken = token;
     }).catch(error => alert(error));
     console.log('ionViewDidLoad ReceiptPage');

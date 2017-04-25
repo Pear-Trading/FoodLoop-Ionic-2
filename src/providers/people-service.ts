@@ -13,28 +13,35 @@ export class PeopleService {
     private http: Http
   ) {} 
 
-  getAgeRanges () {
+  getAgeRanges() {
     return this.http.get(
       this.api_url + '/api/info/ages'
     ).map( res => res.json() );
   }
 
-  register (data) {
-    let register_url = this.api_url + 'register';
+  register(data) {
+    let register_url = this.api_url + '/api/register';
 
     return this.http.post(
       register_url,
       data
-    ).map( res => res.json() );
+    ).map( response => response.json() );
+  }
+
+  login(data) {
+    let login_url = this.api_url + '/api/login';
+
+    return this.http.post(
+      login_url,
+      data
+    ).map( response => response.json() );
   }
 
   /* Links to server, these should be stored in config.js */
   foodloop_root_url = "http://app.peartrade.org/";
-  foodloop_root_url_register = this.foodloop_root_url + "register";
   foodloop_root_url_upload =  this.foodloop_root_url+ "upload";
   foodloop_root_url_edit = this.foodloop_root_url + "edit";
   foodloop_root_url_token = this.foodloop_root_url + "token";
-  foodloop_root_url_login = this.foodloop_root_url + "login";
   foodloop_root_url_search = this.foodloop_root_url + "search";
   foodloop_root_url_approve = this.foodloop_root_url + "admin-approve";
   foodloop_root_url_user_history = this.foodloop_root_url + "user-history";
@@ -62,10 +69,7 @@ export class PeopleService {
   approve(data){
     return this.http.post(this.foodloop_root_url_approve,data);
   }
-  login(data){
-
-    return this.http.post(this.foodloop_root_url_login,data).map(res=>res.json());
-  }
+  
 
 /*********************** --  Data representation part -- **************************/
   /* including get request to server to retrieve user data */

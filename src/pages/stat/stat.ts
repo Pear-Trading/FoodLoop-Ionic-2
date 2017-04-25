@@ -34,7 +34,7 @@ export class StatPage {
     ) {
     this.innerTabCtrl = "Chart";  // Default representation of the page is Chart 
      // get session token
-     this.userData.getSessionToken().then(token => { 
+     this.userData.getSessionKey().then(token => { 
     this.sessionToken = token;
   }).catch(error => alert(error));
   }

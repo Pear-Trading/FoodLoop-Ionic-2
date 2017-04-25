@@ -1,16 +1,11 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Sign up </ion-title>
+    <ion-title>Sign up</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-
-<!-- Defines each item in  a sign up page-->
 <ion-content padding>
-  <form [formGroup]="signup">
+  <form [formGroup]="signup" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label>Token</ion-label>
       <ion-input type="text" formControlName="token"></ion-input>
@@ -39,84 +34,8 @@
     </ion-item>
     <ion-item>
       <ion-label>Password</ion-label>
-      <ion-input type="text" formControlName="password"></ion-input>
+      <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
+    <button ion-button full color="secondary" type="submit" [disabled]="signup.invalid">Sign Up</button>
   </form>
 </ion-content>
-<!--
-    <ion-item>
-      <ion-label>Username</ion-label>
-      <ion-input type="text" formControlName="username"></ion-input>
-    </ion-item>
-      
-    <ion-item class="formError" *ngIf="!signup.controls.username.valid  && (submitForm)">  
-      <p> Please create a username  </p> 
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Name</ion-label>
-      <ion-input formControlName="name" placeholder="e.g. John Smith"></ion-input>
-    </ion-item>
-  
-    <ion-item class="formError" *ngIf="!signup.controls.name.valid  && (submitForm)">  
-      <p> Please enter your fullname </p> 
-    </ion-item>
-
-
-    <ion-item>
-      <ion-label>Age Range</ion-label>
-      <ion-select formControlName="age">
-        <ion-option value="20-35">20-35</ion-option>
-        <ion-option value="35-50">35-50</ion-option>
-        <ion-option value="50+">50+</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item class="formError" *ngIf="!signup.controls.age.valid  && (submitForm)">  
-      <p> Please select your age range</p> 
-    </ion-item>
-
-
-    <ion-item>
-      <ion-label>Email Address</ion-label>
-      <ion-input formControlName="email" type="text" [class.invalid]="!signup.controls.email.valid && (signup.controls.email.dirty || submitForm)" placeholder="e.g. me@example.com" ></ion-input>
-    </ion-item>
-
-    <ion-item class="formError" *ngIf="!signup.controls.email.valid  && (signup.controls.email.dirty || submitForm)">  
-      <p> Please enter a valid email address</p> 
-    </ion-item>
-   
-    <ion-item>
-      <ion-label>Postcode</ion-label>
-      <ion-input formControlName="postcode" placeholder="e.g. LA1 8SS"></ion-input>
-    </ion-item>
-
-    <ion-item class="formError" *ngIf="!signup.controls.postcode.valid  && (signup.controls.postcode.dirty || submitForm)">  
-      <p> Please enter your postcode</p> 
-    </ion-item>
-
-    <ion-item>
-      <ion-label>New Password</ion-label>
-      <ion-input type = "password" formControlName="password"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Confirm New Password</ion-label>
-      <ion-input type = "password" formControlName="passwordConfirmation"></ion-input>
-    </ion-item>
-    
-    <ion-item class="formError" *ngIf="!signup.controls.password.valid  && (signup.controls.password.dirty || submitForm)">  
-      <p> Please create an new password</p> 
-    </ion-item>
-
-    <ion-item class="formError" *ngIf="((signup.value.passwordConfirmation !== signup.value.password  && signup.value.password !== '' )) && (signup.controls.passwordConfirmation.dirty || submitForm)">  
-      <p> Passwords do not match</p> 
-    </ion-item>
-
-    <div padding>
-      <button ion-button (click)="signupForm()" full color="secondary">Sign up</button>
-    </div>
-  </form>
-
-</ion-content>
--->

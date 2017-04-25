@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import firebase from 'firebase';
+import 'rxjs/add/operator/map';
 /*
   this ts file handles the user-data, including login, logout event 
   user-data management by storing data in the local storage 
@@ -12,6 +10,42 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class UserData {
+  private sessionKey: any;
+
+  constructor(
+    private storage: Storage,
+    private events: Events
+  ) {
+    storage.ready().then(() => {
+      storage.get('sessionKey').then((val) => {
+        this.sessionKey = val;
+      })
+    });
+    this.loadTestingData();
+  }
+
+  setSessionKey(key: string) {
+    console.log("set sessionKey");
+    this.sessionKey = key;
+    this.storage.set('SessionKey',key);
+  }
+
+  getSessionKey() {
+    console.log("get sessionKey");
+    if ( this.sessionKey == null ) {
+      console.log("sessionKey null, fetching from storage");
+      this.storage
+        .get('SessionKey')
+        .then(
+          (value) => {
+            this.sessionKey = value;
+            return this.sessionKey;
+          }
+        );
+    } else {
+      return this.sessionKey;
+    }
+  }
 
   /* Testing purpose, ideally, these variable should be initilizaed via calling */
   /* server APIs */
@@ -23,6 +57,7 @@ export class UserData {
   public rankingData: any;
   public testingData;
 
+  HAS_LOGGED_IN = 'hasLoggedIn';
 
   /* Storage */
   /* The data stored in storage is like cache data, the system should periodically update 
@@ -31,16 +66,9 @@ export class UserData {
   // User data, set of personal data to be displayed, username, profile pic, theme color 
 
 
-  /* TESTING SECTION END*/
+  loadTestingData() {
 
-  HAS_LOGGED_IN = 'hasLoggedIn';
-  constructor(
-    public events: Events,
-    public storage: Storage,  
-
-  ) {
-
-      /* Internal database for user testing, handles login, logoff and retrieves user-data */
+    /* Internal database for user testing, handles login, logoff and retrieves user-data */
     this.testingData = {
       test007: [ 
         {"username": "testingc@test.com","password":"admin","token": "test007","fullname": "John Smtih","email" : "testingc@test.com","rankingID": "0"}
@@ -78,9 +106,9 @@ export class UserData {
         {"tokenString":"test0011"},
       ]
     };
-  /* Testing */
+    /* Testing */
 
-}
+  }
   
   random_data(username,fullname){
        return   {token:"d","ref":username,"username": fullname,"previousPos":1,"currentPos":1,"pearPoint":620.57,"retailerSpent":20,"receiptSubmitted":161,"firstStart":"20-Jun-15"};
@@ -119,15 +147,7 @@ export class UserData {
     this.storage.set('username', username);
   };
 
-  setSessionToken(token: string){
-    this.storage.set('SessionToken',token);
-  }
 
-  getSessionToken(){
-    return this.storage.get('SessionToken').then((value) => {
-      return value;
-    });
-  }
   // return a promise
   hasLoggedIn() {
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
