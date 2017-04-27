@@ -17,12 +17,6 @@ import { AccountPage } from '../pages/account/account';
 import { ShopPage } from '../pages/shop/shop';
 import { StatPage } from '../pages/stat/stat';
 import { UserStatPage } from '../pages/user_stat/user_stat';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': 'e2f5be24'
-  }
-};
 
 @NgModule({
   declarations: [
@@ -44,7 +38,7 @@ const cloudSettings: CloudSettings = {
     StatPage,
   ],
   imports: [
-    IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false }),  CloudModule.forRoot(cloudSettings)
+    IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
