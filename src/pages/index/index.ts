@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams , Platform} from 'ionic-angular';
 import { UserPage} from '../user/user';
-import  {Keyboard} from 'ionic-native';
 import { RankingPage} from '../ranking/ranking';
 import { SettingPage} from '../setting/setting';
 import { AboutPage} from '../about/about';
@@ -12,7 +11,6 @@ import { ReceiptPage} from '../receipt/receipt';
 @Component({
   selector: 'page-index',
   templateUrl: 'index.html',
-  providers:[Keyboard]
 })  
 export class IndexPage {
 
@@ -29,7 +27,6 @@ export class IndexPage {
   constructor(
     public navParams: NavParams, 
     public navCtrl: NavController, 
-    public keyboard: Keyboard,
     public platform: Platform
     ) {
 
