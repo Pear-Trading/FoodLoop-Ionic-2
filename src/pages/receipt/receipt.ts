@@ -52,7 +52,6 @@ export class ReceiptPage {
     public platform: Platform,
     public peopleService: PeopleService,
     public userData: UserData,
-    public keyboard : Keyboard,
     public navParams: NavParams,
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
   ) {
@@ -228,7 +227,7 @@ export class ReceiptPage {
 
   public postImage() {
     // Destination URL
-    var url = this.peopleService.foodloop_root_url_upload;
+    var url = '/test';
 
     // // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
