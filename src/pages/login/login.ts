@@ -23,7 +23,6 @@ export class LoginPage {
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private peopleService: PeopleService,
-    private userData: UserData
   ) {
     this.login = this.formBuilder.group({
       email:    ['', [Validators.required]],
@@ -48,8 +47,6 @@ export class LoginPage {
       .subscribe(
         result => {
           loading.dismiss();
-          console.log(result);
-          this.userData.setSessionKey(result.session_key);
           this.navCtrl.push(IndexPage);
         },
         error => {
