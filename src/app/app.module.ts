@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { TokenPage } from '../pages/token/token';
@@ -38,7 +39,8 @@ import { UserStatPage } from '../pages/user_stat/user_stat';
     StatPage,
   ],
   imports: [
-    IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false })
+    IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false }),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

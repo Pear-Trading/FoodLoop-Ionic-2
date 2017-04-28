@@ -4,7 +4,11 @@ import {
   LoadingController, Loading, ToastController
 } from 'ionic-angular';
 import { AlertController, ActionSheetController } from 'ionic-angular';
-import { Camera, FilePath, Transfer, File, Keyboard } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import { Keyboard } from '@ionic-native/keyboard';
 import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
 

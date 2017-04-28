@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { TokenPage } from '../pages/token/token';
 import { SignupPage } from '../pages/signup/signup';
@@ -27,7 +28,7 @@ export interface PageInterface {
 /* This file is usually used as shell to load other Components*/
 @Component({
   templateUrl: 'app.html',
-  providers: [UserData,Storage]  
+  providers: [UserData]  
 })
 
 
@@ -59,7 +60,8 @@ export class MyApp {
     public menu: MenuController,
     public events: Events,
     public userData: UserData,
-    public storage: Storage
+    public storage: Storage,
+    public splashScreen: SplashScreen
  
   ) {
 
@@ -108,7 +110,7 @@ export class MyApp {
   platformReady() {
     // Call any initial plugins when ready
     this.platform.ready().then(() => {
-      Splashscreen.hide();
+      this.splashScreen.hide();
     });
   }
   

@@ -20,7 +20,8 @@ import { UserData} from '../../providers/user-data';
 */
 @Component({
   selector: 'page-user',
-  templateUrl: 'user.html',
+  template: '<div>shit</div>',
+  //  templateUrl: 'user.html',
   providers: [PeopleService,UserData]
 })
 export class UserPage {

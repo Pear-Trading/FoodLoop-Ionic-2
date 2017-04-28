@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { UserData } from './user-data';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 
@@ -7,39 +10,62 @@ import 'rxjs/add/operator/map';
  
 @Injectable()
 export class PeopleService {
-  api_url =  'https://dev.app.peartrade.org';
+  private apiUrl = 'https://dev.app.peartrade.org/api';
 
   constructor(
-    private http: Http
-  ) {} 
-
-  getAgeRanges() {
+    private http: Http,
+    private transfer: Transfer,
+    private userData: UserData
+  ) {}
+  
+  public getAgeRanges() {
     return this.http.get(
-      this.api_url + '/api/info/ages'
+      this.apiUrl + '/info/ages'
     ).map( res => res.json() );
   }
 
-  register(data) {
-    let register_url = this.api_url + '/api/register';
-
+  public register(data) {
     return this.http.post(
-      register_url,
+      this.apiUrl + '/register',
       data
     ).map( response => response.json() );
   }
 
-  login(data) {
-    let login_url = this.api_url + '/api/login';
-
-    return this.http.post(
-      login_url,
+  public login(data) {
+    let login_event = this.http.post(
+      this.apiUrl + '/login',
       data
     ).map( response => response.json() );
+    login_event.subscribe(
+      result => {  this.userData.setSessionKey( result.session_key ) }
+    );
+    return login_event;
   }
+
+  public upload(data, filePath) {
+    data.session_key = this.userData.getSessionKey;
+
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: 'receipt.jpg',
+      chunkedMode: false,
+      params: {
+        json: JSON.stringify(data)
+      }
+    };
+    const fileTransfer: TransferObject = this.transfer.create();
+    return Observable.fromPromise(
+      fileTransfer.upload(
+        filePath,
+        this.apiUrl + '/upload',
+        options
+      )
+    ); //.map( response => response.json() );
+  }
+
 
   /* Links to server, these should be stored in config.js */
   foodloop_root_url = "http://app.peartrade.org/";
-  foodloop_root_url_upload =  this.foodloop_root_url+ "upload";
   foodloop_root_url_edit = this.foodloop_root_url + "edit";
   foodloop_root_url_token = this.foodloop_root_url + "token";
   foodloop_root_url_search = this.foodloop_root_url + "search";
@@ -52,10 +78,6 @@ export class PeopleService {
   }
   search(data){
     return this.http.post(this.foodloop_root_url_search,data);
-  }
-
-  upload(data){ 
-    return this.http.post(this.foodloop_root_url_upload,data).map(res=> res.json());
   }
 
   edit(data){ 
