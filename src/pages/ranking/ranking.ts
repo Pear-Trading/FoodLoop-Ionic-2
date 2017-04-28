@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {ComponentFactoryResolver} from '@angular/core';
 import { NavController, NavParams, ToastController} from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
 

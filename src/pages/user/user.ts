@@ -1,14 +1,10 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams , App , Slides} from 'ionic-angular';
 import { ReceiptPage } from '../receipt/receipt';
-import { SignupPage } from '../signup/signup';
-import { LoginPage } from '../login/login';
-import { IndexPage } from '../index/index';
 import { OverviewPage } from '../overview/overview';
 import { GamePage } from '../game/game';
 import { ShopPage } from '../shop/shop';
 import { StatPage } from '../stat/stat';
-import { Storage } from '@ionic/storage';
 import { Chart } from 'chart.js';
 import { PeopleService} from '../../providers/people-service';
 import { UserData} from '../../providers/user-data';

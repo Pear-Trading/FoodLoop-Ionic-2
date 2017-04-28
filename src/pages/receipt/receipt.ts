@@ -18,7 +18,7 @@ declare var cordova: any;
 @Component({
   selector: 'page-receipt',
   templateUrl: 'receipt.html',
-  providers: [PeopleService, UserData,Keyboard]
+  providers: [PeopleService, UserData]
 })
 
 
@@ -57,6 +57,11 @@ export class ReceiptPage {
     public peopleService: PeopleService,
     public userData: UserData,
     public navParams: NavParams,
+    private keyboard: Keyboard,
+    private camera: Camera,
+    private filePath: FilePath,
+    private transfer: Transfer,
+    private file: File,
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
   ) {
     this.historyStoreList = [
@@ -80,7 +85,7 @@ export class ReceiptPage {
 
   ionViewDidEnter(){
     this.platform.ready().then(() => {
-      Keyboard.disableScroll(true);
+      this.keyboard.disableScroll(true);
     });
   }
 
@@ -163,7 +168,7 @@ export class ReceiptPage {
 
   ionViewWillLeave() {
     this.platform.ready().then(() => {
-      Keyboard.disableScroll(false);
+      this.keyboard.disableScroll(false);
     });
   }
 
@@ -176,13 +181,13 @@ export class ReceiptPage {
         {
           text: 'Take a picture',
           handler: () => {
-            this.takePicture(Camera.PictureSourceType.CAMERA);
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
           text: 'Load from library ',
           handler: () => {
-            this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
@@ -207,10 +212,10 @@ export class ReceiptPage {
     };
 
     // Get the data of an image
-    Camera.getPicture(options).then((imagePath) => {
+    this.camera.getPicture(options).then((imagePath) => {
       // Special handling for Android library
-      if (this.platform.is('android') && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {
-        FilePath.resolveNativePath(imagePath)
+      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+        this.filePath.resolveNativePath(imagePath)
           .then(filePath => {
             let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
             let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
@@ -268,7 +273,7 @@ export class ReceiptPage {
     } ;
 
 
-    const fileTransfer = new Transfer();
+    const fileTransfer = this.transfer.create();
 
     this.loading = this.loadingCtrl.create({
       content: 'Uploading...' + filename,
@@ -305,7 +310,7 @@ export class ReceiptPage {
 
   // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
-    File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+    this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
     }, error => {
       console.log(error);

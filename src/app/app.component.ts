@@ -1,16 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
-import { TokenPage } from '../pages/token/token';
-import { SignupPage } from '../pages/signup/signup';
 import { AboutPage } from '../pages/about/about';
 import { IndexPage } from '../pages/index/index';
-import { ReceiptPage } from '../pages/receipt/receipt';
-import { RankingPage } from '../pages/ranking/ranking';
-import { AccountPage } from '../pages/account/account';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 import { UserData } from '../providers/user-data';
 
@@ -60,7 +53,6 @@ export class MyApp {
     public menu: MenuController,
     public events: Events,
     public userData: UserData,
-    public storage: Storage,
     public splashScreen: SplashScreen
  
   ) {

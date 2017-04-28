@@ -1,4 +1,4 @@
-import { Component , ViewChild, ViewChildren, ElementRef} from '@angular/core';
+import { Component , ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { PeopleService } from '../../providers/people-service';

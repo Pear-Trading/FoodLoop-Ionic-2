@@ -16,8 +16,8 @@ export class UserData {
     private storage: Storage,
     private events: Events
   ) {
-    storage.ready().then(() => {
-      storage.get('sessionKey').then((val) => {
+    this.storage.ready().then(() => {
+      this.storage.get('sessionKey').then((val) => {
         this.sessionKey = val;
       })
     });
