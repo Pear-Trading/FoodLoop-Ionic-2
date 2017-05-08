@@ -4,7 +4,11 @@ import {
   LoadingController, Loading, ToastController
 } from 'ionic-angular';
 import { AlertController, ActionSheetController } from 'ionic-angular';
-import { Camera, FilePath, Transfer, File, Keyboard } from 'ionic-native';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import { Keyboard } from '@ionic-native/keyboard';
 import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
 
@@ -14,7 +18,7 @@ declare var cordova: any;
 @Component({
   selector: 'page-receipt',
   templateUrl: 'receipt.html',
-  providers: [PeopleService, UserData,Keyboard]
+  providers: [PeopleService, UserData]
 })
 
 
@@ -25,16 +29,18 @@ export class ReceiptPage {
 
   storename= '';
   storeaddress= ''; 
-  id = '';
-  amount =null;
-  transactionAdditionType;
+  organisationId: number;
+  organisationTown: string;
+  organisationPostcode: string;
+  amount: number;
+  transactionAdditionType = 1;
 
   lastImage: string = null;
   loading: Loading;
 
   storeList;
   historyStoreList; 
-  receiptList;  // pending receipt list
+  //receiptList;  // pending receipt list
   showHistoryList = false; 
   showAddStore = false;
   showList = false; 
@@ -52,8 +58,12 @@ export class ReceiptPage {
     public platform: Platform,
     public peopleService: PeopleService,
     public userData: UserData,
-    public keyboard : Keyboard,
     public navParams: NavParams,
+    private keyboard: Keyboard,
+    private camera: Camera,
+    private filePath: FilePath,
+    private transfer: Transfer,
+    private file: File,
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
   ) {
     this.historyStoreList = [
@@ -61,23 +71,26 @@ export class ReceiptPage {
       {id:2,name:"Lemon Inc.", fullAddress: "223 Lemon Road,Lancaster,LA1 1AP"},
       {id:3,name:"Orange Inc.", fullAddress: "323 Orange Walk,Lancaster,LA1 1AP"},
     ];
-    this.receiptList = [
-      {id:1,storename:"Apple Inc.", amount:1.09,status:"pending",fullAddress: "123 Apple Street,Lancaster,LA1 1AP"},
-      {id:2,storename:"Lemon Inc.", amount:5.33,status:"pending",fullAddress: "223 Lemon Road,Lancaster,LA1 1AP"},
-      {id:3,storename:"Orange Inc.", amount:10.21,status:"pending",fullAddress: "323 Orange Walk,Lancaster,LA1 1AP"},
-    ];
+    //this.receiptList = [
+    // {id:1,storename:"Apple Inc.", amount:1.09,status:"pending",fullAddress: "123 Apple Street,Lancaster,LA1 1AP"},
+    // {id:2,storename:"Lemon Inc.", amount:5.33,status:"pending",fullAddress: "223 Lemon Road,Lancaster,LA1 1AP"},
+    // {id:3,storename:"Orange Inc.", amount:10.21,status:"pending",fullAddress: "323 Orange Walk,Lancaster,LA1 1AP"},
+    //];
   }
   //  Setting up variables required for this page, such as session token 
   ionViewDidLoad() {
-    this.userData.getSessionToken().then(token => {
-      this.sessionToken = token;
-    }).catch(error => alert(error));
+    this.userData.getSessionKey().subscribe(
+      token => {
+        this.sessionToken = token;
+      },
+      error => alert(error)
+    );
     console.log('ionViewDidLoad ReceiptPage');
   }
 
   ionViewDidEnter(){
     this.platform.ready().then(() => {
-      Keyboard.disableScroll(true);
+      this.keyboard.disableScroll(true);
     });
   }
 
@@ -92,21 +105,30 @@ export class ReceiptPage {
   }
 
   initializeItems() {
-      var searchData = JSON.stringify({
-      searchName: this.storename, sessionToken: this.sessionToken});
+    var searchData = {
+      search_name: this.storename,
+    };
 
-      this.peopleService.search(searchData).subscribe(
-       data => {
-          this.storeList = data.json().validated; 
-          // handle the case when the storelist is empty
-          if(this.storeList.length < 1 ) {
-            this.storeList = null;
-            this.showAddStore = true;
-          } 
-       },
-       error=> {
+    this.peopleService.search(searchData).subscribe(
+      data => {
+        if(data.validated.length > 0) {
+          this.storeList = data.validated;
+          this.transactionAdditionType = 1;
+        } else {
+          this.storeList = data.unvalidated;
+          this.transactionAdditionType = 2;
+        }
+        // handle the case when the storelist is empty
+        if(this.storeList.length < 1 ) {
+          this.storeList = null;
+          this.showAddStore = true;
+          this.transactionAdditionType = 3;
+        }
+      },
+      error => {
         console.log(error);
-      });
+      }
+    );
   }
 
   // show histry list when the input/storename is empty
@@ -119,7 +141,7 @@ export class ReceiptPage {
   addStore(store){
     this.storename = store.name; 
     this.storeaddress = store.fullAddress;
-    this.id = store.id; 
+    this.organisationId = store.id; 
     this.showList = false; 
     this.showHistoryList = false;   
   }
@@ -153,7 +175,7 @@ export class ReceiptPage {
 
   ionViewWillLeave() {
     this.platform.ready().then(() => {
-      Keyboard.disableScroll(false);
+      this.keyboard.disableScroll(false);
     });
   }
 
@@ -166,13 +188,13 @@ export class ReceiptPage {
         {
           text: 'Take a picture',
           handler: () => {
-            this.takePicture(Camera.PictureSourceType.CAMERA);
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
           text: 'Load from library ',
           handler: () => {
-            this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
@@ -189,18 +211,21 @@ export class ReceiptPage {
   takePicture(sourceType) {
     console.log(this.platform);
     // Create options for the Camera Dialog
-    var options = {
+    var options: CameraOptions = {
       quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true
     };
 
     // Get the data of an image
-    Camera.getPicture(options).then((imagePath) => {
+    this.camera.getPicture(options).then((imagePath) => {
       // Special handling for Android library
-      if (this.platform.is('android') && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {
-        FilePath.resolveNativePath(imagePath)
+      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+        this.filePath.resolveNativePath(imagePath)
           .then(filePath => {
             let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
             let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
@@ -221,45 +246,68 @@ export class ReceiptPage {
 
   public postImage() {
     // Destination URL
-    var url = this.peopleService.foodloop_root_url_upload;
+    var url = '/test';
 
     // // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
 
     // // File name only
     var filename = this.lastImage;
-    var myParams;
+    var myParams: any;
     switch(this.transactionAdditionType){
       case 1:
-        myParams = {};
+        myParams = {
+          transaction_type  : this.transactionAdditionType,
+          transaction_value : this.amount,
+          organisation_id   : this.organisationId,
+        };
         break;
       case 2: 
-        myParams = {};
+        myParams = {
+          transaction_type  : this.transactionAdditionType,
+          transaction_value : this.amount,
+          organisation_id   : this.organisationId,
+        };
         break;
       case 3: 
-        myParams = {};
+        myParams = {
+          transaction_type  : this.transactionAdditionType,
+          transaction_value : this.amount,
+          organisation_name : this.storename,
+          street_name       : this.storeaddress,
+          town              : this.organisationTown,
+          postcode          : this.organisationPostcode,
+        };
         break;
     }
     /******************************/
-    var options = {
-      fileKey: "file2",
-      fileName: filename,
-      chunkedMode: false,
-      mimeType: "multipart/form-data",
-      params: myParams
-    } 
-
-
-    const fileTransfer = new Transfer();
 
     this.loading = this.loadingCtrl.create({
       content: 'Uploading...' + filename,
     });
     this.loading.present();
 
-    // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, encodeURI(url), options,true).then(data => {
-    this.loading.dismiss();
+    this.peopleService.upload(myParams, targetPath).subscribe(
+      response => {
+//    var options = {
+//      fileKey: "file2",
+//      fileName: filename,
+//      chunkedMode: false,
+//      // TODO This is wrong, defaults to image/jpeg.
+//      // mimeType: "multipart/form-data",
+//      params: {
+//        json: JSON.stringify( myParams )
+//      }
+//    } ;
+//
+//
+//    const fileTransfer = this.transfer.create();
+//
+
+//
+//    // Use the FileTransfer to upload the image
+//    fileTransfer.upload(targetPath, encodeURI(url), options,true).then(data => {
+      this.loading.dismiss();
       this.presentToast('Reeceipt succesfully submitted.');
 
 
@@ -269,9 +317,10 @@ export class ReceiptPage {
       this.amount =null;
       this.lastImage = null;
 
-    }, err => {
-      this.loading.dismissAll();
-      this.presentToast('Error while uploading.');
+    },
+    err => {
+      this.loading.dismiss();
+      this.presentToast('Error while uploading:' + JSON.stringify(err));
     });
   }
 
@@ -287,7 +336,7 @@ export class ReceiptPage {
 
   // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
-    File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+    this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
     }, error => {
       console.log(error);

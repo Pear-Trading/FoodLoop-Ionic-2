@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import firebase from 'firebase';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 /*
   this ts file handles the user-data, including login, logout event 
   user-data management by storing data in the local storage 
@@ -12,6 +11,25 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class UserData {
+
+  constructor(
+    private storage: Storage,
+    private events: Events
+  ) {
+    this.loadTestingData();
+  }
+
+  public setSessionKey(key: string) {
+    console.log("set sessionKey");
+    this.storage.set('SessionKey',key);
+  }
+
+  public getSessionKey() {
+    console.log("get sessionKey");
+    return Observable.fromPromise(
+      this.storage.get('SessionKey')
+    );
+  }
 
   /* Testing purpose, ideally, these variable should be initilizaed via calling */
   /* server APIs */
@@ -23,6 +41,7 @@ export class UserData {
   public rankingData: any;
   public testingData;
 
+  HAS_LOGGED_IN = 'hasLoggedIn';
 
   /* Storage */
   /* The data stored in storage is like cache data, the system should periodically update 
@@ -31,16 +50,9 @@ export class UserData {
   // User data, set of personal data to be displayed, username, profile pic, theme color 
 
 
-  /* TESTING SECTION END*/
+  loadTestingData() {
 
-  HAS_LOGGED_IN = 'hasLoggedIn';
-  constructor(
-    public events: Events,
-    public storage: Storage,  
-
-  ) {
-
-      /* Internal database for user testing, handles login, logoff and retrieves user-data */
+    /* Internal database for user testing, handles login, logoff and retrieves user-data */
     this.testingData = {
       test007: [ 
         {"username": "testingc@test.com","password":"admin","token": "test007","fullname": "John Smtih","email" : "testingc@test.com","rankingID": "0"}
@@ -78,9 +90,9 @@ export class UserData {
         {"tokenString":"test0011"},
       ]
     };
-  /* Testing */
+    /* Testing */
 
-}
+  }
   
   random_data(username,fullname){
        return   {token:"d","ref":username,"username": fullname,"previousPos":1,"currentPos":1,"pearPoint":620.57,"retailerSpent":20,"receiptSubmitted":161,"firstStart":"20-Jun-15"};
@@ -119,15 +131,7 @@ export class UserData {
     this.storage.set('username', username);
   };
 
-  setSessionToken(token: string){
-    this.storage.set('SessionToken',token);
-  }
 
-  getSessionToken(){
-    return this.storage.get('SessionToken').then((value) => {
-      return value;
-    });
-  }
   // return a promise
   hasLoggedIn() {
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => {

@@ -1,4 +1,4 @@
-import { Component , ViewChild, ViewChildren, ElementRef} from '@angular/core';
+import { Component , ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { PeopleService } from '../../providers/people-service';
@@ -34,9 +34,9 @@ export class StatPage {
     ) {
     this.innerTabCtrl = "Chart";  // Default representation of the page is Chart 
      // get session token
-     this.userData.getSessionToken().then(token => { 
-    this.sessionToken = token;
-  }).catch(error => alert(error));
+    //     this.userData.getSessionKey().then(token => { 
+    //this.sessionToken = token;
+    //}).catch(error => alert(error));
   }
 
 

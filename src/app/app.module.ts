@@ -1,5 +1,11 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { NgModule } from '@angular/core';
+import { IonicApp, IonicModule } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+
+import { AppProviders } from './app.providers';
+
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { TokenPage } from '../pages/token/token';
@@ -16,12 +22,6 @@ import { OverviewPage } from '../pages/overview/overview';
 import { AccountPage } from '../pages/account/account';
 import { ShopPage } from '../pages/shop/shop';
 import { StatPage } from '../pages/stat/stat';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': 'e2f5be24'
-  }
-};
 
 @NgModule({
   declarations: [
@@ -43,7 +43,10 @@ const cloudSettings: CloudSettings = {
     StatPage,
   ],
   imports: [
-    IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false }),  CloudModule.forRoot(cloudSettings)
+    IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false }),
+    IonicStorageModule.forRoot(),
+    BrowserModule,
+    HttpModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,6 +67,6 @@ const cloudSettings: CloudSettings = {
     ShopPage,
     StatPage,
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: AppProviders.getProviders()
 })
 export class AppModule {}

@@ -1,42 +1,96 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { UserData } from './user-data';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+
 
 /* this provider handles the interaction between server and client */
  
 @Injectable()
 export class PeopleService {
+  private apiUrl = 'https://dev.app.peartrade.org/api';
 
-
+  constructor(
+    private http: Http,
+    private transfer: Transfer,
+    private userData: UserData
+  ) {}
   
+  public getAgeRanges() {
+    return this.http.get(
+      this.apiUrl + '/info/ages'
+    ).map( res => res.json() );
+  }
+
+  public register(data) {
+    return this.http.post(
+      this.apiUrl + '/register',
+      data
+    ).map( response => response.json() );
+  }
+
+  public login(data) {
+    let login_event = this.http.post(
+      this.apiUrl + '/login',
+      data
+    ).map( response => response.json() );
+    login_event.subscribe(
+      result => {  this.userData.setSessionKey( result.session_key ) }
+    );
+    return login_event;
+  }
+
+  public upload(data, filePath) {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          data.session_key = key;
+          let options: FileUploadOptions = {
+            fileKey: 'file',
+            fileName: 'receipt.jpg',
+            chunkedMode: false,
+            params: {
+              json: JSON.stringify(data)
+            }
+          };
+          const fileTransfer: TransferObject = this.transfer.create();
+          return Observable.fromPromise(
+            fileTransfer.upload(
+              filePath,
+              this.apiUrl + '/upload',
+              options
+            )
+          )
+        }
+      ).map( response => JSON.parse(response.response) );
+  }
+
+  public search(data) {
+    return this.userData.getSessionKey()
+      .flatMap(
+        value => {
+          data.session_key = value;
+          return this.http.post(
+            this.apiUrl + '/search',
+            data
+          );
+        }
+      ).map( response => response.json() );
+  }
+
   /* Links to server, these should be stored in config.js */
   foodloop_root_url = "http://app.peartrade.org/";
-  foodloop_root_url_register = this.foodloop_root_url + "register";
-  foodloop_root_url_upload =  this.foodloop_root_url+ "upload";
   foodloop_root_url_edit = this.foodloop_root_url + "edit";
   foodloop_root_url_token = this.foodloop_root_url + "token";
-  foodloop_root_url_login = this.foodloop_root_url + "login";
-  foodloop_root_url_search = this.foodloop_root_url + "search";
   foodloop_root_url_approve = this.foodloop_root_url + "admin-approve";
   foodloop_root_url_user_history = this.foodloop_root_url + "user-history";
 
-  constructor(public http: Http) {
-  } 
 
   getUserHistory(data){
     return this.http.post(this.foodloop_root_url_user_history,data);
   }
-  search(data){
-    return this.http.post(this.foodloop_root_url_search,data);
-  }
-  register(data){ 
-    return this.http.post(this.foodloop_root_url_register,data).map(res => res.json());
-  }
-
-  upload(data){ 
-    return this.http.post(this.foodloop_root_url_upload,data).map(res=> res.json());
-  }
-
   edit(data){ 
     return this.http.post(this.foodloop_root_url_edit,data);
   }
@@ -48,10 +102,7 @@ export class PeopleService {
   approve(data){
     return this.http.post(this.foodloop_root_url_approve,data);
   }
-  login(data){
-
-    return this.http.post(this.foodloop_root_url_login,data).map(res=>res.json());
-  }
+  
 
 /*********************** --  Data representation part -- **************************/
   /* including get request to server to retrieve user data */

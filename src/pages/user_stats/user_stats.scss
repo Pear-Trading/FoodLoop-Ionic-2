@@ -1,0 +1,125 @@
+page-user{
+	border-radius: 2dp;
+
+.simpleDashBoard{
+
+	border-radius: 0dp;
+	background: #29526d;
+			
+	.greetingRow{
+	  padding-top: 0px;
+		height: 72dp;
+		.title{
+			padding-top:    16dp;
+			padding-bottom: 16dp;
+			padding: 16dp;
+			font-size: 24sp;
+			color:white;
+		
+		}
+		.subhead{
+			font-size: 12sp;
+			color: #eac55e;
+		}
+		ion-item{
+			background-color: transparent;
+		}
+	}	
+  .buttonNote{
+    font-size: 1.0em;
+    color: white;
+    line-height: 10px;
+  
+  }
+  .statusRow{
+    .header{
+      color: #eaac5e;
+      font-size: 1.5em;
+      text-align: center;
+    }
+    .bigContent{
+      color: white;
+      font-size: 2.0em;
+      text-align: center;
+    }
+
+  }
+
+
+	.innerChart{
+		background-color:white;
+		
+	}
+
+}
+
+
+  .cardHeader{
+    background-color: orangered; 
+    // height: 10%; 
+    color:white; 
+    font-size: 1.5em; 
+    padding: 16px; 
+  } 
+
+  .cardContent{ 
+    background: color($colors, primary);
+	box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
+    border-radius: 0px; /* 0px rounded corners */
+  }
+  
+
+  .cardItem{
+
+	  padding: 0px;
+	  margin: 6px auto;
+	  min-width: 90%;
+	  
+    .cardItemHeader{
+      background-color: #74a7b8;
+      color: #efefef; 
+      font-size: 22sp;
+      padding: 5px;
+	  text-align: center;
+    }
+	
+    .cardItemContent{
+		background-color: #efefef;
+		color: #1e4158;
+		font-size: 28px; 
+		padding: 10px;
+		text-align: center;  
+    }
+
+    border-bottom: 1px solid lightgray; 
+		box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
+		transition: 0.3s;
+		border-radius: 5px;
+		background-color: whitesmoke; 
+  }
+
+.pearUpCtrl{
+
+margin: 30px 10px 10px 10px;
+border-radius: 5px;
+background: #cfcfcf;
+   
+    button{
+    background-color: #74a7b8;
+    color: white;
+	border: 1px solid rgba(255, 255, 255, .7);
+	width: 120px;
+	height: 120px;
+	border-radius: 100%;
+	margin: 5px auto;
+	text-transform: none;
+   }
+
+      button:active{
+    background-color: #efefef;
+    color: white;
+    box-shadow: 0px 4px 8px #74a7b8;
+   }
+
+}
+}

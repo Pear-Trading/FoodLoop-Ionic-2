@@ -1,23 +1,70 @@
-/* this page defines the functionaility of the page such as */
-/* when a button is pressed */
 import { Component } from '@angular/core';
-import { NavController, ToastController, Loading ,LoadingController } from 'ionic-angular';
-import { TokenPage} from '../token/token';
-import { IndexPage} from '../index/index';
-import { MenuController } from 'ionic-angular'; // navigation bar dependency
-import { UserData } from '../../providers/user-data';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { NavController, ToastController, LoadingController } from 'ionic-angular';
+import { SignupPage } from '../signup/signup';
+import { IndexPage } from '../index/index';
 import { PeopleService } from '../../providers/people-service';
+import { UserData } from '../../providers/user-data';
 import 'rxjs/add/operator/timeout';
 
 
 /* interface of home page*/
 @Component({
   templateUrl: 'login.html',
-  providers: [UserData,PeopleService]  
+  providers: [ UserData, PeopleService ]  
 })
 
-
 export class LoginPage {
+  login: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private navCtrl: NavController,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private peopleService: PeopleService,
+  ) {
+    this.login = this.formBuilder.group({
+      email:    ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+  }
+
+  goToSignup() {
+    this.navCtrl.push(SignupPage);
+  }
+
+  onSubmit() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Signing in...'
+    });
+    loading.present();
+
+    this.peopleService
+      .login(this.login.value)
+      .timeout(5000)
+      .subscribe(
+        result => {
+          loading.dismiss();
+          this.navCtrl.push(IndexPage);
+        },
+        error => {
+          loading.dismiss();
+          let toast = this.toastCtrl.create({
+            message: JSON.parse(error._body).message,
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        }
+      );
+  }
+
+
+}
+
+  /*
 
 
   public username;
@@ -48,7 +95,7 @@ export class LoginPage {
     password: this.password
    });
    
-   /* testing */
+   /* testing *
    if(this.username == "admin"){
       this.userData.login(this.username);
       this.sessionToken=  "admin_token";
@@ -56,7 +103,7 @@ export class LoginPage {
       this.navCtrl.setRoot(this.indexPage,{username:this.username});
    } else { 
    
-   /* use peopelService to login and retrieve sessionToken */
+   /* use peopelService to login and retrieve sessionToken *
    
    // first, display loading/spinner to show status
     let loading = this.loadingCtrl.create({
@@ -93,3 +140,4 @@ export class LoginPage {
   }
   }
 }
+  */

@@ -15,8 +15,8 @@ import { UserData} from '../../providers/user-data';
   quite similiar to a index page 
 */
 @Component({
-  selector: 'page-user',
-  templateUrl: 'user.html',
+  selector: 'page-user-stats',
+  templateUrl: 'user_stats.html',
   providers: [PeopleService,UserData]
 })
 export class UserPage {
@@ -83,7 +83,7 @@ export class UserPage {
   }
   
  ionViewDidLoad() {
-   //  this.initCharts();
+   this.initCharts();
  }
 
   addReceipt(){
@@ -100,12 +100,12 @@ export class UserPage {
   /* including calling provider whihc calls api to retrieve user data */
   /* navigation and respresentation of the retrieved data */
 
-//  initCharts(){
-//  
-//    this.lineChart = new Chart(this.lineCanvas.nativeElement,this.peopleService.getChartData("Daily"));
-//    this.barChart = new Chart(this.barCanvas.nativeElement,this.peopleService.getChartData("Weekly"));
-//    this.pieChart = new Chart(this.pieCanvas.nativeElement,this.peopleService.getChartData("Monthly"));
-//  }
+  initCharts(){
+  
+    this.lineChart = new Chart(this.lineCanvas.nativeElement,this.peopleService.getChartData("Daily"));
+    this.barChart = new Chart(this.barCanvas.nativeElement,this.peopleService.getChartData("Weekly"));
+    this.pieChart = new Chart(this.pieCanvas.nativeElement,this.peopleService.getChartData("Monthly"));
+  }
 
   slideChanged(){
     let currentIndex = this.slides.getActiveIndex();
