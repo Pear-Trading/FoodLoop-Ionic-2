@@ -33,6 +33,7 @@ page-user{
 		}
 
 		.pearstatus{
+			border-bottom: 3px solid rgba(255, 255, 255, .6);
 			margin: 0;
 			padding: 0em 0em 1.4em 0em;
 
@@ -53,8 +54,9 @@ page-user{
 	}
 
 	.stat_button{
-		background: rgba(167, 136, 60, .4);
+		background: rgba(167, 136, 60, .2);
 		height: 3em;
+		margin: 10px 0px 0px 0px;
 		}
 	
 

@@ -44,22 +44,11 @@
     </ion-row>
 
 	  
-    <ion-row class="stat_button">
-      <ion-segment [(ngModel)]="status" mode="md" >
-        <ion-segment-button value="Spend"  (ionSelect)="goToSlide(0)">Spend</ion-segment-button>
-        <ion-segment-button value="Top5"  (ionSelect)="goToSlide(1)">Top 5</ion-segment-button>
-        <ion-segment-button value="Chart" (ionSelect)="goToSlide(2)">Chart</ion-segment-button>
-        <ion-segment-button value="Global"(ionSelect)="goToSlide(3)">Global</ion-segment-button>
-        <ion-segment-button value="Ranks" (ionSelect)="goToSlide(4)">Ranks</ion-segment-button>
-        <ion-segment-button value="Awards"(ionSelect)="goToSlide(5)">Awards</ion-segment-button>
-      </ion-segment>
-    </ion-row>
 
-    <!-- display charts -->
-    <!-- ideally, this would be a quick and simple grasp of user overview-->
+
 
     <ion-row class="innerChart" >
-        <ion-slides pager (ionSlideDidChange)="slideChanged()"> 
+        <ion-slides (ionSlideDidChange)="slideChanged()"> 
           <ion-slide>
   <div class="currentstats">  
 		<ion-row>
@@ -256,6 +245,17 @@
 		  
         </ion-slides>
 </ion-row>
+
+    <ion-row class="stat_button">
+      <ion-segment [(ngModel)]="status" mode="md" >
+        <ion-segment-button value="Spend"  (ionSelect)="goToSlide(0)">Spend</ion-segment-button>
+        <ion-segment-button value="Top5"  (ionSelect)="goToSlide(1)">Top 5</ion-segment-button>
+        <ion-segment-button value="Chart" (ionSelect)="goToSlide(2)">Chart</ion-segment-button>
+        <ion-segment-button value="Global"(ionSelect)="goToSlide(3)">Global</ion-segment-button>
+        <ion-segment-button value="Ranks" (ionSelect)="goToSlide(4)">Ranks</ion-segment-button>
+        <ion-segment-button value="Awards"(ionSelect)="goToSlide(5)">Awards</ion-segment-button>
+      </ion-segment>
+    </ion-row>
 
 	</ion-grid>
 
