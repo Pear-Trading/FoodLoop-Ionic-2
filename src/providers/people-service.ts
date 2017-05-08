@@ -43,32 +43,47 @@ export class PeopleService {
   }
 
   public upload(data, filePath) {
-    data.session_key = this.userData.getSessionKey;
-
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: 'receipt.jpg',
-      chunkedMode: false,
-      params: {
-        json: JSON.stringify(data)
-      }
-    };
-    const fileTransfer: TransferObject = this.transfer.create();
-    return Observable.fromPromise(
-      fileTransfer.upload(
-        filePath,
-        this.apiUrl + '/upload',
-        options
-      )
-    ); //.map( response => response.json() );
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          data.session_key = key;
+          let options: FileUploadOptions = {
+            fileKey: 'file',
+            fileName: 'receipt.jpg',
+            chunkedMode: false,
+            params: {
+              json: JSON.stringify(data)
+            }
+          };
+          const fileTransfer: TransferObject = this.transfer.create();
+          return Observable.fromPromise(
+            fileTransfer.upload(
+              filePath,
+              this.apiUrl + '/upload',
+              options
+            )
+          )
+        }
+      ).map( response => JSON.parse(response.response) );
   }
 
+  public search(data) {
+    return this.userData.getSessionKey()
+      .flatMap(
+        value => {
+          data.session_key = value;
+          return this.http.post(
+            this.apiUrl + '/search',
+            data
+          );
+        }
+      ).map( response => response.json() );
+  }
 
   /* Links to server, these should be stored in config.js */
   foodloop_root_url = "http://app.peartrade.org/";
   foodloop_root_url_edit = this.foodloop_root_url + "edit";
   foodloop_root_url_token = this.foodloop_root_url + "token";
-  foodloop_root_url_search = this.foodloop_root_url + "search";
   foodloop_root_url_approve = this.foodloop_root_url + "admin-approve";
   foodloop_root_url_user_history = this.foodloop_root_url + "user-history";
 
@@ -76,10 +91,6 @@ export class PeopleService {
   getUserHistory(data){
     return this.http.post(this.foodloop_root_url_user_history,data);
   }
-  search(data){
-    return this.http.post(this.foodloop_root_url_search,data);
-  }
-
   edit(data){ 
     return this.http.post(this.foodloop_root_url_edit,data);
   }

@@ -21,7 +21,7 @@ export interface PageInterface {
 /* This file is usually used as shell to load other Components*/
 @Component({
   templateUrl: 'app.html',
-  providers: [UserData]  
+  providers: [UserData]
 })
 
 

@@ -21,22 +21,22 @@
     <!-- Display search result -->
     <ion-list class="store-list" *ngIf="showList && storename!='' "> 
       <ion-item (click)="addStore(store)" *ngFor="let store of storeList">  
-          {{store.name}},{{store.fullAddress}} 
+          {{store.name}},{{store.town}} 
       </ion-item>
     </ion-list>
     
     <!-- Display enter address box -->
-    <ion-list *ngIf="showAddStore || storeaddress!=''">  
+    <ion-list *ngIf="showAddStore || storeaddress!=''">
       <ion-item>
-          <ion-label stacked> Wrong address? Enter full address below </ion-label>
-          <ion-input [(ngModel)]="storeaddress"> </ion-input>
+          <ion-label stacked> Wrong address? Enter Town below </ion-label>
+          <ion-input [(ngModel)]="organisationTown"> </ion-input>
       </ion-item>
     </ion-list>
     
     <!-- Display history input -->
     <ion-list class="history-list" *ngIf="showHistoryList"> 
       <ion-item (click)="addStore(store)" *ngFor="let store of historyStoreList">  
-          {{store.name}},{{store.fullAddress}} 
+          {{store.name}},{{store.town}} 
       </ion-item>
     </ion-list>
 
@@ -63,7 +63,7 @@
     <!-- Enter amount spent-->
     <ion-item> 
       <ion-label stacked>Enter amount spent below(£)</ion-label>
-      <ion-input [(ngModel)]="amount" step="0.01" placeholder="e.g. 5.00"></ion-input>
+      <ion-input type="number" [(ngModel)]="amount" step="0.01" placeholder="e.g. 5.00"></ion-input>
     </ion-item>
     <!-- move onto next -->
     <ion-item>  

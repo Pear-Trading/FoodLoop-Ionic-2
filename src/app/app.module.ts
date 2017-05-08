@@ -1,10 +1,11 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { NgModule } from '@angular/core';
+import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { Transfer } from '@ionic-native/transfer';
+
+import { AppProviders } from './app.providers';
+
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { TokenPage } from '../pages/token/token';
@@ -66,6 +67,6 @@ import { StatPage } from '../pages/stat/stat';
     ShopPage,
     StatPage,
   ],
-  providers: [Transfer, SplashScreen, {provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: AppProviders.getProviders()
 })
 export class AppModule {}

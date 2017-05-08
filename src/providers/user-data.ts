@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 /*
   this ts file handles the user-data, including login, logout event 
@@ -10,41 +11,24 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class UserData {
-  private sessionKey: any;
 
   constructor(
     private storage: Storage,
     private events: Events
   ) {
-    this.storage.ready().then(() => {
-      this.storage.get('sessionKey').then((val) => {
-        this.sessionKey = val;
-      })
-    });
     this.loadTestingData();
   }
 
-  setSessionKey(key: string) {
+  public setSessionKey(key: string) {
     console.log("set sessionKey");
-    this.sessionKey = key;
     this.storage.set('SessionKey',key);
   }
 
-  getSessionKey() {
+  public getSessionKey() {
     console.log("get sessionKey");
-    if ( this.sessionKey == null ) {
-      console.log("sessionKey null, fetching from storage");
-      this.storage
-        .get('SessionKey')
-        .then(
-          (value) => {
-            this.sessionKey = value;
-            return this.sessionKey;
-          }
-        );
-    } else {
-      return this.sessionKey;
-    }
+    return Observable.fromPromise(
+      this.storage.get('SessionKey')
+    );
   }
 
   /* Testing purpose, ideally, these variable should be initilizaed via calling */
