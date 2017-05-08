@@ -3,6 +3,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { AboutPage } from '../pages/about/about';
 import { IndexPage } from '../pages/index/index';
+import { ReceiptPage } from '../pages/receipt/receipt';
+import { RankingPage } from '../pages/ranking/ranking';
+import { SettingPage} from '../pages/setting/setting';
+import { StatPage} from '../pages/stat/stat';
+import { AccountPage } from '../pages/account/account';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 
 import { UserData } from '../providers/user-data';
@@ -33,9 +38,13 @@ export class MyApp {
   
   // for logged in user 
   loggedInPage: PageInterface[]= [
-    { title: 'Home', component: IndexPage, icon: 'person' },
-    { title: 'Leaderboard',component: IndexPage, index:1,icon: 'stats'},
-    { title: 'Logout', component: LoginPage, icon: 'log-out',index:3, logsOut: true }
+    { title: 'Home', component: IndexPage, icon: 'home' },
+	{ title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
+    { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
+	{ title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
+	{ title: 'Account',component: SettingPage, index:9,icon: 'person'},
+	{ title: 'About',component: AboutPage, index:11,icon: 'globe'},
+    { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
   ];
 
   // for not login user

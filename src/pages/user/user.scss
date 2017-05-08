@@ -5,19 +5,18 @@ page-user{
 	.userdashboard{
 		margin: 0%;
 		border: 0px solid black;
-			padding: 0px 0px 10em 0px;
+		padding: 0px 0px 10em 0px;
 		
 		.greeting{
-			background: #29526d;
 			padding-top: 0px;
-
+			height: 6.5em;
 				.username{
-					font-size: 2em;
+					font-size: 1.5em;
 					color:white;	
 				}
 
 				.useremail{
-					font-size: 1.5em;
+					font-size: 1em;
 					color: #eac55e;
 				}
 
@@ -27,66 +26,65 @@ page-user{
 		}	
 
 		.buttonNote{
-			font-size: 1.5em;
+			font-size: .8em;
+			font-size: .8em;
 			color: white;
-			line-height: 1.8em;
+			line-height: 1em;
 		}
 
 		.pearstatus{
+			border-bottom: 3px solid rgba(255, 255, 255, .6);
 			margin: 0;
-			padding: 0em 0em .8em 0em;
-			background: #29526d;
+			padding: 0em 0em 1.4em 0em;
+
 			
 			.statusheader{
-				color: #eaac5e;
-				font-size: 1.4em;
+				color: rgba(200, 200, 200, 1);
+				font-size: 1em;
 				text-align: center;
 			}
 
 			.statuscontent{
-				color: white;
-				font-size: 2em;
+				color: rgba(255, 255, 255, 1);
+				font-size: 1.3em;
 				text-align: center;
 			}		
 		}
 
 	}
 
+	.stat_button{
+		background: rgba(167, 136, 60, .2);
+		height: 3em;
+		margin: 10px 0px 0px 0px;
+		}
+	
+
 	.currentstats{ 
-		padding: 10px 10px 0px 10px;
+		padding: 10px 35px 0px 35px;
 	}
   
 	.statbox{
 		margin: 0;
 		padding: 0px;
-		border: 1px solid #336699;
-		box-shadow: 0 4px 8px 0 rgba(30, 65, 88, .5);
+		border: 1px solid rgba(255, 255, 255, .8);
 		transition: 0.3s;
-		border-radius: 7px;
-		background-color: whitesmoke;
+		border-radius: 5px;
+		background-color: rgba(255, 255, 255, 0);
 	  
-		.statboxheaderblue{
-			background-color: #74a7b8;
-			border-radius: 5px 5px 0px 0px;
-			color: #ffffff; 
-			font-size: 1em;
-			padding: 2%;
+		.statboxheader{
+			background-color: rgba(255, 255, 255, .6);
+			border-radius: 3px 3px 0px 0px;
+			color: rgba(50, 50, 50, 1); 
+			font-size: .8em;
+			padding: 1%;
 			text-align: center;
 		}
 
-		.statboxheaderorange{
-			background-color: #cc6633;
-			border-radius: 5px 5px 0px 0px;
-			color: #ffffff; 
-			font-size: 1em;
-			padding: 2%;
-			text-align: center;
-		}
-		
 		.statboxcontent{
-			color: #1e4158;
-			font-size: 1.3emem; 
-			padding: .5em;
+			color: rgba(255, 255, 255, 1);
+			font-size: 1em; 
+			padding: .2em;
 			text-align: center;  
 		}
 
@@ -95,11 +93,12 @@ page-user{
 
 	.pearUpCtrl{
 		position: fixed;
-		bottom: 3em; 
+		bottom: 3.5em; 
 		left: 0%;
 		right: 0%;
-		background-color: rgba(51, 153, 204, .2);
+		background-color: rgba(204, 204, 204, .0);
 		height: 10em;
+		z-index: 99;
    
 		button{
 			margin: .1em auto;
@@ -136,3 +135,19 @@ ion-row {
 ion-col {
 	padding: 0px;
 }
+
+.swiper-pagination {
+    top: 93%;
+}
+
+.swiper-pagination-bullet:active {
+    background: #a7883c !important;
+}
+
+.swiper-pagination-bullet{
+    background: #29526d !important;
+    border-radius: 100%;
+    height: 7px;   
+    width: 7px;
+}
+

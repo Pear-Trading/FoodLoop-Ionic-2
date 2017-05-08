@@ -5,6 +5,7 @@ import { RankingPage} from '../ranking/ranking';
 import { SettingPage} from '../setting/setting';
 import { AboutPage} from '../about/about';
 import { ReceiptPage} from '../receipt/receipt';
+import { StatPage} from '../stat/stat';
 /*
   Works as a Tab page 
 */
@@ -20,6 +21,7 @@ export class IndexPage {
   tab3Root: any = SettingPage;
   tab4Root: any = AboutPage;
   tab5Root: any = ReceiptPage;
+  tab6Root: any = StatPage;
   mySelectedIndex: number;
   username:any;
   valueforngif=true;

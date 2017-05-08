@@ -2,22 +2,23 @@ page-index {
 
 }
 .tabbar {
-  justify-content: center;
-  height: 7%;
-  }
+	justify-content: center;
+}
 
 .tab-button {
-  max-width: 200px;
-  background: #1e4158;
-  height: 100%;
-  }
+	max-width: 200px;
+	background: #1e4158;
+	background: #29526d url('../assets/img/blue-grad.jpg') repeat-x ;
+	background-size: auto 100%;
+}
 
 
 .tabs-md .tab-button .tab-button-icon {
-  color: #efefef;
+	font-size: 1.2em;
+	color: rgba(200, 200, 200, 1);
 }
 
 .tabs-md .tab-button {
-  color: #efefef;
-  }
+	color: rgba(200, 200, 200, 1);
+}
 

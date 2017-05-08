@@ -1,3 +1,30 @@
 page-about {
 
+	h2 {
+		color: #ffffff;
+		font-size: 1.2em;
+	}
+	
+	h2 {
+		color: #fdfdfd;
+	}
+
+	p {
+		color: #ffffff;
+		padding: 0px 10px 0px 10px;
+		font-size: .8em;
+	}
+	
+	.right {
+		text-align: right;
+		font-variant: small-caps;
+		font-size: .8em;
+	}
+	
+	.swiper-pagination-bullet{
+		background: #fefefe !important;
+		border-radius: 100%;
+		height: 7px;   
+		width: 7px;
+	}
 }
