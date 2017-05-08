@@ -46,7 +46,7 @@
 	  
     <ion-row class="stat_button">
       <ion-segment [(ngModel)]="status" mode="md" >
-        <ion-segment-button value="Total"  (ionSelect)="goToSlide(0)">Totals</ion-segment-button>
+        <ion-segment-button value="Spend"  (ionSelect)="goToSlide(0)">Spend</ion-segment-button>
         <ion-segment-button value="Top5"  (ionSelect)="goToSlide(1)">Top 5</ion-segment-button>
         <ion-segment-button value="Chart" (ionSelect)="goToSlide(2)">Chart</ion-segment-button>
         <ion-segment-button value="Global"(ionSelect)="goToSlide(3)">Global</ion-segment-button>
@@ -65,7 +65,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderblue">Total Spend</div>
+                <div class="statboxheader">Total</div>
                 <div class="statboxcontent"> £88.88 </div>
               </div>
   			</ion-col>
@@ -73,7 +73,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderblue">Today's Spend</div>
+                <div class="statboxheader">Today</div>
                 <div class="statboxcontent"> £108.89 </div>
               </div>
 			</ion-col>
@@ -84,7 +84,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderblue">This Week</div>
+                <div class="statboxheader">Week</div>
                 <div class="statboxcontent"> £88.88 </div>
               </div>
 			</ion-col> 
@@ -92,7 +92,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderblue">This Month</div>
+                <div class="statboxheader">Month</div>
                 <div class="statboxcontent"> £108.89 </div>
               </div>
 			</ion-col>
@@ -103,7 +103,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderblue">Global Spend</div>
+                <div class="statboxheader">Global</div>
                 <div class="statboxcontent"> £88.88 </div>
               </div>
 			</ion-col> 
@@ -111,7 +111,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderblue">Global Average</div>
+                <div class="statboxheader">Global Avg.</div>
                 <div class="statboxcontent"> £108.89 </div>
               </div>
 			</ion-col>
@@ -137,7 +137,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Local Rank (week)</div>
+                <div class="statboxheader">Local Week</div>
                 <div class="statboxcontent"> 3 </div>
               </div>
 			</ion-col> 
@@ -145,7 +145,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Global Rank (week)</div>
+                <div class="statboxheader">Global Week</div>
                 <div class="statboxcontent"> 130 </div>
               </div>
 			</ion-col>
@@ -156,7 +156,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Local Rank (month)</div>
+                <div class="statboxheader">Local Month</div>
                 <div class="statboxcontent"> 3 </div>
               </div>
 			</ion-col> 
@@ -164,7 +164,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Global Rank (month)</div>
+                <div class="statboxheader">Global Month</div>
                 <div class="statboxcontent"> 130 </div>
               </div>
 			</ion-col>
@@ -175,7 +175,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Local Rank (year)</div>
+                <div class="statboxheader">Local Year</div>
                 <div class="statboxcontent"> 3 </div>
               </div>
 			</ion-col> 
@@ -183,7 +183,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheaderorange">Global Rank (year)</div>
+                <div class="statboxheader">Global Year</div>
                 <div class="statboxcontent"> 130 </div>
               </div>
 			</ion-col>
@@ -198,7 +198,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheadergreen">Days Logged</div>
+                <div class="statboxheader">Days Logged</div>
                 <div class="statboxcontent"> 105 of 123 </div>
               </div>
 			</ion-col> 
@@ -206,7 +206,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheadergreen">Highest Spend</div>
+                <div class="statboxheader">Highest Spend</div>
                 <div class="statboxcontent"> £108.89 </div>
               </div>
 			</ion-col>
@@ -217,7 +217,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheadergreen">Best Week (Points)</div>
+                <div class="statboxheader">Best Week Points</div>
                 <div class="statboxcontent"> 97 </div>
               </div>
 			</ion-col> 
@@ -225,7 +225,7 @@
 			</ion-col>			
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheadergreen">Best Month (Points)</div>
+                <div class="statboxheader">Best Month Points</div>
                 <div class="statboxcontent"> 256 </div>
               </div>
 			</ion-col>
@@ -236,7 +236,7 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheadergreen">Hero Points</div>
+                <div class="statboxheader">Hero Total</div>
                 <div class="statboxcontent"> 18,987 </div>
               </div>
 			</ion-col> 
@@ -244,7 +244,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheadergreen">Hero Status</div>
+                <div class="statboxheader">Hero Status</div>
                 <div class="statboxcontent"> Legendary </div>
               </div>
 			</ion-col>
