@@ -12,12 +12,12 @@ page-user{
 			height: 6.5em;
 				.username{
 					font-size: 1.5em;
-					color:white;	
+					color: rgba(255, 255, 255, 1);	
 				}
 
 				.useremail{
 					font-size: 1em;
-					color: #eac55e;
+					color: rgba(230, 230, 230, .8);
 				}
 
 				ion-item{
@@ -122,7 +122,7 @@ page-user{
 		}
 	}
 
-}
+
 
 ion-grid {
 	padding: 0px;
@@ -151,3 +151,4 @@ ion-col {
     width: 7px;
 }
 
+}
