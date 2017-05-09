@@ -31,6 +31,17 @@ export class UserData {
     );
   }
 
+  public removeSessionKey() {
+    console.log("remove sessionKey");
+    this.storage.remove('SessionKey');
+  }
+
+  public hasLoggedIn() {
+    return this.getSessionKey().map(
+      result => result ? true : false
+    );
+  }
+
   /* Testing purpose, ideally, these variable should be initilizaed via calling */
   /* server APIs */
   /* myData stores user detail including email, fullname, username and invitation token */
@@ -132,12 +143,7 @@ export class UserData {
   };
 
 
-  // return a promise
-  hasLoggedIn() {
-    return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
-      return value === true;
-    });
-  };
+
   /* Storage management and data access method end */ 
 
   /* Testing */
