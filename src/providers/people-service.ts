@@ -32,14 +32,23 @@ export class PeopleService {
   }
 
   public login(data) {
-    let login_event = this.http.post(
+    return this.http.post(
       this.apiUrl + '/login',
       data
     ).map( response => response.json() );
-    login_event.subscribe(
-      result => {  this.userData.setSessionKey( result.session_key ) }
-    );
-    return login_event;
+  }
+
+  public logout() {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          this.userData.removeSessionKey();
+          return this.http.post(
+            this.apiUrl + '/logout',
+            { session_key : key }
+          );
+        }
+      ).map( response => response.json );
   }
 
   public upload(data, filePath) {

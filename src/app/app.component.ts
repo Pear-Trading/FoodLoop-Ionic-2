@@ -10,6 +10,7 @@ import { StatPage} from '../pages/stat/stat';
 import { AccountPage } from '../pages/account/account';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 
+import { PeopleService } from '../providers/people-service';
 import { UserData } from '../providers/user-data';
 
 export interface PageInterface {
@@ -26,7 +27,7 @@ export interface PageInterface {
 /* This file is usually used as shell to load other Components*/
 @Component({
   templateUrl: 'app.html',
-  providers: [UserData]
+  providers: [UserData, PeopleService]
 })
 
 
@@ -62,31 +63,45 @@ export class MyApp {
     public menu: MenuController,
     public events: Events,
     public userData: UserData,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public peopleService: PeopleService,
  
   ) {
 
   /* Check if localCache exsit, if yes, auto-login */
   /* if not, redirect to the home page for login or sign up*/       
 
-  
-    this.userData.hasLoggedIn()
-      .then((hasLoggedIn) => {
-        if (hasLoggedIn) {
-          this.rootPage = IndexPage;
-          this.enableMenu(true);
+
+    this.userData.hasLoggedIn().subscribe(
+      result => {
+        if (result) {
+          console.log('User is logged in, rendering Index');
+          this.renderIndexPage();
         } else {
-          this.rootPage = LoginPage;
-
+          console.log('User is not logged in, rendering Login');
+          this.renderLoginPage();
         }
-        this.platformReady()
-      })
+      },
+      err => {
+        console.log('Error checking if logged in, assuming not');
+        this.renderLoginPage();
+      }
+    );
 
-    
     this.listenToLoginEvents();
+  }
 
-    
-   }
+  renderLoginPage() {
+    this.rootPage = LoginPage;
+    this.enableMenu(false);
+    this.platformReady();
+  }
+
+  renderIndexPage() {
+    this.rootPage = IndexPage;
+    this.enableMenu(true);
+    this.platformReady();
+  }
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
@@ -131,7 +146,11 @@ export class MyApp {
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
       setTimeout(() => {
-        this.userData.logout();
+        this.events.publish('user:logout');
+        this.peopleService.logout().subscribe(
+          result => console.log('successfully logged out'),
+          err => console.log('something went wrong when logging out'),
+        );
       }, 1000);
     }
   }
