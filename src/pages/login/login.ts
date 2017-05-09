@@ -50,7 +50,6 @@ export class LoginPage {
 
     this.peopleService
       .login(this.login.value)
-      .timeout(5000)
       .subscribe(
         result => {
           this.userData.setSessionKey( result.session_key );
