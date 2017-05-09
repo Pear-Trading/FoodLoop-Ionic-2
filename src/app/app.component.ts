@@ -146,10 +146,10 @@ export class MyApp {
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
       setTimeout(() => {
+        this.events.publish('user:logout');
         this.peopleService.logout().subscribe(
           result => console.log('successfully logged out'),
           err => console.log('something went wrong when logging out'),
-          () => this.events.publish('user:logout'),
         );
       }, 1000);
     }
