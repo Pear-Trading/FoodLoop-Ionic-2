@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, ToastController, LoadingController } from 'ionic-angular';
+import {
+  NavController,
+  ToastController,
+  LoadingController,
+  Events
+} from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { IndexPage } from '../index/index';
 import { PeopleService } from '../../providers/people-service';
@@ -22,7 +27,9 @@ export class LoginPage {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
+    private events: Events,
     private peopleService: PeopleService,
+    private userData: UserData,
   ) {
     this.login = this.formBuilder.group({
       email:    ['', [Validators.required]],
@@ -46,11 +53,14 @@ export class LoginPage {
       .timeout(5000)
       .subscribe(
         result => {
+          this.userData.setSessionKey( result.session_key );
+          this.events.publish('user:login')
           loading.dismiss();
           this.navCtrl.push(IndexPage);
         },
         error => {
           loading.dismiss();
+          this.events.publish('user:logout')
           let toast = this.toastCtrl.create({
             message: JSON.parse(error._body).message,
             duration: 3000,
