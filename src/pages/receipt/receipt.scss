@@ -1,13 +1,16 @@
 
-.myBackgroundColor{
-    background-color: whitesmoke;
-}
 
-.padding16{
-    margin: 16px; 
-}
 
 page-receipt {
+
+	.myBackgroundColor{
+		background-color: none;
+	}
+
+	.padding16{
+		margin: 16px; 
+	}
+
 
     ion-input{
         font-size:2.0em;
