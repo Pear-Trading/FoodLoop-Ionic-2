@@ -10,6 +10,7 @@ import { StatPage} from '../pages/stat/stat';
 import { AccountPage } from '../pages/account/account';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 
+import { PeopleService } from '../providers/people-service';
 import { UserData } from '../providers/user-data';
 
 export interface PageInterface {
@@ -26,7 +27,7 @@ export interface PageInterface {
 /* This file is usually used as shell to load other Components*/
 @Component({
   templateUrl: 'app.html',
-  providers: [UserData]
+  providers: [UserData, PeopleService]
 })
 
 
@@ -62,7 +63,8 @@ export class MyApp {
     public menu: MenuController,
     public events: Events,
     public userData: UserData,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public peopleService: PeopleService,
  
   ) {
 
@@ -144,7 +146,11 @@ export class MyApp {
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
       setTimeout(() => {
-        this.userData.logout();
+        this.peopleService.logout().subscribe(
+          result => console.log('successfully logged out'),
+          err => console.log('something went wrong when logging out'),
+          () => this.events.publish('user:logout'),
+        );
       }, 1000);
     }
   }

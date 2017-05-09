@@ -31,6 +31,11 @@ export class UserData {
     );
   }
 
+  public removeSessionKey() {
+    console.log("remove sessionKey");
+    this.storage.remove('SessionKey');
+  }
+
   public hasLoggedIn() {
     return this.getSessionKey().map(
       result => result ? true : false

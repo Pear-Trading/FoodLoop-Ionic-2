@@ -38,6 +38,19 @@ export class PeopleService {
     ).map( response => response.json() );
   }
 
+  public logout() {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          this.userData.removeSessionKey();
+          return this.http.post(
+            this.apiUrl + '/logout',
+            { session_key : key }
+          );
+        }
+      ).map( response => response.json );
+  }
+
   public upload(data, filePath) {
     return this.userData.getSessionKey()
       .flatMap(
