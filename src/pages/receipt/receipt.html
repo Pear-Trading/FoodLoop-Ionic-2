@@ -4,22 +4,22 @@
 				<ion-icon item-right name='menu'></ion-icon>
 			</button>
 			<ion-title>
-				Submit a Receipt
+				Receipts
 			</ion-title>
 		</ion-toolbar>
 	</ion-header>
 
 
 <!-- fit into one screen -->
-<ion-content class="myBackgroundColor">
+<ion-content>
 
   <!-- Step 1. -->
   <ion-card *ngIf="currentStep === 1" >
 
     <!-- Enter storename and search -->
     <ion-item> 
-      <ion-label stacked>Enter store name below </ion-label>
-      <ion-input [(ngModel)]="storename" (focus)="showHisList($event)" (input)="getStores($event)" placeholder="e.g. Three inc."></ion-input>
+      <ion-label stacked><span class="labelreceipt">Enter store name below</span></ion-label>
+      <ion-input [(ngModel)]="storename" (focus)="showHisList($event)" (input)="getStores($event)" placeholder="For example: BT Ltd"></ion-input>
     </ion-item>
 
     <!-- Display search result -->
@@ -51,7 +51,7 @@
   </ion-card>
 
   <!-- folded step 1. -->
-  <ion-card padding (click)="goToStep(1)" *ngIf="currentStep != 1">  
+  <ion-card click)="goToStep(1)" *ngIf="currentStep != 1">  
     <ion-item>
       <ion-label *ngIf="storename==='' || storeaddress===''">Step 1. Enter store details below </ion-label>
       <ion-label *ngIf="storename!='' && storeaddress!=''">{{storename}} <br> {{storeaddress}}</ion-label>
@@ -119,9 +119,13 @@
     </ion-item>
   </ion-card>
 
-  <div padding>
-    <button class="btnColor" ion-button color="primary" large [disabled]="!submitReceipt" (click) ="postImage()" > Submit</button>
-  </div>
+	<div padding class="pearUpCtrl">
+		<div class="boxforbutton">
+			<button ion-button [disabled]="!submitReceipt" (click) ="postImage()" >
+				submit
+			</button>
+		</div>
+	</div>
 
 
   <!-- Display the list of pending receipt -->
