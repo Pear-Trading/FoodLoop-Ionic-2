@@ -51,7 +51,7 @@
   </ion-card>
 
   <!-- folded step 1. -->
-  <ion-card click)="goToStep(1)" *ngIf="currentStep != 1">  
+  <ion-card (click)="goToStep(1)" *ngIf="currentStep != 1">
     <ion-item>
       <ion-label *ngIf="storename==='' || storeaddress===''">Step 1. Enter store details below </ion-label>
       <ion-label *ngIf="storename!='' && storeaddress!=''">{{storename}} <br> {{storeaddress}}</ion-label>
