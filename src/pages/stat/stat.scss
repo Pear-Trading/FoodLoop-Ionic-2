@@ -1,70 +1,77 @@
 page-stat {
 
-  .cardHeader{
-    background-color: orangered; 
-    color:white; 
-    font-size: 1.5em; 
-    padding: 16px; 
-  } 
+	.cardHeader{
+		background-color: none; 
+		color:white; 
+		font-size: 1.3em; 
+		padding: 12px; 
+	} 
    
-  //  custom header color 
-  .blueCard{
-    background-color: dodgerblue;
-  }
+	.blueCard{
+		background-color: dodgerblue;
+	}
 
-  .purpleCard{
-    background-color: mediumpurple;
-  }
+	.purpleCard{
+		background-color: mediumpurple;
+	}
 
-  .greenCard{
-    background-color:yellowgreen;
-  }
+	.greenCard{
+		background-color:yellowgreen;
+	}
 
-  .orangeCard{
-    background-color:orange;
-  }
+	.orangeCard{
+		background-color:orange;
+	}
 
-  .tanCard{
-    background-color:peru;
-  }  
+	.tanCard{
+		background-color:peru;
+	}  
 
-  .tealCard{
-    background-color:teal;
-  }
+	.tealCard{
+		background-color:teal;
+	}
   
-  .oliveCard{
-    background-color:olive;
-  }
+	.oliveCard{
+		background-color:olive;
+	}
   
-  .cardContent{
-    padding:16px; 
-    background-color: whitesmoke;
-  }
+	.cardContent{
+		padding: 8px; 
+		background-color: rgba(255, 255, 255, .6);
+	}
 
   //  a card .cardItem consisted of 
   // header 
   // header right 
   // main .cardContent
-  .cardItem{
-    .cardItemHeader{
-      background-color: whitesmoke;
-      color:black; 
-      font-size: 1.3em;
-      padding: 5px;
-    }
 
-    .cardItemHeaderRight{
-      float: right;
-      color:black;
-    }
+	.cardItem{
+		border-bottom: 1px solid rgba(230, 230, 230, 1); 
+		margin: 0px 0px 10px 0px; 
+		
+		.cardItemHeader{
+			background-color: none;
+			color:black; 
+			font-size: 1.1em;
+		}
 
-    .cardItemContent{
-      background-color: whitesmoke;
-      color:darkgray;
-      font-size: 1.0em; 
-      padding:5px; 
-    }
-    border-bottom: 1px solid lightgray; 
-  }
+		.cardItemHeaderRight{
+			float: right;
+			color: black;
+		}
 
+		.cardItemContent{
+			background-color: none;
+			color:darkgray;
+			font-size: 1.0em; 
+			padding: 6px;
+		}
+   }
+	.card-md{
+		background: none;
+		border: 3px solid rgba(255, 255, 255, .8);
+		border-radius: 10px;
+		width: 85%;
+		margin: 20px auto;
+	}
 }

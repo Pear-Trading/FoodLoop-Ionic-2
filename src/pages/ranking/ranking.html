@@ -15,26 +15,26 @@
 <div padding>
   <ion-segment color="primary" mode="md" [(ngModel)]="listType">
     <ion-segment-button value="All">
-      All
+      Regional
     </ion-segment-button>
     <ion-segment-button value="Local">
-      Local
+      Monthly
     </ion-segment-button>
     <ion-segment-button value="Monthly">
-      Monthly
+      Global
     </ion-segment-button>
   </ion-segment>
 
   
   <div [ngSwitch]="listType" class="listCtrl">
 
-    <ion-list *ngSwitchCase="'All'"  >
+    <ion-list *ngSwitchCase="'All'">
       <ion-item [ngClass]="getClass(item)" *ngFor="let item of rankingData "  >
   
         <ion-grid>
-          <ion-row >
+          <ion-row class="ranking-list">
             <!-- Current Position -->
-            <ion-col width-10><p>{{item.currentPos}}<p></ion-col>
+            <ion-col  width-10><p>{{item.currentPos}}<p></ion-col>
             <!-- Display position shift using different icon and color -->
             <ion-col *ngIf="item.previousPos!=0" width-20><ion-icon [color]="getIconColor(item)" [name]="getIcon(item)"></ion-icon></ion-col>
             <!-- if no position shift is made, display red -->
