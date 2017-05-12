@@ -1,19 +1,22 @@
 page-receipt {
 
-    ion-input{
+    ion-input, ion-input-placeholder{
         font-size: 1.2em;
-    }
+		color: rgba(255, 255, 255, 1);
+	}
 	
 	ion-label, .labelreceipt {
-		color: rgba(39, 73, 100, 1);
+		color: rgba(255, 255, 255, 1);
 		font-size: 1.2em;
 		font-weight: 500;
 	}
 	
 	.card-md {
-		border: 1pt solid rgba(255, 255, 255, .6);
-		background-color: rgba(255, 255, 255, .2);
+		border: 3px solid rgba(255, 255, 255, .7);
+		background-color: rgba(255, 255, 255, .3);
 		border-radius: 10px;
+		width: 86%;
+		margin: 15px auto;
 	}
 	
 	.cardContent, .item-md {
@@ -23,9 +26,10 @@ page-receipt {
 
     .cardContent{
       background-color: none;
+	  color: rgba(255, 255, 255, 1);
     }
-
-    .cardItem{
+ 
+	.cardItem{
 
       .cardItemHeader{
         background-color: red;
