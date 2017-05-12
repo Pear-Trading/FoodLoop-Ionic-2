@@ -1,5 +1,6 @@
 page-user{
-	scroll: on;
+	scroll: auto;
+
 
 	
 	.userdashboard{
@@ -35,7 +36,7 @@ page-user{
 		.pearstatus{
 			border-bottom: 3px solid rgba(255, 255, 255, .6);
 			margin: 0;
-			padding: 0em 0em 1.4em 0em;
+			padding: 0em 0em .4em 0em;
 
 			
 			.statusheader{
@@ -56,12 +57,12 @@ page-user{
 	.stat_button{
 		background: rgba(167, 136, 60, .2);
 		height: 3em;
-		margin: 10px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
 		}
 	
 
 	.currentstats{ 
-		padding: 10px 35px 0px 35px;
+		padding: 3px 15px 0px 15px;
 	}
   
 	.statbox{
@@ -83,8 +84,8 @@ page-user{
 
 		.statboxcontent{
 			color: rgba(255, 255, 255, 1);
-			font-size: 1em; 
-			padding: .2em;
+			font-size: .8em; 
+			padding: .1em;
 			text-align: center;  
 		}
 
@@ -93,11 +94,11 @@ page-user{
 
 	.pearUpCtrl{
 		position: fixed;
-		bottom: 3.5em; 
+		bottom: 3.3em; 
 		left: 0%;
 		right: 0%;
 		background-color: rgba(204, 204, 204, .0);
-		height: 10em;
+		height: 9.8em;
 		z-index: 99;
    
 		button{

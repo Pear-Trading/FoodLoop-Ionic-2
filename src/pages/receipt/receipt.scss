@@ -1,46 +1,38 @@
-
-.myBackgroundColor{
-    background-color: whitesmoke;
-}
-
-.padding16{
-    margin: 16px; 
-}
-
 page-receipt {
 
-    ion-input{
-        font-size:2.0em;
-    }
-
-   .cardHeader{
-      background-color: orangered; 
-      color:white; 
-      font-size: 1.5em; 
-      padding: 16px; 
-    } 
-
-    .blueCard{
-      background-color: dodgerblue;
-    }
-
-    .purpleCard{
-      background-color: mediumpurple;
-    }
-
-    .yellowCard{
-      background-color:yellowgreen;
-    }
+    ion-input, ion-input-placeholder{
+        font-size: 1.2em;
+		color: rgba(255, 255, 255, 1);
+	}
+	
+	ion-label, .labelreceipt {
+		color: rgba(255, 255, 255, 1);
+		font-size: 1.2em;
+		font-weight: 500;
+	}
+	
+	.card-md {
+		border: 3px solid rgba(255, 255, 255, .7);
+		background-color: rgba(255, 255, 255, .3);
+		border-radius: 10px;
+		width: 86%;
+		margin: 15px auto;
+	}
+	
+	.cardContent, .item-md {
+		background-color: rgba(255, 255, 255, 0);
+	}
+	
 
     .cardContent{
-      padding:16px; 
-      background-color: whitesmoke;
+      background-color: none;
+	  color: rgba(255, 255, 255, 1);
     }
-
-    .cardItem{
+ 
+	.cardItem{
 
       .cardItemHeader{
-        background-color: whitesmoke;
+        background-color: red;
         color:black; 
         font-size: 1.3em;
         padding: 5px;
@@ -52,7 +44,7 @@ page-receipt {
       }
 
       .cardItemContent{
-        background-color: whitesmoke;
+        background-color: red;
         color:darkgray;
         font-size: 1.0em; 
         padding:5px; 
@@ -66,6 +58,34 @@ page-receipt {
         font-size: 1.5em; 
         width:100%;
     }
+	
+	.pearUpCtrl{
+	
+		width: 100%;
+		background: none;
+		padding: 0px;
+
+		.boxforbutton{
+			margin: 0px auto;
+			width: 8em;
+			background: none;
+		}
+		
+		button{
+			z-index: 99;
+			background-color: #f5f5f5;
+			color: #666;
+			border: 2px solid #3399ff;
+			width: 5.5em;
+			height: 5.5em;
+			border-radius: 100%;
+			text-transform: small-caps;
+			font-size: 1.4em;
+			line-height: 1.2em;
+			align-items: center;
+		}
+	}
+	
     .receiptCtrl{
         margin-top: 20%;
     }
