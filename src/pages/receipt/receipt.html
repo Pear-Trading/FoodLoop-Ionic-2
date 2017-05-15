@@ -19,13 +19,13 @@
     <!-- Enter storename and search -->
     <ion-item> 
       <ion-label stacked><span class="labelreceipt">Enter store name below</span></ion-label>
-      <ion-input [(ngModel)]="storename" (focus)="showHisList($event)" (input)="getStores($event)" placeholder="For example: BT Ltd"></ion-input>
+      <ion-input [(ngModel)]="storename" (input)="getStores($event)" placeholder="For example: BT Ltd"></ion-input>
     </ion-item>
 
     <!-- Display search result -->
     <ion-list class="store-list" *ngIf="showList && storename!='' "> 
       <ion-item (click)="addStore(store)" *ngFor="let store of storeList">  
-          {{store.name}},{{store.town}} 
+          {{store.name}}, {{store.town}}
       </ion-item>
     </ion-list>
     
@@ -37,13 +37,6 @@
       </ion-item>
     </ion-list>
     
-    <!-- Display history input -->
-    <ion-list class="history-list" *ngIf="showHistoryList"> 
-      <ion-item (click)="addStore(store)" *ngFor="let store of historyStoreList">  
-          {{store.name}},{{store.town}} 
-      </ion-item>
-    </ion-list>
-
     <!-- move onto next step -->
     <ion-item>  
     <button ion-button full (click)="nextStep()"> Next </button>
