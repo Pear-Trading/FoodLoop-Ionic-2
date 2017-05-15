@@ -27,8 +27,10 @@ declare var cordova: any;
 
 export class ReceiptPage {
 
+  selectedOrganisation: any;
+
   storename= '';
-  storeaddress= ''; 
+  storeaddress= '';
   organisationId: number;
   organisationTown: string;
   organisationPostcode: string;
@@ -108,6 +110,7 @@ export class ReceiptPage {
 
   // if user select a item from the list 
   addStore(store){
+    this.selectedOrganisation = store;
     this.storename = store.name; 
     this.storeaddress = store.fullAddress;
     this.organisationId = store.id; 
@@ -115,7 +118,7 @@ export class ReceiptPage {
   }
 
   // search for store
-  getStores(ev) {
+  organisationSearch(ev) {
     // Reset items back to all of the items
     this.initializeItems();
     this.showList = true;
@@ -124,12 +127,15 @@ export class ReceiptPage {
     // set val to the value of the searchbar
     let val = ev.target.value;
 
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '' && this.storeList!=null) {
-      this.storeList = this.storeList.filter((item) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+    // Filter the store list so search seems quicker
+    if (val && val.trim() != '' && this.storeList != null) {
+      this.storeList = this.storeList.filter(
+        (item) => {
+          return ( item.name.toLowerCase().indexOf( val.toLowerCase() ) > -1 );
+        }
+      )
     }
+
     // if nothing is found 
     if(!this.storeList === null){
       // display add new store button 
@@ -137,13 +143,6 @@ export class ReceiptPage {
     }
   }
   
-
-  ionViewWillLeave() {
-    this.platform.ready().then(() => {
-      this.keyboard.disableScroll(false);
-    });
-  }
-
   //  promote a action sheet to ask user to upload image from either  
   //  phone's gallery or Camera 
   uploadImage() {
@@ -210,8 +209,6 @@ export class ReceiptPage {
 
 
   public postImage() {
-    // Destination URL
-    var url = '/test';
 
     // // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
