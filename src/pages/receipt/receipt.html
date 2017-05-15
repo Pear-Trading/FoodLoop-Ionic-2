@@ -19,11 +19,11 @@
     <!-- Enter storename and search -->
     <ion-item> 
       <ion-label stacked><span class="labelreceipt">Enter store name below</span></ion-label>
-      <ion-input [(ngModel)]="storename" (input)="organisationSearch($event)" placeholder="For example: BT Ltd"></ion-input>
+      <ion-input [(ngModel)]="submitOrg.name" (input)="organisationSearch($event)" placeholder="For example: BT Ltd"></ion-input>
     </ion-item>
 
     <!-- Display search result -->
-    <ion-list class="store-list" *ngIf="showList && storename!='' "> 
+    <ion-list class="store-list" *ngIf="storeList != null"> 
       <ion-item (click)="addStore(store)" *ngFor="let store of storeList">
         <!-- TODO Make this look better -->
         <span class="address-store">{{store.name}},</span><br />
@@ -33,28 +33,34 @@
     </ion-list>
     
     <!-- Display enter address box -->
-    <ion-list *ngIf="showAddStore || storeaddress!=''">
+    <ion-list *ngIf="showAddStore">
       <ion-item>
-          <ion-label stacked> Wrong address? Enter Town below </ion-label>
-          <ion-input [(ngModel)]="organisationTown"> </ion-input>
+        <ion-label stacked>Street Address</ion-label>
+        <ion-input [(ngModel)]="submitOrg.street_name"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Town*</ion-label>
+          <ion-input [(ngModel)]="submitOrg.town"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Postcode</ion-label>
+          <ion-input [(ngModel)]="submitOrg.postcode"></ion-input>
       </ion-item>
     </ion-list>
     
     <!-- move onto next step -->
-    <ion-item>  
-    <button ion-button full (click)="nextStep()"> Next </button>
+    <ion-item>
+    <button ion-button full (click)="nextStep()">Next</button>
     </ion-item>
   </ion-card>
 
   <!-- folded step 1. -->
   <ion-card (click)="goToStep(1)" *ngIf="currentStep != 1">
     <ion-item>
-      <ion-label *ngIf="storename==='' || storeaddress===''">Step 1. Enter store details below </ion-label>
-      <ion-label *ngIf="storename!='' && storeaddress!=''">{{storename}} <br> {{storeaddress}}</ion-label>
+      <ion-label *ngIf="transactionAdditionType != 3">{{selectedOrganisation.name}} - {{selectedOrganisation.town}}</ion-label>
+      <ion-label *ngIf="transactionAdditionType == 3">{{submitOrg.name}} - {{submitOrg.town}}</ion-label>
       <ion-icon item-right name="arrow-dropdown"></ion-icon>
     </ion-item>
-
-
   </ion-card>
 
 
@@ -67,7 +73,7 @@
     </ion-item>
     <!-- move onto next -->
     <ion-item>  
-      <button ion-button full (click)="nextStep()"> Next </button>
+      <button ion-button full (click)="nextStep()">Next</button>
     </ion-item>
   </ion-card>
 
@@ -83,13 +89,13 @@
   <!-- Step 3. -->
   <ion-card *ngIf="currentStep === 3">  
     <ion-item> 
-      <div class="myLabel">Press the button to add a receipt photo </div>
+      <div class="myLabel">Press the button to add a receipt photo</div>
       <!-- Switch between different buttons, display add receipt or retake button -->
       <button padding class="camBtn" [hidden]="lastImage !== null" ion-button color="light" large full (click)="uploadImage()" >
-        <ion-icon ios="ios-camera" md="md-camera">  Add receipt photo </ion-icon>
+        <ion-icon ios="ios-camera" md="md-camera">Add receipt photo</ion-icon>
         </button>
       <button padding class="camBtn" [hidden]="lastImage === null" ion-button color="light" large full (click)="uploadImage()" >
-        <ion-icon ios="ios-camera" md="md-camera"> Retake</ion-icon>
+        <ion-icon ios="ios-camera" md="md-camera">Retake</ion-icon>
         </button>
       <!-- Switch end -->
     </ion-item>
@@ -102,7 +108,7 @@
     </ion-item>
 
     <ion-item>  
-      <button ion-button full (click)="nextStep()"> Next </button>
+      <button ion-button full (click)="nextStep()">Next</button>
     </ion-item>
   </ion-card>
 
@@ -123,18 +129,4 @@
 		</div>
 	</div>
 
-
-  <!-- Display the list of pending receipt -->
-<!--  <ion-card>    
-      <div class="cardHeader"> Pending receipt </div>
-      <div class="cardContent">   
-        <div class="cardItem" *ngFor="let receipt of receiptList">  
-          <div class="cardItemHeader"> {{receipt.storename}} 
-            <span class="cardItemHeaderRight"> £{{receipt.amount}} </span>
-          </div>
-          <div class="cardItemContent"> {{receipt.fullAddress}} </div>
-        </div>
-      </div>
-</ion-card> -->
-   
 </ion-content>
