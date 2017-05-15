@@ -90,4 +90,21 @@ page-receipt {
         margin-top: 20%;
     }
 
+	.address-store {
+		font-size: .8em;
+		color:  rgba(255, 255, 255, 1);
+		line-height: .4em;
+	}
+	
+	.address-street {
+		font-size: .7em;
+		color:  rgba(255, 255, 255, .7);
+		line-height: .6em;
+	}
+	
+	.address-town {
+		 font-size: .6em;
+		color:  rgba(255, 255, 255, .5);
+		line-height: .5em;
+	}
 }

@@ -26,7 +26,9 @@
     <ion-list class="store-list" *ngIf="showList && storename!='' "> 
       <ion-item (click)="addStore(store)" *ngFor="let store of storeList">
         <!-- TODO Make this look better -->
-        {{store.name}}, {{store.street_name}}, {{ store.town }}, {{ store.postcode }}
+        <span class="address-store">{{store.name}},</span><br />
+		<span class="address-street">{{store.street_name}},</span><br /> 
+		<span class="address-town">{{ store.town }}, {{ store.postcode }}</span>
       </ion-item>
     </ion-list>
     
