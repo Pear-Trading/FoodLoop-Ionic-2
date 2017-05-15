@@ -27,8 +27,10 @@ declare var cordova: any;
 
 export class ReceiptPage {
 
+  selectedOrganisation: any;
+
   storename= '';
-  storeaddress= ''; 
+  storeaddress= '';
   organisationId: number;
   organisationTown: string;
   organisationPostcode: string;
@@ -39,9 +41,6 @@ export class ReceiptPage {
   loading: Loading;
 
   storeList;
-  historyStoreList; 
-  //receiptList;  // pending receipt list
-  showHistoryList = false; 
   showAddStore = false;
   showList = false; 
   submitReceipt = false;
@@ -49,7 +48,6 @@ export class ReceiptPage {
 
   currentStep = 1;
 
-  public sessionToken;
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public loadingCtrl: LoadingController,
@@ -65,28 +63,7 @@ export class ReceiptPage {
     private transfer: Transfer,
     private file: File,
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
-  ) {
-    this.historyStoreList = [
-      {id:1,name:"Apple Inc.", fullAddress: "123 Apple Street,Lancaster,LA1 1AP"},
-      {id:2,name:"Lemon Inc.", fullAddress: "223 Lemon Road,Lancaster,LA1 1AP"},
-      {id:3,name:"Orange Inc.", fullAddress: "323 Orange Walk,Lancaster,LA1 1AP"},
-    ];
-    //this.receiptList = [
-    // {id:1,storename:"Apple Inc.", amount:1.09,status:"pending",fullAddress: "123 Apple Street,Lancaster,LA1 1AP"},
-    // {id:2,storename:"Lemon Inc.", amount:5.33,status:"pending",fullAddress: "223 Lemon Road,Lancaster,LA1 1AP"},
-    // {id:3,storename:"Orange Inc.", amount:10.21,status:"pending",fullAddress: "323 Orange Walk,Lancaster,LA1 1AP"},
-    //];
-  }
-  //  Setting up variables required for this page, such as session token 
-  ionViewDidLoad() {
-    this.userData.getSessionKey().subscribe(
-      token => {
-        this.sessionToken = token;
-      },
-      error => alert(error)
-    );
-    console.log('ionViewDidLoad ReceiptPage');
-  }
+  ) {}
 
   ionViewDidEnter(){
     this.platform.ready().then(() => {
@@ -131,40 +108,34 @@ export class ReceiptPage {
     );
   }
 
-  // show histry list when the input/storename is empty
-  showHisList(ev){
-    if(this.storename === "" )
-     this.showHistoryList = true;
-  }
-  
   // if user select a item from the list 
   addStore(store){
+    this.selectedOrganisation = store;
     this.storename = store.name; 
     this.storeaddress = store.fullAddress;
     this.organisationId = store.id; 
     this.showList = false; 
-    this.showHistoryList = false;   
   }
 
   // search for store
-  getStores(ev) {
+  organisationSearch(ev) {
     // Reset items back to all of the items
     this.initializeItems();
     this.showList = true;
-    this.showHistoryList = false;   
     this.showAddStore = false; 
 
     // set val to the value of the searchbar
     let val = ev.target.value;
 
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '' && this.storeList!=null) {
-      this.storeList = this.storeList.filter((item) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    } else if(val.trim()===''){
-      this.showHistoryList = true; 
+    // Filter the store list so search seems quicker
+    if (val && val.trim() != '' && this.storeList != null) {
+      this.storeList = this.storeList.filter(
+        (item) => {
+          return ( item.name.toLowerCase().indexOf( val.toLowerCase() ) > -1 );
+        }
+      )
     }
+
     // if nothing is found 
     if(!this.storeList === null){
       // display add new store button 
@@ -172,13 +143,6 @@ export class ReceiptPage {
     }
   }
   
-
-  ionViewWillLeave() {
-    this.platform.ready().then(() => {
-      this.keyboard.disableScroll(false);
-    });
-  }
-
   //  promote a action sheet to ask user to upload image from either  
   //  phone's gallery or Camera 
   uploadImage() {
@@ -245,8 +209,6 @@ export class ReceiptPage {
 
 
   public postImage() {
-    // Destination URL
-    var url = '/test';
 
     // // File for Upload
     var targetPath = this.pathForImage(this.lastImage);

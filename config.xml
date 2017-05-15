@@ -7,7 +7,6 @@
   <access origin="https://*.peartrade.org"/>
   <allow-navigation href="http://ionic.local/*"/>
   <allow-navigation href="http://*:8100"/>
-  <allow-navigation href="http://192.168.2.158:8100"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="SplashMaintainAspectRatio" value="true"/>
