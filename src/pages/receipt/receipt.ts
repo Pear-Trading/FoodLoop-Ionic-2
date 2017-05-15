@@ -28,9 +28,12 @@ declare var cordova: any;
 export class ReceiptPage {
 
   selectedOrganisation: any;
-
-  storename= '';
-  storeaddress= '';
+  submitOrg = {
+    name: '',
+    street_name: '',
+    town: '',
+    postcode: '',
+  };
   organisationId: number;
   organisationTown: string;
   organisationPostcode: string;
@@ -42,11 +45,10 @@ export class ReceiptPage {
 
   storeList;
   showAddStore = false;
-  showList = false; 
   submitReceipt = false;
 
 
-  currentStep = 1;
+  currentStep: number = 1;
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -82,17 +84,23 @@ export class ReceiptPage {
   }
 
   initializeItems() {
+    // Dont bother searching for an empty or undefined string
+    if ( this.submitOrg.name == '' ) {
+      return;
+    }
     var searchData = {
-      search_name: this.storename,
+      search_name: this.submitOrg.name,
     };
 
     this.peopleService.search(searchData).subscribe(
       data => {
         if(data.validated.length > 0) {
           this.storeList = data.validated;
+          this.showAddStore = false;
           this.transactionAdditionType = 1;
         } else {
           this.storeList = data.unvalidated;
+          this.showAddStore = false;
           this.transactionAdditionType = 2;
         }
         // handle the case when the storelist is empty
@@ -111,18 +119,13 @@ export class ReceiptPage {
   // if user select a item from the list 
   addStore(store){
     this.selectedOrganisation = store;
-    this.storename = store.name; 
-    this.storeaddress = store.fullAddress;
     this.organisationId = store.id; 
-    this.showList = false; 
   }
 
   // search for store
   organisationSearch(ev) {
     // Reset items back to all of the items
     this.initializeItems();
-    this.showList = true;
-    this.showAddStore = false; 
 
     // set val to the value of the searchbar
     let val = ev.target.value;
@@ -221,24 +224,24 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          organisation_id   : this.organisationId,
+          organisation_id   : this.selectedOrganisation.id,
         };
         break;
       case 2: 
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          organisation_id   : this.organisationId,
+          organisation_id   : this.selectedOrganisation.id,
         };
         break;
       case 3: 
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          organisation_name : this.storename,
-          street_name       : this.storeaddress,
-          town              : this.organisationTown,
-          postcode          : this.organisationPostcode,
+          organisation_name : this.submitOrg.name,
+          street_name       : this.submitOrg.street_name,
+          town              : this.submitOrg.town,
+          postcode          : this.submitOrg.postcode,
         };
         break;
     }
@@ -251,42 +254,32 @@ export class ReceiptPage {
 
     this.peopleService.upload(myParams, targetPath).subscribe(
       response => {
-//    var options = {
-//      fileKey: "file2",
-//      fileName: filename,
-//      chunkedMode: false,
-//      // TODO This is wrong, defaults to image/jpeg.
-//      // mimeType: "multipart/form-data",
-//      params: {
-//        json: JSON.stringify( myParams )
-//      }
-//    } ;
-//
-//
-//    const fileTransfer = this.transfer.create();
-//
-
-//
-//    // Use the FileTransfer to upload the image
-//    fileTransfer.upload(targetPath, encodeURI(url), options,true).then(data => {
-      this.loading.dismiss();
-      this.presentToast('Reeceipt succesfully submitted.');
-
-
-      // reset form
-      this.storename= '';
-      this.storeaddress= ''; 
-      this.amount =null;
-      this.lastImage = null;
-
-    },
-    err => {
-      this.loading.dismiss();
-      this.presentToast('Error while uploading:' + JSON.stringify(err));
-    });
+        console.log('Successful Upload');
+        console.log(response);
+        this.loading.dismiss();
+        this.presentToast('Reeceipt succesfully submitted.');
+        this.resetForm();
+      },
+      err => {
+        console.log('Upload Error');
+        console.log(err);
+        this.loading.dismiss();
+        this.presentToast('Error while uploading:' + JSON.stringify(err));
+      }
+    );
   }
 
-
+  private resetForm() {
+    this.submitOrg = {
+      name: '',
+      street_name: '',
+      town: '',
+      postcode: '',
+    };
+    this.amount = null;
+    this.lastImage = null;
+    this.currentStep = 1;
+  }
 
   // Create a new name for the image
   private createFileName() {
