@@ -89,6 +89,18 @@ export class PeopleService {
       ).map( response => response.json() );
   }
 
+  public basicStats() {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          return this.http.post(
+            this.apiUrl + '/stats',
+            { session_key : key },
+          );
+        },
+      ).map( response => response.json() );
+  }
+
   /* Links to server, these should be stored in config.js */
   foodloop_root_url = "http://app.peartrade.org/";
   foodloop_root_url_edit = this.foodloop_root_url + "edit";

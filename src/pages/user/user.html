@@ -31,7 +31,7 @@
       <ion-col> 
         <div class="statusheader">My Points</div>
         <div class="statuscontent"> 
-          {{myPearPoints}} 
+          {{ basicStats.user_sum / 10 | number:'1.0-0' }}
         </div>
       </ion-col>
  
@@ -47,14 +47,14 @@
       <ion-col> 
         <div class="statusheader">My Spend</div>
         <div class="statuscontent"> 
-          Spend? 
+          {{ basicStats.user_sum | currency:'GBP':true:'1.2-2' }}
         </div>
       </ion-col>
  
       <ion-col> 
         <div class="statusheader">Value to Local Economy</div>
         <div class="statuscontent"> 
-          Local Economy (re-spend)
+          {{ basicStats.user_sum * 2.3 | currency:'GBP':true:'1.2-2' }}
         </div>
       </ion-col>
     </ion-row>	  
@@ -68,8 +68,8 @@
 		<ion-row>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Total</div>
-                <div class="statboxcontent"> £88.88 </div>
+                <div class="statboxheader">My Total</div>
+                <div class="statboxcontent">{{ basicStats.user_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
   			</ion-col>
 			<ion-col col-1> 
@@ -77,7 +77,7 @@
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
                 <div class="statboxheader">Today</div>
-                <div class="statboxcontent"> £108.89 </div>
+                <div class="statboxcontent">{{ basicStats.today_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
         </ion-row>
@@ -88,7 +88,7 @@
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
                 <div class="statboxheader">Week</div>
-                <div class="statboxcontent"> £88.88 </div>
+                <div class="statboxcontent">{{ basicStats.week_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col> 
 			<ion-col col-1> 
@@ -96,7 +96,7 @@
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
                 <div class="statboxheader">Month</div>
-                <div class="statboxcontent"> £108.89 </div>
+                <div class="statboxcontent">{{ basicStats.month_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
         </ion-row>
@@ -107,7 +107,7 @@
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
                 <div class="statboxheader">Global</div>
-                <div class="statboxcontent"> £88.88 </div>
+                <div class="statboxcontent">{{ basicStats.global_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col> 
 			<ion-col col-1> 
@@ -115,7 +115,7 @@
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox"> 
                 <div class="statboxheader">Global Avg.</div>
-                <div class="statboxcontent"> £108.89 </div>
+                <div class="statboxcontent">{{ basicStats.global_sum / basicStats.global_count | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
         </ion-row>
