@@ -50,7 +50,12 @@
     
     <!-- move onto next step -->
     <ion-item>
-    <button ion-button full (click)="nextStep()">Next</button>
+		<span class="float-right">
+			<button ion-button icon-right color="button-blue" (click)="nextStep()">
+				Next
+				<ion-icon name="arrow-dropright"></ion-icon>
+			</button>
+		</span>
     </ion-item>
   </ion-card>
 

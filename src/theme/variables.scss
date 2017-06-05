@@ -33,6 +33,7 @@ $colors: (
   foodloop:   #8a7129,
   header: 	  #1e4158,
   whitish:    #fefefe,
+  button-blue: #1f7184,
 );
 
 
@@ -54,6 +55,9 @@ $segment-button-md-text-color-activated: rgba(255, 255, 255, 1);
 $segment-button-md-border-bottom-width: 5px;
 $segment-button-md-text-color: rgba(255, 255, 255, 1);
 $segment-button-md-border-bottom-color: rgba(255, 255, 255, 1);
+
+$text-input-placeholder-color: rgba(200, 200, 200, 1);
+$text-input-placeholder-font: .2em;
 
 $tabs-md-tab-color-active: rgba(255, 255, 255, 1);
 
