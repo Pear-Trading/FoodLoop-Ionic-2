@@ -15,9 +15,10 @@ page-receipt {
 	}
 	
 	.item-md .item-button {
-    padding: 10px 30px;
-    height: 35px;
-    font-size: 1.2rem;
+    padding: 5px 30px;
+    height: 36px;
+    font-size: 1.6rem;
+	border: 1px solid rgba(255, 255, 255, .6);
 	}
 	
 	ion-label, .labelreceipt {
@@ -27,7 +28,7 @@ page-receipt {
 	}
 	
 	.card-md {
-		border: 3px solid rgba(255, 255, 255, .9);
+		border: 3px solid rgba(255, 255, 255, 1);
 		background-color: rgba(255, 255, 255, .2);
 		border-radius: 10px;
 		width: 86%;
