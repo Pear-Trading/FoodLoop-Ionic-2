@@ -95,6 +95,21 @@ export class PeopleService {
       ).map( response => response.json() );
   }
 
+  public leaderboard(lb_type) {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          return this.http.post(
+            this.apiUrl + '/stats/leaderboard',
+            {
+              session_key : key,
+              type : lb_type,
+            },
+          );
+        },
+      ).map( response => response.json() );
+  }
+
   /* Links to server, these should be stored in config.js */
   foodloop_root_url = "http://app.peartrade.org/";
   foodloop_root_url_edit = this.foodloop_root_url + "edit";
