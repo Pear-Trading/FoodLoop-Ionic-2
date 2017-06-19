@@ -44,7 +44,8 @@ export class MyApp {
     { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
 	{ title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
 	{ title: 'Account',component: SettingPage, index:9,icon: 'person'},
-	{ title: 'About',component: AboutPage, index:11,icon: 'globe'},
+	// The about page is currently the Guide page, need a whole guide page and About be about the app	
+	{ title: 'Guide',component: AboutPage, index:11,icon: 'globe'},
     { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
   ];
 
