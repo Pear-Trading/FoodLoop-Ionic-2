@@ -17,12 +17,6 @@ export class PeopleService {
     private transfer: Transfer,
     private userData: UserData
   ) {}
-  
-  public getAgeRanges() {
-    return this.http.get(
-      this.apiUrl + '/info/ages'
-    ).map( res => res.json() );
-  }
 
   public register(data) {
     return this.http.post(
