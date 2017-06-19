@@ -27,9 +27,9 @@
       <ion-input type="text" formControlName="postcode"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Age Range</ion-label>
-      <ion-select type="text" formControlName="age_range">
-        <ion-option *ngFor="let range of ageRanges" [value]="range.id">{{ range.string }}</ion-option>
+      <ion-label>Year of Birth</ion-label>
+      <ion-select type="text" formControlName="year_of_birth">
+        <ion-option *ngFor="let year of years" [value]="year">{{ year }}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
