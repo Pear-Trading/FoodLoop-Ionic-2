@@ -17,41 +17,41 @@
   <ion-card *ngIf="currentStep === 1" >
 
     <!-- Enter storename and search -->
-    <ion-item> 
+    <ion-item>
       <ion-label stacked><span class="labelreceipt">Enter store name below</span></ion-label>
-      <ion-input [(ngModel)]="submitOrg.name" (input)="organisationSearch($event)" placeholder="For example: BT Ltd"></ion-input>
+      <ion-input [(ngModel)]="submitOrg.name" (input)="organisationSearch($event)" (ngModelChange)="step1Validate()" placeholder="For example: BT Ltd"></ion-input>
     </ion-item>
 
     <!-- Display search result -->
-    <ion-list class="store-list" *ngIf="storeList != null"> 
+    <ion-list class="store-list" *ngIf="storeList != null">
       <ion-item (click)="addStore(store)" *ngFor="let store of storeList">
         <!-- TODO Make this look better -->
         <span class="address-store">{{store.name}},</span><br />
-		<span class="address-street">{{store.street_name}},</span><br /> 
+		<span class="address-street">{{store.street_name}},</span><br />
 		<span class="address-town">{{ store.town }}, {{ store.postcode }}</span>
       </ion-item>
     </ion-list>
-    
+
     <!-- Display enter address box -->
     <ion-list *ngIf="showAddStore">
       <ion-item>
         <ion-label stacked>Street Address</ion-label>
-        <ion-input [(ngModel)]="submitOrg.street_name"></ion-input>
+        <ion-input [(ngModel)]="submitOrg.street_name" (ngModelChange)="step1Validate()"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label stacked>Town*</ion-label>
-          <ion-input [(ngModel)]="submitOrg.town"></ion-input>
+          <ion-input [(ngModel)]="submitOrg.town" (ngModelChange)="step1Validate()"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label stacked>Postcode</ion-label>
-          <ion-input [(ngModel)]="submitOrg.postcode"></ion-input>
+          <ion-input [(ngModel)]="submitOrg.postcode" (ngModelChange)="step1Validate()"></ion-input>
       </ion-item>
     </ion-list>
-    
+
     <!-- move onto next step -->
     <ion-item>
 		<span class="float-right">
-			<button ion-button icon-right color="button-blue" (click)="nextStep()">
+			<button [disabled]="step1Invalid" ion-button icon-right color="button-blue" (click)="nextStep()">
 				Next
 				<ion-icon name="arrow-dropright"></ion-icon>
 			</button>
@@ -60,40 +60,40 @@
   </ion-card>
 
   <!-- folded step 1. -->
-  <ion-card (click)="goToStep(1)" *ngIf="currentStep != 1">
+  <!-- <ion-card (click)="goToStep(1)" *ngIf="currentStep != 1">
     <ion-item>
       <ion-label *ngIf="transactionAdditionType != 3">{{selectedOrganisation.name}} - {{selectedOrganisation.town}}</ion-label>
       <ion-label *ngIf="transactionAdditionType == 3">{{submitOrg.name}} - {{submitOrg.town}}</ion-label>
       <ion-icon item-right name="arrow-dropdown"></ion-icon>
     </ion-item>
-  </ion-card>
+  </ion-card> -->
 
 
   <!-- Step 2. -->
   <ion-card *ngIf="currentStep === 2">
     <!-- Enter amount spent-->
-    <ion-item> 
+    <ion-item>
       <ion-label stacked>Enter amount spent below(£)</ion-label>
       <ion-input type="number" [(ngModel)]="amount" step="0.01" placeholder="e.g. 5.00"></ion-input>
     </ion-item>
     <!-- move onto next -->
-    <ion-item>  
+    <ion-item>
       <button ion-button full (click)="nextStep()">Next</button>
     </ion-item>
   </ion-card>
 
   <!-- Folded step 2. -->
-  <ion-card padding (click)="goToStep(2)" *ngIf="currentStep != 2">  
-    <ion-item>  
+  <!-- <ion-card padding (click)="goToStep(2)" *ngIf="currentStep != 2">
+    <ion-item>
       <ion-label *ngIf="amount===null" >Step 2. Enter amount spent</ion-label>
       <ion-label *ngIf="amount!=null">£{{amount}}</ion-label>
       <ion-icon item-right name="arrow-dropdown"></ion-icon>
     </ion-item>
-  </ion-card>
+  </ion-card> -->
 
   <!-- Step 3. -->
-  <ion-card *ngIf="currentStep === 3">  
-    <ion-item> 
+  <ion-card *ngIf="currentStep === 3">
+    <ion-item>
       <div class="myLabel">Press the button to add a receipt photo</div>
       <!-- Switch between different buttons, display add receipt or retake button -->
       <button padding class="camBtn" [hidden]="lastImage !== null" ion-button color="light" large full (click)="uploadImage()" >
@@ -106,25 +106,25 @@
     </ion-item>
 
     <!-- Display taken image -->
-    <ion-item>  
+    <ion-item>
       <ion-card [hidden]="lastImage === null" style="width: 30%; height:30%"  >
         <img src={{pathForImage(lastImage)}} >
       </ion-card>
     </ion-item>
 
-    <ion-item>  
+    <ion-item>
       <button ion-button full (click)="nextStep()">Next</button>
     </ion-item>
   </ion-card>
 
   <!-- folded step 3 -->
-  <ion-card padding (click)="goToStep(3)" *ngIf="currentStep != 3">  
-    <ion-item >  
+  <!-- <ion-card padding (click)="goToStep(3)" *ngIf="currentStep != 3">
+    <ion-item >
         <ion-label *ngIf="lastImage === null" >Step 3. Add a receipt photo</ion-label>
         <ion-label *ngIf="lastImage != null">{{lastImage}}</ion-label>
         <ion-icon item-right name="arrow-dropdown"></ion-icon>
     </ion-item>
-  </ion-card>
+  </ion-card> -->
 
 	<div padding class="pearUpCtrl">
 		<div class="boxforbutton">

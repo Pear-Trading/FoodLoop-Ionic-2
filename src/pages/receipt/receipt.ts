@@ -22,8 +22,8 @@ declare var cordova: any;
 })
 
 
-// ideally this page allows player to submit a receipt along with 
-// the key feature of uploading an image 
+// ideally this page allows player to submit a receipt along with
+// the key feature of uploading an image
 
 export class ReceiptPage {
 
@@ -47,6 +47,7 @@ export class ReceiptPage {
   showAddStore = false;
   submitReceipt = false;
 
+  step1Invalid = true;
 
   currentStep: number = 1;
 
@@ -74,13 +75,13 @@ export class ReceiptPage {
   }
 
   nextStep(){
-    this.currentStep ++; 
+    this.currentStep ++;
     if(this.currentStep===4)
-      this.submitReceipt = true; 
+      this.submitReceipt = true;
   }
 
   goToStep(theStep){
-    this.currentStep = theStep; 
+    this.currentStep = theStep;
   }
 
   initializeItems() {
@@ -116,10 +117,10 @@ export class ReceiptPage {
     );
   }
 
-  // if user select a item from the list 
+  // if user select a item from the list
   addStore(store){
     this.selectedOrganisation = store;
-    this.organisationId = store.id; 
+    this.organisationId = store.id;
   }
 
   // search for store
@@ -139,15 +140,27 @@ export class ReceiptPage {
       )
     }
 
-    // if nothing is found 
+    // if nothing is found
     if(!this.storeList === null){
-      // display add new store button 
+      // display add new store button
       this.showAddStore = true;
     }
   }
-  
-  //  promote a action sheet to ask user to upload image from either  
-  //  phone's gallery or Camera 
+
+  step1Validate() {
+    console.log('TRIGGERED');
+    if( this.submitOrg.name.length == 0 ||
+        this.submitOrg.street_name.length == 0 ||
+        this.submitOrg.town.length == 0 ||
+        this.submitOrg.postcode.length == 0 ) {
+          this.step1Invalid = true;
+        }else{
+          this.step1Invalid = false;
+        }
+  }
+
+  //  promote a action sheet to ask user to upload image from either
+  //  phone's gallery or Camera
   uploadImage() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image from: ',
@@ -207,7 +220,7 @@ export class ReceiptPage {
       }
     }, (err) => {
       this.presentToast('Error while selecting image.');
-    }); 
+    });
   }
 
 
@@ -227,14 +240,14 @@ export class ReceiptPage {
           organisation_id   : this.selectedOrganisation.id,
         };
         break;
-      case 2: 
+      case 2:
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
           organisation_id   : this.selectedOrganisation.id,
         };
         break;
-      case 3: 
+      case 3:
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
