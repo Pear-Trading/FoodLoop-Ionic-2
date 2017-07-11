@@ -3,6 +3,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { AboutPage } from '../pages/about/about';
 import { IndexPage } from '../pages/index/index';
+import { UserPage} from '../pages/user/user';
 import { ReceiptPage } from '../pages/receipt/receipt';
 import { RankingPage } from '../pages/ranking/ranking';
 import { SettingPage} from '../pages/setting/setting';
@@ -34,17 +35,17 @@ export interface PageInterface {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // Defines differnet page when this application is first loaded 
+  // Defines differnet page when this application is first loaded
 
-  
-  // for logged in user 
+
+  // for logged in user
   loggedInPage: PageInterface[]= [
-    { title: 'Home', component: IndexPage, icon: 'home' },
+    { title: 'Home', component: UserPage, icon: 'home' },
 	{ title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
     { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
 	{ title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
 	{ title: 'Account',component: SettingPage, index:9,icon: 'person'},
-	// The about page is currently the Guide page, need a whole guide page and About be about the app	
+	// The about page is currently the Guide page, need a whole guide page and About be about the app
 	{ title: 'Guide',component: AboutPage, index:11,icon: 'globe'},
     { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
   ];
@@ -55,10 +56,10 @@ export class MyApp {
     { title: 'About', component: AboutPage, icon: 'person-add' }
   ];
 
-  // specify which pages to display first  
+  // specify which pages to display first
   public rootPage : any;
 
-  
+
   constructor(
     public platform: Platform,
     public menu: MenuController,
@@ -66,18 +67,18 @@ export class MyApp {
     public userData: UserData,
     public splashScreen: SplashScreen,
     public peopleService: PeopleService,
- 
+
   ) {
 
   /* Check if localCache exsit, if yes, auto-login */
-  /* if not, redirect to the home page for login or sign up*/       
+  /* if not, redirect to the home page for login or sign up*/
 
 
     this.userData.hasLoggedIn().subscribe(
       result => {
         if (result) {
-          console.log('User is logged in, rendering Index');
-          this.renderIndexPage();
+          console.log('User is logged in, rendering User');
+          this.renderUserPage();
         } else {
           console.log('User is not logged in, rendering Login');
           this.renderLoginPage();
@@ -98,8 +99,8 @@ export class MyApp {
     this.platformReady();
   }
 
-  renderIndexPage() {
-    this.rootPage = IndexPage;
+  renderUserPage() {
+    this.rootPage = UserPage;
     this.enableMenu(true);
     this.platformReady();
   }
@@ -118,7 +119,7 @@ export class MyApp {
     });
   }
 
-  
+
   enableMenu(loggedIn: boolean) {
     this.menu.enable(loggedIn, 'loggedInMenu');
     this.menu.enable(!loggedIn, 'loggedOutMenu');
@@ -130,7 +131,7 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
-  
+
   openPage(page: PageInterface) {
     // the nav component was found using @ViewChild(Nav)
     // reset the nav to remove previous pages and only have this page
