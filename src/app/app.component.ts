@@ -38,7 +38,7 @@ export class MyApp {
 
 
   // for logged in user
-  loggedInPage: PageInterface[]= [
+  loggedInPages: PageInterface[]= [
     { title: 'Home', component: UserPage, icon: 'home' },
 	{ title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
     { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
@@ -118,7 +118,7 @@ export class MyApp {
     });
   }
 
-
+// if true shows logged in menu, if false shows logged out menu
   enableMenu(loggedIn: boolean) {
     this.menu.enable(loggedIn, 'loggedInMenu');
     this.menu.enable(!loggedIn, 'loggedOutMenu');
@@ -133,16 +133,9 @@ export class MyApp {
 
   openPage(page: PageInterface) {
     // the nav component was found using @ViewChild(Nav)
-    // reset the nav to remove previous pages and only have this page
-    // we wouldn't want the back button to show in this scenario
+    // reset the nav to remove previous pages and only have this pag
 
-    if (page.index) {
-      this.nav.setRoot(page.component, { tabIndex: page.index });
-    } else {
-      this.nav.setRoot(page.component).catch(() => {
-        console.log("Didn't set nav root");
-      });
-    }
+    this.nav.setRoot(page.component);
 
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out

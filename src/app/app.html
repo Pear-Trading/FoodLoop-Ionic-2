@@ -1,8 +1,8 @@
 
 <!-- Before user loggin -->
-<ion-menu color="primary" id="loggedOutMenu" [content]="content"> 
+<ion-menu color="primary" id="loggedOutMenu" [content]="content">
   <ion-header>
-    <ion-title>Menu</ion-title> 
+    <ion-title>Menu</ion-title>
   </ion-header>
 
   <ion-content class="outer-content">
@@ -20,7 +20,7 @@
 
   </ion-content>
 
-</ion-menu> 
+</ion-menu>
 
 
 <!-- logged in menu -->
@@ -38,7 +38,7 @@
       <ion-list-header>
         Navigate
       </ion-list-header>
-      <button ion-item menuClose *ngFor="let p of loggedInPage" (click)="openPage(p)">
+      <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>
         {{p.title}}
       </button>
