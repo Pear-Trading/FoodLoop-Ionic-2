@@ -15,7 +15,6 @@ import { ReceiptPage } from '../pages/receipt/receipt';
 import { UserPage } from '../pages/user/user';
 import { RankingPage } from '../pages/ranking/ranking';
 import { SettingPage } from '../pages/setting/setting';
-import { IndexPage } from '../pages/index/index';
 import { GamePage } from '../pages/game/game';
 import { AchievementPage } from '../pages/achievement/achievement';
 import { OverviewPage } from '../pages/overview/overview';
@@ -34,7 +33,6 @@ import { StatPage } from '../pages/stat/stat';
     UserPage,
     RankingPage,
     SettingPage,
-    IndexPage,
     AccountPage,
     OverviewPage,
     GamePage,
@@ -59,7 +57,6 @@ import { StatPage } from '../pages/stat/stat';
     UserPage,
     RankingPage,
     SettingPage,
-    IndexPage,
     AccountPage,
     OverviewPage,
     GamePage,

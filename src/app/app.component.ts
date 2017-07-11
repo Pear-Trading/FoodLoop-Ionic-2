@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { AboutPage } from '../pages/about/about';
-import { IndexPage } from '../pages/index/index';
 import { UserPage} from '../pages/user/user';
 import { ReceiptPage } from '../pages/receipt/receipt';
 import { RankingPage } from '../pages/ranking/ranking';
