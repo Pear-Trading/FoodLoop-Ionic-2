@@ -11,7 +11,6 @@ import { OverviewPage } from '../overview/overview';
 import { GamePage } from '../game/game';
 import { ShopPage } from '../shop/shop';
 import { StatPage } from '../stat/stat';
-import { Chart } from 'chart.js';
 import { PeopleService} from '../../providers/people-service';
 import { UserData} from '../../providers/user-data';
 
