@@ -8,12 +8,12 @@
 	Help
 	</button>
   </ion-toolbar>
-  
+
 
  <div class="simpleDashBoard">
   <ion-grid>
     <!-- Hello user -->
-    <ion-row class="greetingRow">  
+    <ion-row class="greetingRow">
       <ion-item  no-lines>
         <ion-avatar item-left><img src="assets/img/icon1.png"></ion-avatar>
         <h1 class="title"> {{name}}</h1>
@@ -24,26 +24,26 @@
 
     <!-- shows pear points -->
     <ion-row class="statusRow">
-      <ion-col witdh-70 color="primary"> 
+      <ion-col witdh-70 color="primary">
         <div class="header">Points</div>
-        <div class="bigContent"> 
-          {{myPearPoints}} 
+        <div class="bigContent">
+          {{myPearPoints}}
         </div>
 
       </ion-col>
- 
-      <ion-col width-30 color="danger"> 
+
+      <ion-col width-30 color="danger">
         <div class="header">Rank</div>
-        <div class="bigContent"> 
+        <div class="bigContent">
           {{myRank}}
         </div>
       </ion-col>
     </ion-row>
       </ion-grid>
-	  
+
 <div  class="pearUpCtrl">
 	<ion-grid>
-		<ion-row> 
+		<ion-row>
   <button ion-button [navPush]="receiptPage"  large icon-right full > Add a<br />Receipt
 <!--  <ion-icon name="flame" md="md-flame" color="foodloop"> </ion-icon> -->
   </button>
@@ -52,17 +52,17 @@
 </div>
 
 
-<div class="cardContent">  
+<div class="cardContent">
 	<ion-grid>
 		<ion-row>
 			<ion-col col-6>
-              <div (click)="navCtrl.push(statPage)" class="cardItem"> 
+              <div (click)="navCtrl.push(statPage)" class="cardItem">
                 <div class="cardItemHeader">Your Spend</div>
                 <div class="cardItemContent"> £88.88 </div>
               </div>
-			</ion-col> 
+			</ion-col>
 			<ion-col col-6>
-              <div (click)="navCtrl.push(statPage)" class="cardItem"> 
+              <div (click)="navCtrl.push(statPage)" class="cardItem">
                 <div class="cardItemHeader">Loop Total</div>
                 <div class="cardItemContent"> £108.89 </div>
               </div>
@@ -86,17 +86,17 @@
     <!-- ideally, this would be a quick and simple grasp of user overview-->
 
     <ion-row class="innerChart" >
-        <ion-slides pager (ionSlideDidChange)="slideChanged()"> 
+        <ion-slides pager (ionSlideDidChange)="slideChanged()">
           <ion-slide>
-            <canvas #barCanvas></canvas> 
+            <canvas #barCanvas></canvas>
           </ion-slide>
-          
+
           <ion-slide>
             <canvas #lineCanvas></canvas>
           </ion-slide>
-          
+
           <ion-slide>
-            <canvas #pieCanvas></canvas> 
+            <canvas #pieCanvas></canvas>
           </ion-slide>
         </ion-slides>
 
@@ -111,25 +111,3 @@
 
 
 </ion-content>
-
-<!--
-  <ion-toolbar>
-  </ion-toolbar>
-  
-    <div class="cardContent"> 
-     <ion-grid>
-       <ion-row> 
-           <ion-col width-50> 
-              <button ion-button full large block outline [navPush]="gamePage">
-                  <ion-icon name="cube"></ion-icon>
-                     Game center </button>
-           </ion-col>
-            
-            <ion-col width-50> 
-              <button ion-button full large block outline [navPush]="shopPage">
-                  <ion-icon name="cube"></ion-icon>
-                     Shopping center </button>
-           </ion-col>
-        </ion-row>
-     </ion-grid>
-   </div> -->
