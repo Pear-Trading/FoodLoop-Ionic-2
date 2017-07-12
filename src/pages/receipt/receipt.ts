@@ -27,7 +27,6 @@ declare var cordova: any;
 
 export class ReceiptPage {
 
-  selectedOrganisation: any;
   submitOrg = {
     name: '',
     street_name: '',
@@ -48,6 +47,7 @@ export class ReceiptPage {
   submitReceipt = false;
 
   step1Invalid = true;
+  step2Invalid = true;
 
   currentStep: number = 1;
 
@@ -74,10 +74,12 @@ export class ReceiptPage {
     });
   }
 
+  previousStep(){
+    this.currentStep --;
+  }
+
   nextStep(){
     this.currentStep ++;
-    if(this.currentStep===4)
-      this.submitReceipt = true;
   }
 
   goToStep(theStep){
@@ -119,7 +121,8 @@ export class ReceiptPage {
 
   // if user select a item from the list
   addStore(store){
-    this.selectedOrganisation = store;
+    this.submitOrg = store;
+    this.step1Validate();
     this.organisationId = store.id;
   }
 
@@ -148,7 +151,6 @@ export class ReceiptPage {
   }
 
   step1Validate() {
-    console.log('TRIGGERED');
     if( this.submitOrg.name.length == 0 ||
         this.submitOrg.street_name.length == 0 ||
         this.submitOrg.town.length == 0 ||
@@ -156,6 +158,14 @@ export class ReceiptPage {
           this.step1Invalid = true;
         }else{
           this.step1Invalid = false;
+        }
+  }
+
+  step2Validate() {
+    if( this.amount == 0 ) {
+          this.step2Invalid = true;
+        }else{
+          this.step2Invalid = false;
         }
   }
 
@@ -218,6 +228,7 @@ export class ReceiptPage {
         var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
         this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
       }
+      this.submitReceipt = true;
     }, (err) => {
       this.presentToast('Error while selecting image.');
     });
@@ -237,14 +248,14 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          organisation_id   : this.selectedOrganisation.id,
+          organisation_id   : this.organisationId,
         };
         break;
       case 2:
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          organisation_id   : this.selectedOrganisation.id,
+          organisation_id   : this.organisationId,
         };
         break;
       case 3:
@@ -270,7 +281,7 @@ export class ReceiptPage {
         console.log('Successful Upload');
         console.log(response);
         this.loading.dismiss();
-        this.presentToast('Reeceipt succesfully submitted.');
+        this.presentToast('Receipt succesfully submitted.');
         this.resetForm();
       },
       err => {
