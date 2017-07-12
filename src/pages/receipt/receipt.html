@@ -59,16 +59,6 @@
     </ion-item>
   </ion-card>
 
-  <!-- folded step 1. -->
-  <!-- <ion-card (click)="goToStep(1)" *ngIf="currentStep != 1">
-    <ion-item>
-      <ion-label *ngIf="transactionAdditionType != 3">{{selectedOrganisation.name}} - {{selectedOrganisation.town}}</ion-label>
-      <ion-label *ngIf="transactionAdditionType == 3">{{submitOrg.name}} - {{submitOrg.town}}</ion-label>
-      <ion-icon item-right name="arrow-dropdown"></ion-icon>
-    </ion-item>
-  </ion-card> -->
-
-
   <!-- Step 2. -->
   <ion-card *ngIf="currentStep === 2">
     <!-- Enter amount spent-->
@@ -81,15 +71,6 @@
       <button ion-button full (click)="nextStep()">Next</button>
     </ion-item>
   </ion-card>
-
-  <!-- Folded step 2. -->
-  <!-- <ion-card padding (click)="goToStep(2)" *ngIf="currentStep != 2">
-    <ion-item>
-      <ion-label *ngIf="amount===null" >Step 2. Enter amount spent</ion-label>
-      <ion-label *ngIf="amount!=null">£{{amount}}</ion-label>
-      <ion-icon item-right name="arrow-dropdown"></ion-icon>
-    </ion-item>
-  </ion-card> -->
 
   <!-- Step 3. -->
   <ion-card *ngIf="currentStep === 3">
@@ -116,15 +97,6 @@
       <button ion-button full (click)="nextStep()">Next</button>
     </ion-item>
   </ion-card>
-
-  <!-- folded step 3 -->
-  <!-- <ion-card padding (click)="goToStep(3)" *ngIf="currentStep != 3">
-    <ion-item >
-        <ion-label *ngIf="lastImage === null" >Step 3. Add a receipt photo</ion-label>
-        <ion-label *ngIf="lastImage != null">{{lastImage}}</ion-label>
-        <ion-icon item-right name="arrow-dropdown"></ion-icon>
-    </ion-item>
-  </ion-card> -->
 
 	<div padding class="pearUpCtrl">
 		<div class="boxforbutton">
