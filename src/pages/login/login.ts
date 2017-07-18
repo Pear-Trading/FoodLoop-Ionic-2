@@ -53,6 +53,7 @@ export class LoginPage {
       .subscribe(
         result => {
           this.userData.setSessionKey( result.session_key );
+          this.userData.setEmail( this.login.value.email );
           this.events.publish('user:login')
           loading.dismiss();
           this.navCtrl.setRoot(UserPage);

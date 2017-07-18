@@ -44,6 +44,7 @@ export class PeopleService {
       .flatMap(
         key => {
           this.userData.removeSessionKey();
+          this.userData.removeEmail();
           return this.http.post(
             this.apiUrl + '/logout',
             { session_key : key }

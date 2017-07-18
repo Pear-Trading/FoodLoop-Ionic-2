@@ -16,6 +16,7 @@ import 'rxjs/add/operator/timeout';
 export class FeedbackPage {
   feedbackForm: FormGroup;
   loggedIn: boolean;
+  loggedInEmail: any;
   username: any;
 
   constructor(
@@ -65,16 +66,16 @@ export class FeedbackPage {
     this.userData.getEmail().subscribe(
       result => {
         if (result) {
-          console.log('Username has been received');
-          this.username = result;
+          console.log('Email has been received');
+          this.loggedInEmail = result;
           this.loggedIn = true;
         } else {
-          console.log('Username is not available');
+          console.log('Email is not available');
           this.loggedIn = false;
         }
       },
       err => {
-        console.log('Username could not be received');
+        console.log('Email could not be received');
         this.loggedIn = false;
       }
     );

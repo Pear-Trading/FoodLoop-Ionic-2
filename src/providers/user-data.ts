@@ -42,11 +42,21 @@ export class UserData {
     );
   }
 
+  public setEmail(email: string) {
+    console.log("set Email");
+    this.storage.set('email',email);
+  }
+
   public getEmail() {
-    console.log("get sessionKey");
+    console.log("get email");
     return Observable.fromPromise(
-      this.storage.get('username')
+      this.storage.get('email')
     );
+  }
+
+  public removeEmail() {
+    console.log("remove email");
+    this.storage.remove('email');
   }
 
   /* Testing purpose, ideally, these variable should be initilizaed via calling */
