@@ -6,6 +6,7 @@ import { Camera } from '@ionic-native/camera';
 import { Keyboard } from '@ionic-native/keyboard';
 import { FilePath } from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
+import { AppVersion } from '@ionic-native/app-version';
 
 export class AppProviders {
   public static getProviders () {
@@ -16,6 +17,7 @@ export class AppProviders {
       FilePath,
       File,
       Camera,
+      AppVersion,
       {
         provide: ErrorHandler,
         useClass: IonicErrorHandler

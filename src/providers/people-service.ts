@@ -4,6 +4,8 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { UserData } from './user-data';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { AppVersion } from '@ionic-native/app-version';
+
 
 
 /* this provider handles the interaction between server and client */
@@ -15,10 +17,15 @@ export class PeopleService {
   constructor(
     private http: Http,
     private transfer: Transfer,
-    private userData: UserData
+    private userData: UserData,
+    private appVersion: AppVersion,
   ) {}
 
   public feedback(data) {
+    data.app_name = this.appVersion.getAppName();
+    data.package_name = this.appVersion.getPackageName();
+    data.version_code = this.appVersion.getVersionCode();
+    data.version_number = this.appVersion.getVersionNumber();
     return this.http.post(
       this.apiUrl + '/feedback',
       data

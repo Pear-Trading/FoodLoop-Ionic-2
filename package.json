@@ -19,6 +19,7 @@
         "@angular/http": "4.0.2",
         "@angular/platform-browser": "4.0.2",
         "@angular/platform-browser-dynamic": "4.0.2",
+        "@ionic-native/app-version": "3.4.2",
         "@ionic-native/camera": "3.4.2",
         "@ionic-native/core": "3.4.2",
         "@ionic-native/file": "3.4.2",
@@ -30,6 +31,7 @@
         "@ionic/storage": "^2.0.1",
         "chart.js": "^2.5.0",
         "cordova-android": "^6.2.3",
+        "cordova-plugin-app-version": "^0.1.9",
         "cordova-plugin-console": "1.0.5",
         "cordova-plugin-device": "1.1.4",
         "cordova-plugin-file": "~4.3.2",
@@ -73,7 +75,8 @@
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
             "cordova-sqlite-storage": {},
-            "ionic-plugin-keyboard": {}
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-app-version": {}
         },
         "platforms": [
             "android"
