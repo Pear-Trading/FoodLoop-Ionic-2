@@ -8,6 +8,7 @@ import { AppProviders } from './app.providers';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
+import { FeedbackPage } from '../pages/feedback/feedback';
 import { TokenPage } from '../pages/token/token';
 import { SignupPage } from '../pages/signup/signup';
 import { AboutPage } from '../pages/about/about';
@@ -26,6 +27,7 @@ import { StatPage } from '../pages/stat/stat';
   declarations: [
     MyApp,
     LoginPage,
+    FeedbackPage,
     TokenPage,
     SignupPage,
     AboutPage,
@@ -50,6 +52,7 @@ import { StatPage } from '../pages/stat/stat';
   entryComponents: [
     MyApp,
     LoginPage,
+    FeedbackPage,
     TokenPage,
     SignupPage,
     AboutPage,

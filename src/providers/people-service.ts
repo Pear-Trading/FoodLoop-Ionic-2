@@ -18,6 +18,13 @@ export class PeopleService {
     private userData: UserData
   ) {}
 
+  public feedback(data) {
+    return this.http.post(
+      this.apiUrl + '/feedback',
+      data
+    ).map( response => response.json() );
+  }
+
   public register(data) {
     return this.http.post(
       this.apiUrl + '/register',

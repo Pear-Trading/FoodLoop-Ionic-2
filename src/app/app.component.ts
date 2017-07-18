@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FeedbackPage } from '../pages/feedback/feedback';
 import { LoginPage } from '../pages/login/login';
 import { AboutPage } from '../pages/about/about';
 import { UserPage} from '../pages/user/user';
@@ -39,20 +40,22 @@ export class MyApp {
 
   // for logged in user
   loggedInPages: PageInterface[]= [
-    { title: 'Home', component: UserPage, icon: 'home' },
-	{ title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
-    { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
+  { title: 'Home', component: UserPage, icon: 'home' },
+  { title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
+  { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
 	{ title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
 	{ title: 'Account',component: SettingPage, index:9,icon: 'person'},
 	// The about page is currently the Guide page, need a whole guide page and About be about the app
 	{ title: 'Guide',component: AboutPage, index:11,icon: 'globe'},
-    { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
+  { title: 'Feedback', component: FeedbackPage, index:13,icon: 'mail' },
+  { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
   ];
 
   // for not login user
   loggedOutPages: PageInterface[] = [
     { title: 'Login', component: LoginPage, icon: 'person' },
-    { title: 'About', component: AboutPage, icon: 'person-add' }
+    { title: 'About', component: AboutPage, icon: 'person-add' },
+    { title: 'Feedback', component: FeedbackPage, icon: 'mail' }
   ];
 
   // specify which pages to display first
