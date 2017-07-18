@@ -18,13 +18,13 @@ export class StatPage {
   @ViewChild('lineCanvas') lineCanvas: ElementRef;
 
 
-  innerTabCtrl; // set default style of the page as list 
+  innerTabCtrl; // set default style of the page as list
   sessionToken;
   //  varibles of chart
   rankChart: any;   // shows changes in rankChart
   pointChart: any;  // shows changes in pear point over a period of time
   spentChart: any;  // shows changes in spent over a period of time
-  respentChart: any; // shows changes in respent over a period of time 
+  respentChart: any; // shows changes in respent over a period of time
 
   constructor(
     public navCtrl: NavController,
@@ -32,9 +32,9 @@ export class StatPage {
     public peopleService: PeopleService,
     public userData : UserData
     ) {
-    this.innerTabCtrl = "Chart";  // Default representation of the page is Chart 
+    this.innerTabCtrl = "Chart";  // Default representation of the page is Chart
      // get session token
-    //     this.userData.getSessionKey().then(token => { 
+    //     this.userData.getSessionKey().then(token => {
     //this.sessionToken = token;
     //}).catch(error => alert(error));
   }
@@ -45,27 +45,6 @@ export class StatPage {
    this.initCharts();
   }
 
-
-// testing, getting user history of duing 09/03/2017-09/03/2019
-tst(){
-  var data = JSON.stringify({
-  retrieveType: 2, 
-  startDayNumber: 9,
-  startMonthNumber: 3 ,
-  startYear:2017 ,
-  endDayNumber: 9,
-  endMonthNumber:3 ,
-  endYear: 2019,
-    sessionToken: this.sessionToken,
-  });
-
-  this.peopleService.getUserHistory(data).subscribe(data=>{
-    console.log(data);
-  },error=>{
-    console.log(error);
-  });
-  console.log(this.lineCanvas)
-} 
 
 /*********************** --  Data representation part -- **************************/
   /* including calling provider whihc calls api to retrieve user data */

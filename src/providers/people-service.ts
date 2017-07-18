@@ -131,12 +131,7 @@ export class PeopleService {
   foodloop_root_url_edit = this.foodloop_root_url + "edit";
   foodloop_root_url_token = this.foodloop_root_url + "token";
   foodloop_root_url_approve = this.foodloop_root_url + "admin-approve";
-  foodloop_root_url_user_history = this.foodloop_root_url + "user-history";
 
-
-  getUserHistory(data){
-    return this.http.post(this.foodloop_root_url_user_history,data);
-  }
   edit(data){
     return this.http.post(this.foodloop_root_url_edit,data);
   }
