@@ -54,6 +54,7 @@ export class LoginPage {
         result => {
           this.userData.setSessionKey( result.session_key );
           this.userData.setEmail( this.login.value.email );
+          this.userData.setDisplayName( result.display_name );
           this.events.publish('user:login')
           loading.dismiss();
           this.navCtrl.setRoot(UserPage);

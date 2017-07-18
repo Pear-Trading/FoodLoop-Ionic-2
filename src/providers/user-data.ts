@@ -59,6 +59,23 @@ export class UserData {
     this.storage.remove('email');
   }
 
+  public setDisplayName(displayname: string) {
+    console.log("set Display Name");
+    this.storage.set('displayname',displayname);
+  }
+
+  public getDisplayName() {
+    console.log("get Display Name");
+    return Observable.fromPromise(
+      this.storage.get('displayname')
+    );
+  }
+
+  public removeDisplayName() {
+    console.log("remove Display Name");
+    this.storage.remove('displayname');
+  }
+
   /* Testing purpose, ideally, these variable should be initilizaed via calling */
   /* server APIs */
   /* myData stores user detail including email, fullname, username and invitation token */

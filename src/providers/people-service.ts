@@ -52,6 +52,7 @@ export class PeopleService {
         key => {
           this.userData.removeSessionKey();
           this.userData.removeEmail();
+          this.userData.removeDisplayName();
           return this.http.post(
             this.apiUrl + '/logout',
             { session_key : key }
