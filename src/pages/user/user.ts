@@ -109,6 +109,21 @@ export class UserPage {
     this.navCtrl.push(OverviewPage);
   }
 
+  getUserDisplayName() {
+    this.userData.getDisplayName().subscribe(
+      result => {
+        if (result) {
+          console.log('Display Name has been received');
+          this.name = result;
+        } else {
+          console.log('Display Name is not available');
+        }
+      },
+      err => {
+        console.log('Display Name could not be received');
+      }
+    );
+  }
 
 
 /*********************** --  Data representation part -- **************************/
