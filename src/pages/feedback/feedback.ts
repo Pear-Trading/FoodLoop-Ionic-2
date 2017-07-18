@@ -15,6 +15,8 @@ import 'rxjs/add/operator/timeout';
 
 export class FeedbackPage {
   feedbackForm: FormGroup;
+  loggedIn: boolean;
+  username: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,7 +24,24 @@ export class FeedbackPage {
     private peopleService: PeopleService,
     private userData: UserData,
   ) {
+    this.userData.hasLoggedIn().subscribe(
+      result => {
+        if (result) {
+          console.log('User is logged in');
+          this.getUserEmail();
+        } else {
+          console.log('User is not logged in');
+          this.loggedIn = false;
+        }
+      },
+      err => {
+        console.log('Error checking if logged in, assuming not');
+        this.loggedIn = false;
+      }
+    );
+
     this.feedbackForm = this.formBuilder.group({
+      email:           ['', [Validators.required]],
       feedbacktext:    ['', [Validators.required]],
     });
   }
@@ -40,6 +59,25 @@ export class FeedbackPage {
           this.presentToast('Error submitting Feedback.');
         }
       );
+  }
+
+  getUserEmail() {
+    this.userData.getEmail().subscribe(
+      result => {
+        if (result) {
+          console.log('Username has been received');
+          this.username = result;
+          this.loggedIn = true;
+        } else {
+          console.log('Username is not available');
+          this.loggedIn = false;
+        }
+      },
+      err => {
+        console.log('Username could not be received');
+        this.loggedIn = false;
+      }
+    );
   }
 
   private presentToast(text) {
