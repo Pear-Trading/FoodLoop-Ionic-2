@@ -7,10 +7,10 @@ import 'rxjs/add/operator/map';
 
 
 /* this provider handles the interaction between server and client */
- 
+
 @Injectable()
 export class PeopleService {
-  private apiUrl = 'https://dev.app.peartrade.org/api';
+  private apiUrl = 'https://dev.peartrade.org/api';
 
   constructor(
     private http: Http,
@@ -121,18 +121,18 @@ export class PeopleService {
   getUserHistory(data){
     return this.http.post(this.foodloop_root_url_user_history,data);
   }
-  edit(data){ 
+  edit(data){
     return this.http.post(this.foodloop_root_url_edit,data);
   }
-  
-  verifyToken(data){ 
+
+  verifyToken(data){
     return this.http.post(this.foodloop_root_url_token,data);
   }
 
   approve(data){
     return this.http.post(this.foodloop_root_url_approve,data);
   }
-  
+
 
 /*********************** --  Data representation part -- **************************/
   /* including get request to server to retrieve user data */
@@ -149,9 +149,9 @@ getChartData(type){
          data:{
            labels:["Mon","Tue","Wed","Thur","Fri","Sat","Sun"],
            datasets: [{
-        
-             data: [333.30,350.55, 366.50, 400.00, 450.00, 506.66],  
-             backgroundColor: [ 
+
+             data: [333.30,350.55, 366.50, 400.00, 450.00, 506.66],
+             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
@@ -190,15 +190,15 @@ getChartData(type){
       break;
     case "respent":
       break;
-    case "Daily":  
+    case "Daily":
       chartData = {
          type: 'line',
          data:{
            labels:["Mon","Tue","Wed","Thur","Fri","Sat","Sun"],
            datasets: [{
-        
-               data: [12, 19, 3, 5, 2, 3],  
-             backgroundColor: [ 
+
+               data: [12, 19, 3, 5, 2, 3],
+             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
