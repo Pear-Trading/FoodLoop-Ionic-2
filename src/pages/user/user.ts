@@ -62,6 +62,7 @@ export class UserPage {
     user_count: 0,
     global_sum: 0,
     global_count: 0,
+    user_position: 0,
   };
 
   constructor(
