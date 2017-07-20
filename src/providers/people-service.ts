@@ -12,7 +12,8 @@ import { AppVersion } from '@ionic-native/app-version';
 
 @Injectable()
 export class PeopleService {
-  private apiUrl = 'https://dev.peartrade.org/api';
+//  private apiUrl = 'https://dev.peartrade.org/api';
+  private apiUrl = 'http://localhost:3000/api';
 
   constructor(
     private http: Http,
