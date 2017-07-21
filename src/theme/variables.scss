@@ -34,6 +34,7 @@ $colors: (
   header: 	  #1e4158,
   whitish:    #fefefe,
   button-blue: #248ed0,
+  light-grey: #646464,
 );
 
 
@@ -63,7 +64,9 @@ $tabs-md-tab-color-active: rgba(255, 255, 255, 1);
 
 $grid-padding-width: 2px;
 
+$alert-md-button-text-color: color($colors, secondary);
 
+$label-md-text-color: color($colors, primary);
 
 /*$segment-button-md-border-bottom-color-activated: #ff0000;*/
 // App Windows Variables

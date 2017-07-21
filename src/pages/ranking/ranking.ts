@@ -3,7 +3,7 @@ import { NavController, NavParams, ToastController} from 'ionic-angular';
 import { PeopleService } from '../../providers/people-service';
 
 /*
- This page represent a ranking page/leaderboard. 
+ This page represent a ranking page/leaderboard.
  display players in leaderboard and highlight important information
 */
 @Component({
@@ -15,10 +15,10 @@ export class RankingPage {
 
   rankingData: Array<any>;
   currentPos: number;
-  listType = 'daily_total';
+  listType: any = 'daily_total';
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams ,
     private toastCtrl: ToastController,
     private peopleService : PeopleService,
