@@ -89,7 +89,7 @@
       <div class="myLabel">Press the button to add a receipt photo</div>
       <!-- Switch between different buttons, display add receipt or retake button -->
       <button padding class="camBtn" [hidden]="lastImage !== null" ion-button color="light" large full (click)="uploadImage()" >
-        <ion-icon ios="ios-camera" md="md-camera">Add receipt photo</ion-icon>
+        <ion-icon ios="ios-camera" md="md-camera"> Add receipt photo</ion-icon>
         </button>
       <button padding class="camBtn" [hidden]="lastImage === null" ion-button color="light" large full (click)="uploadImage()" >
         <ion-icon ios="ios-camera" md="md-camera">Retake</ion-icon>

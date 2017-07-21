@@ -43,7 +43,7 @@ export class MyApp {
   { title: 'Home', component: UserPage, icon: 'home' },
   { title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
   { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
-  // Commented out until it has data 
+  // Commented out until it has data
   // { title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
 	{ title: 'Account',component: SettingPage, index:9,icon: 'person'},
 	// The about page is currently the Guide page, need a whole guide page and About be about the app
@@ -55,7 +55,7 @@ export class MyApp {
   // for not login user
   loggedOutPages: PageInterface[] = [
     { title: 'Login', component: LoginPage, icon: 'person' },
-    { title: 'About', component: AboutPage, icon: 'person-add' },
+    { title: 'Guide', component: AboutPage, icon: 'globe' },
     { title: 'Feedback', component: FeedbackPage, icon: 'mail' }
   ];
 

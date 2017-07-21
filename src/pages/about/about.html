@@ -17,118 +17,133 @@
 <ion-content>
 
 <ion-slides pager class="about-cards">
+	<ion-slide *ngIf="!loggedIn" class="whitecard">
+    <h2>Login</h2>
+	<p>Here is your login page. Simply enter your email you used for login with the password. Once the details are filled you can click the 'Sign In' button. If you do not have an account press 'Create Account', then follow the instructions given if you swipe right here.</p>
+	<img src="assets/img/login.png" />
+	<p class="right">swipe >> Register</p>
+	</ion-slide>
+
+	<ion-slide *ngIf="!loggedIn" class="whitecard">
+    <h2>Register</h2>
+	<p>Here you register your account using the token provided to you. Fill in all the details as given, then click the 'Sign Up' button to proceed.</p>
+	<img src="assets/img/register.png" />
+	<p class="right">swipe >> How to use this App</p>
+	<p class="right">swipe << Login</p>
+	</ion-slide>
+
 	<ion-slide class="whitecard">
     <h2>How to use this Application</h2>
 	<p>This is your home screen. Let's examine the features.</p>
-	<img class="img-200" src="assets/img/home_screen.PNG" />
+	<img class="img-200" src="assets/img/home_screen.png" />
 	<p class="right">swipe >> My Points</p>
+	<p *ngIf="!loggedIn" class="right">swipe << Register</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
     <h2>My Points</h2>
 	<p>This is your Local Loop points that will change dependent on how you shop locally and how your suppliers shop.</p>
-	<img src="assets/img/points.PNG" />
+	<img src="assets/img/points.png" />
 	<p class="right">swipe >> My Rank</p>
-	<p class="right">swipe << How to use this Application</p>	
+	<p class="right">swipe << How to use this Application</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
     <h2>My Rank</h2>
 	<p>Your rank is your position to your 'local' group only.</p>
-	<img src="assets/img/rank.PNG" />
+	<img src="assets/img/rank.png" />
 	<p class="right">swipe >> My Spend</p>
-	<p class="right">swipe << My Points</p>	
+	<p class="right">swipe << My Points</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
     <h2>My Spend</h2>
 	<p>This is the all time tally of how much you have spent.</p>
-	<img src="assets/img/spend.PNG" />
+	<img src="assets/img/spend.png" />
 	<p class="right">swipe >> Value to the Local Economy</p>
-	<p class="right">swipe << My Rank</p>	
+	<p class="right">swipe << My Rank</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
     <h2>Value to the Local Economy</h2>
 	<p>The value to your local economy is a complex calculation of how your money has been spent and re-spent locally in the chain of where you buy from and who they buy from.</p>
-	<img src="assets/img/value.PNG" />
+	<img src="assets/img/value.png" />
 	<p class="right">swipe >> Averages</p>
-	<p class="right">swipe << My Spend</p>	
+	<p class="right">swipe << My Spend</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
     <h2>Averages</h2>
-	<p>The averages for you, local and global along with the weekly spend. See how well you compare.</p>
-	<img src="assets/img/stats.PNG" />
+	<p>This shows you your total and average spend within various time frames. See how well you compare.</p>
+	<img src="assets/img/stats.png" />
 	<p class="right">swipe >> Add a Receipt</p>
-	<p class="right">swipe << Value to the Local Economy</p>	
+	<p class="right">swipe << Value to the Local Economy</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
     <h2>Add a Receipt</h2>
-	<p>When you press this button you will be taken to the Add a Receipt page, pressing the bottom 'Receipts' link does the same thing.</p>
-	<img class="img-100" src="assets/img/receipt.PNG" />
+	<p>When you press this button you will be taken to the Add a Receipt page, pressing 'Add Receipt' in the menu does the same thing.</p>
+	<img class="img-100" src="assets/img/receipt.png" />
 	<p class="right">swipe >> Enter a Shop Name</p>
-	<p class="right">swipe << Averages</p>	
-	</ion-slide>	
+	<p class="right">swipe << Averages</p>
+	</ion-slide>
 
 	<ion-slide class="whitecard">
     <h2>Enter a Shop Name</h2>
-	<p>The text fits here</p>
-	<img src="assets/img/" />
+	<p>Here you search for the business you shopped at. Simply search the name, then click the found establishment. If this does not work, swipe right here for more instruction.</p>
+	<img src="assets/img/searchstore1.png" />
 	<p class="right">swipe >> Add a Receipt</p>
-	<p class="right">swipe << Value to the Local Economy</p>	
+	<p class="right">swipe << Enter a New Shop</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
-    <h2>Averages</h2>
-	<p>The text fits here</p>
-	<img src="assets/img/" />
-	<p class="right">swipe >> Add a Receipt</p>
-	<p class="right">swipe << Value to the Local Economy</p>	
+    <h2>Enter a New Shop</h2>
+	<p><b>Ignore if you found a store in the previous step and simply click 'Next'.</b>If the business could not be found, here you can enter its details by filling all the form fiels. Once all have been filled, you can proceed with 'Next'.</p>
+	<img src="assets/img/searchstore2.png" />
+	<p class="right">swipe >> Enter Amount Spent</p>
+	<p class="right">swipe << Enter a Shop Name</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
-    <h2>Averages</h2>
-	<p>The text fits here</p>
-	<img src="assets/img/" />
-	<p class="right">swipe >> Add a Receipt</p>
-	<p class="right">swipe << Value to the Local Economy</p>	
+    <h2>Enter Amount Spent</h2>
+	<p>Enter the amount of money spent in pounds (and pence) in the field. Once filled, you can proceed with 'Next'.</p>
+	<img src="assets/img/enteramount.png" />
+	<p class="right">swipe >> Take Photo and Submit</p>
+	<p class="right">swipe << Enter a New Shop</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
-    <h2>Averages</h2>
-	<p>The text fits here</p>
-	<img src="assets/img/" />
-	<p class="right">swipe >> Add a Receipt</p>
-	<p class="right">swipe << Value to the Local Economy</p>	
+    <h2>Take Photo and Submit</h2>
+	<p>Here you take a photo of a receipt, or upload an image previously taken, so that the transaction can be verified. Once this has been done you can retake the photo if unsatisfactory. If satisfied, click the now enabled 'Submit' button to submit the receipt.</p>
+	<img src="assets/img/takephoto.png" />
+	<p class="right">swipe >> Leaderboards</p>
+	<p class="right">swipe << Enter Amount Spent</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
-    <h2>Averages</h2>
-	<p>The text fits here</p>
-	<img src="assets/img/" />
-	<p class="right">swipe >> Add a Receipt</p>
-	<p class="right">swipe << Value to the Local Economy</p>	
+    <h2>Leaderboards</h2>
+	<p>On the Leaderboard page you can select a leaderboard by clicking the region showing as 'Last Week Total' on this image. It displays your position in the leaderboards with the relevant comparative statistic, along with the trend of if you have been going up or down the ranks.</p>
+	<img src="assets/img/leaderboard.png" />
+	<p class="right">swipe >> Giving Feedback</p>
+	<p class="right">swipe << Take Photo and Submit</p>
 	</ion-slide>
 
 	<ion-slide class="whitecard">
-    <h2>Averages</h2>
-	<p>The text fits here</p>
-	<img src="assets/img/" />
-	<p class="right">swipe >> Add a Receipt</p>
-	<p class="right">swipe << Value to the Local Economy</p>	
+    <h2>Giving Feedback</h2>
+	<p>We value your feedback, especially while this app is in development! To provide us with feedback on how we can improve your experience, simply go to the Feedback page and enter the information as requested. If you are logged in, it will use the email of your current login.</p>
+	<img src="assets/img/feedback.png" />
+	<p class="right">swipe << Leaderboards</p>
 	</ion-slide>
-	
+
 </ion-slides>
-	
+
 <ion-slides pager class="about-cards">
 	<ion-slide class="redcard">
     <h2>What is the Local Loop Application?</h2>
 	<p>The Local Loop System is a fun way to reflect your spending, more specifically your local spernding. At the same time it will help us all to understand better how money circulates around the local economy. To do this we need to collect some information about you and your spending.</p>
 	<p class="right">swipe >> for what information do you need?</p>
 	</ion-slide>
-	
+
 
 	<ion-slide class="redcard">
     <h2>What Information Do You Need?</h2>
@@ -136,7 +151,7 @@
 	<p class="right">swipe >> for what about my personal data?</p>
 	<p class="right">swipe << What is the Local Loop Application</p>
 	</ion-slide>
-	
+
 
 	<ion-slide class="redcard">
     <h2>What About my Personal Data?</h2>
@@ -152,7 +167,7 @@
 	<p class="right">swipe >> Can I see my Data?</p>
 	<p class="right">swipe << What About My Personal Data</p>
 	</ion-slide>
-	
+
 
 	<ion-slide class="redcard">
     <h2>Can I see my data?</h2>
@@ -160,14 +175,14 @@
 	<p class="right">swipe >> for What are all the Tables?</p>
 	<p class="right">swipe << What Data is Shared</p>
 	</ion-slide>
-	
+
 
 	<ion-slide class="redcard">
     <h2>What are all the Tables</h2>
 	<p>Ẁe want you to have fun in collecting the information and so we have created several ways in which to show the data to you. One of the most important is a leaderboard of the localregion and global regions so you can see your ranking and position change on a daily, weekly and yearly basis. You will also see your region in comparisson to others.</p>
 	<p class="right">swipe << Can I See My Data</p>
 	</ion-slide>
-	
+
 </ion-slides>
 
 
@@ -183,7 +198,7 @@
     <h2>How are Points Calculated?</h2>
 	<p>Points are calculated on the value of your spend and the subsequent re-spend. When the receipt you submit is “local” (defined by distance to your postcode), you are awarded points. More points are awarded when the money you have spent is re-spent by the business you spent with. So local shopping for you and the companies you spend with are always rewarded.</p>
 	<p class="right">swipe >> for what is local?</p>
-	<p class="right">swipe << What is the Local Loop Game</p>	
+	<p class="right">swipe << What is the Local Loop Game</p>
 	</ion-slide>
 
   <ion-slide class="greencard">
@@ -206,7 +221,7 @@
 	<p class="right">swipe >> for </p>
 	<p class="right">swipe << What is the Hero Level</p>
 	</ion-slide>
-	
+
 </ion-slides>
 
 
@@ -238,7 +253,7 @@
 	<p>Creating local wealth through intelligent collaboration and cooperation. Using innovation to create and develop local and global markets based on fair an mutually agreed business practices.</p>
 	<p class="right">swipe >> for environmental care</p>
 	<p class="right">swipe << The Quadruple Bottom Line</p>
-</ion-slide> 
+</ion-slide>
 
 
   <ion-slide class="bluecard">
@@ -255,29 +270,29 @@
 	<p class="right">swipe << Environmental Care</p>
 </ion-slide>
 
-  
+
   <ion-slide class="bluecard">
     <h2>Ongoing Personal Development</h2>
 	<p>Supporting the inner-growth and development of all those we work with and trade with, including ourselves. Helping each other reach our full potential.</p>
 	<p class="right">swipe >> for who are the developers?</p>
 	<p class="right">swipe << Cultivating Social Well-being</p>
 	</ion-slide>
-  
+
   <ion-slide class="bluecard">
     <h2>Who are the Developers?</h2>
 	<p>The application is under continuous development by a number of different parties. The origination is with the Small Green Consultancy. Technical work and project management is supplied by Shadowcat Systems Limited. The applicaton is developed under the Pear Trading brand and has been enhanced by association with the Ethical Small Traders Association.</p>
 	<p class="right">swipe >> for </p>
 	<p class="right">swipe << Ongoing Personal Development</p>
-</ion-slide>   
-  
+</ion-slide>
+
 </ion-slides>
 
   <div style='-webkit-user-drag: none; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;'>
 
 
-   
 
-  
+
+
   </div><!-- Style end -->
 
 </ion-content>

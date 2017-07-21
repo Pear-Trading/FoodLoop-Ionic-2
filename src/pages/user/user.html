@@ -74,7 +74,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox">
-                <div class="statboxheader">Avg. Transaction Today</div>
+                <div class="statboxheader">Avg. Spend Today</div>
                 <div class="statboxcontent">{{ basicStats.today_sum / (basicStats.today_count ? basicStats.today_count : 1) | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
@@ -93,7 +93,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox">
-                <div class="statboxheader">Last Week Avg. Transaction</div>
+                <div class="statboxheader">Last Week Avg. Spend</div>
                 <div class="statboxcontent">{{ basicStats.week_sum / (basicStats.week_count ? basicStats.week_count : 1) | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
@@ -112,7 +112,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox">
-                <div class="statboxheader">Last Month Avg. Transaction</div>
+                <div class="statboxheader">Last Month Avg. Spend</div>
                 <div class="statboxcontent">{{ basicStats.month_sum / (basicStats.month_count ? basicStats.month_count : 1) | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
@@ -131,7 +131,7 @@
 			</ion-col>
 			<ion-col>
               <div (click)="navCtrl.push(statPage)" class="statbox">
-                <div class="statboxheader">User Avg. Transaction</div>
+                <div class="statboxheader">User Avg. Spend</div>
                 <div class="statboxcontent">{{ basicStats.user_sum / (basicStats.user_count ? basicStats.user_count : 1) | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
