@@ -6,7 +6,7 @@ import { PeopleService } from '../../providers/people-service';
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
-  providers: [PeopleService]  
+  providers: [PeopleService]
 })
 
 export class SignupPage {
