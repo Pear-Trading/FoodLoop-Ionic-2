@@ -5,6 +5,7 @@ import { UserData } from './user-data';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { AppVersion } from '@ionic-native/app-version';
+import { ConfigurationService } from './configuration.service';
 
 
 
@@ -12,8 +13,7 @@ import { AppVersion } from '@ionic-native/app-version';
 
 @Injectable()
 export class PeopleService {
-  private apiUrl = 'https://dev.peartrade.org/api';
-  //  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = ConfigurationService.apiUrl;
 
   constructor(
     private http: Http,
