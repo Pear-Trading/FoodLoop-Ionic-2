@@ -3,8 +3,17 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { ErrorHandler } from '@angular/core';
+import { IonicErrorHandler } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { Transfer } from '@ionic-native/transfer';
+import { Camera } from '@ionic-native/camera';
+import { Keyboard } from '@ionic-native/keyboard';
+import { FilePath } from '@ionic-native/file-path';
+import { File } from '@ionic-native/file';
+import { AppVersion } from '@ionic-native/app-version';
 
-import { AppProviders } from './app.providers';
+// import { AppProviders } from './app.providers';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -67,6 +76,18 @@ import { StatPage } from '../pages/stat/stat';
     ShopPage,
     StatPage,
   ],
-  providers: AppProviders.getProviders()
+  providers: [
+    Transfer,
+    SplashScreen,
+    Keyboard,
+    FilePath,
+    File,
+    Camera,
+    AppVersion,
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    }
+  ],
 })
 export class AppModule {}
