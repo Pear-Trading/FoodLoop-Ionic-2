@@ -7,8 +7,8 @@ import { UserPage} from '../pages/user/user';
 import { ReceiptPage } from '../pages/receipt/receipt';
 import { RankingPage } from '../pages/ranking/ranking';
 import { SettingPage} from '../pages/setting/setting';
-import { StatPage} from '../pages/stat/stat';
-import { AccountPage } from '../pages/account/account';
+// import { StatPage} from '../pages/stat/stat';
+// import { AccountPage } from '../pages/account/account';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 
 import { PeopleService } from '../providers/people-service';

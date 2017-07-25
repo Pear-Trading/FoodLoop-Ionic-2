@@ -35,10 +35,10 @@
       <ion-col>
         <div class="statusheader">My Rank</div>
 				<!-- Should use ngIfElse once ng-template can have CSS bound to it -->
-				<div *ngIf="basicStats.userposition == 0" class="statuscontent">
+				<div *ngIf="basicStats.user_position == 0" class="statuscontent">
           Unranked
         </div>
-				<div *ngIf="basicStats.userposition != 0" class="statuscontent">
+				<div *ngIf="basicStats.user_position != 0" class="statuscontent">
 					{{ basicStats.user_position }}
 				</div>
       </ion-col>
