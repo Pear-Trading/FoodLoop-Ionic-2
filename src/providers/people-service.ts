@@ -23,14 +23,28 @@ export class PeopleService {
   ) {}
 
   public feedback(data) {
-    data.app_name = this.appVersion.getAppName();
-    data.package_name = this.appVersion.getPackageName();
-    data.version_code = this.appVersion.getVersionCode();
-    data.version_number = this.appVersion.getVersionNumber();
-    return this.http.post(
-      this.apiUrl + '/feedback',
-      data
-    ).map( response => response.json() );
+    return Observable.fromPromise(this.appVersion.getAppName())
+      .flatMap(result => {
+        data.app_name = result;
+        return Observable.fromPromise(this.appVersion.getPackageName());
+      })
+      .flatMap(result => {
+        data.package_name = result;
+        return Observable.fromPromise(this.appVersion.getVersionCode());
+      })
+      .flatMap(result => {
+        data.version_code = result;
+        return Observable.fromPromise(this.appVersion.getVersionNumber());
+      })
+      .flatMap(result => {
+        data.version_number = result;
+        console.log(data);
+        return this.http.post(
+          this.apiUrl + '/feedback',
+          data
+        );
+      })
+    .map( response => response.json() );
   }
 
   public register(data) {
