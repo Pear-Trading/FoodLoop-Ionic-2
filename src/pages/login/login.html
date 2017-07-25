@@ -1,21 +1,39 @@
+<ion-header>
+	<ion-toolbar color="header">
+		<button ion-button menuToggle >
+			<ion-icon item-right name='menu'></ion-icon>
+		</button>
+		<ion-title>
+			Login
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-row>
-    <ion-col text-center>
-      <h1>LocalLoop</h1>
-    </ion-col>
-  </ion-row>
-  <form [formGroup]="login" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label stacked>Email</ion-label>
-      <ion-input type="text" formControlName="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>Password</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-    <button ion-button type="submit" color="primary" [disabled]="login.invalid" block>Sign In</button>
-  </form>
-  <button ion-button (click)="goToSignup()" color="secondary" block>Create an account</button>
+	<ion-grid class="grid-login">
+		<ion-row>
+			<ion-col text-center>
+				<h1>LocalLoop</h1>
+			</ion-col>
+		</ion-row>
+
+			<form [formGroup]="login" (ngSubmit)="onSubmit()">
+				<ion-item class="item-login">
+					<ion-label stacked>Email</ion-label>
+					<ion-input type="text" formControlName="email"></ion-input>
+				</ion-item>
+				<ion-item class="item-login">
+					<ion-label stacked>Password</ion-label>
+					<ion-input type="password" formControlName="password"></ion-input>
+				</ion-item>
+<!-- The CSS for the buttons needs fixing so color="secondary" is no longer required -->
+			<button ion-button type="submit" color="secondary" class="button-login" [disabled]="login.invalid" block>Sign In</button>
+				</form>
+			<button ion-button (click)="goToSignup()"  class="button-login" color="secondary" block>Create an account</button>
+
+
+	</ion-grid>
+
+	<img class="icon-login" src="assets/img/icon1.png">
+
 </ion-content>
-
-

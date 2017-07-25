@@ -4,24 +4,47 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { UserData } from './user-data';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { AppVersion } from '@ionic-native/app-version';
+import { ConfigurationService } from './configuration.service';
+
 
 
 /* this provider handles the interaction between server and client */
- 
+
 @Injectable()
 export class PeopleService {
-  private apiUrl = 'https://dev.app.peartrade.org/api';
+  private apiUrl = ConfigurationService.apiUrl;
 
   constructor(
     private http: Http,
     private transfer: Transfer,
-    private userData: UserData
+    private userData: UserData,
+    private appVersion: AppVersion,
   ) {}
-  
-  public getAgeRanges() {
-    return this.http.get(
-      this.apiUrl + '/info/ages'
-    ).map( res => res.json() );
+
+  public feedback(data) {
+    return Observable.fromPromise(this.appVersion.getAppName())
+      .flatMap(result => {
+        data.app_name = result;
+        return Observable.fromPromise(this.appVersion.getPackageName());
+      })
+      .flatMap(result => {
+        data.package_name = result;
+        return Observable.fromPromise(this.appVersion.getVersionCode());
+      })
+      .flatMap(result => {
+        data.version_code = result;
+        return Observable.fromPromise(this.appVersion.getVersionNumber());
+      })
+      .flatMap(result => {
+        data.version_number = result;
+        console.log(data);
+        return this.http.post(
+          this.apiUrl + '/feedback',
+          data
+        );
+      })
+    .map( response => response.json() );
   }
 
   public register(data) {
@@ -43,6 +66,8 @@ export class PeopleService {
       .flatMap(
         key => {
           this.userData.removeSessionKey();
+          this.userData.removeEmail();
+          this.userData.removeDisplayName();
           return this.http.post(
             this.apiUrl + '/logout',
             { session_key : key }
@@ -89,29 +114,51 @@ export class PeopleService {
       ).map( response => response.json() );
   }
 
+  public basicStats() {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          return this.http.post(
+            this.apiUrl + '/stats',
+            { session_key : key },
+          );
+        },
+      ).map( response => response.json() );
+  }
+
+  public leaderboard(lb_type) {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          return this.http.post(
+            this.apiUrl + '/stats/leaderboard',
+            {
+              session_key : key,
+              type : lb_type,
+            },
+          );
+        },
+      ).map( response => response.json() );
+  }
+
   /* Links to server, these should be stored in config.js */
   foodloop_root_url = "http://app.peartrade.org/";
   foodloop_root_url_edit = this.foodloop_root_url + "edit";
   foodloop_root_url_token = this.foodloop_root_url + "token";
   foodloop_root_url_approve = this.foodloop_root_url + "admin-approve";
-  foodloop_root_url_user_history = this.foodloop_root_url + "user-history";
 
-
-  getUserHistory(data){
-    return this.http.post(this.foodloop_root_url_user_history,data);
-  }
-  edit(data){ 
+  edit(data){
     return this.http.post(this.foodloop_root_url_edit,data);
   }
-  
-  verifyToken(data){ 
+
+  verifyToken(data){
     return this.http.post(this.foodloop_root_url_token,data);
   }
 
   approve(data){
     return this.http.post(this.foodloop_root_url_approve,data);
   }
-  
+
 
 /*********************** --  Data representation part -- **************************/
   /* including get request to server to retrieve user data */
@@ -128,9 +175,9 @@ getChartData(type){
          data:{
            labels:["Mon","Tue","Wed","Thur","Fri","Sat","Sun"],
            datasets: [{
-        
-             data: [333.30,350.55, 366.50, 400.00, 450.00, 506.66],  
-             backgroundColor: [ 
+
+             data: [333.30,350.55, 366.50, 400.00, 450.00, 506.66],
+             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
@@ -169,15 +216,15 @@ getChartData(type){
       break;
     case "respent":
       break;
-    case "Daily":  
+    case "Daily":
       chartData = {
          type: 'line',
          data:{
            labels:["Mon","Tue","Wed","Thur","Fri","Sat","Sun"],
            datasets: [{
-        
-               data: [12, 19, 3, 5, 2, 3],  
-             backgroundColor: [ 
+
+               data: [12, 19, 3, 5, 2, 3],
+             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',

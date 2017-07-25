@@ -6,12 +6,12 @@ import { PeopleService } from '../../providers/people-service';
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
-  providers: [PeopleService]  
+  providers: [PeopleService]
 })
 
 export class SignupPage {
   signup: FormGroup;
-  ageRanges: Object[];
+  years: Array<number>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,21 +20,17 @@ export class SignupPage {
     private toastCtrl: ToastController,
     private navCtrl: NavController,
   ) {
-    this.peopleService
-      .getAgeRanges()
-      .subscribe(
-        result => this.ageRanges = result.ages,
-        () => console.log('Got Age Ranges!')
-      );
+    let startYear = new Date().getFullYear() - 11;
+    this.years = Array.from( new Array(140), (val, index) => startYear - index );
 
     this.signup = this.formBuilder.group({
-      token:        ['', [Validators.required]],
-      full_name:    ['', [Validators.required]],
-      display_name: ['', [Validators.required]],
-      email:        ['', [Validators.required]],
-      postcode:     ['', [Validators.required]],
-      age_range:    ['', [Validators.required]],
-      password:     ['', [Validators.required]],
+      token         : ['', [Validators.required]],
+      full_name     : ['', [Validators.required]],
+      display_name  : ['', [Validators.required]],
+      email         : ['', [Validators.required]],
+      postcode      : ['', [Validators.required]],
+      year_of_birth : ['', [Validators.required]],
+      password      : ['', [Validators.required]],
     });
   }
 

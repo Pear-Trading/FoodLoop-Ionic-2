@@ -6,34 +6,34 @@
 
 <ion-content padding>
   <form [formGroup]="signup" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label>Token</ion-label>
+    <ion-item class="item-signup">
+      <ion-label stacked>Token</ion-label>
       <ion-input type="text" formControlName="token"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Full Name</ion-label>
+    <ion-item class="item-signup">
+      <ion-label stacked>Full Name</ion-label>
       <ion-input type="text" formControlName="full_name"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Display Name</ion-label>
+    <ion-item class="item-signup">
+      <ion-label stacked>Display Name</ion-label>
       <ion-input type="text" formControlName="display_name"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Email</ion-label>
+    <ion-item class="item-signup">
+      <ion-label stacked>Email</ion-label>
       <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Postcode</ion-label>
+    <ion-item class="item-signup">
+      <ion-label stacked>Postcode</ion-label>
       <ion-input type="text" formControlName="postcode"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Age Range</ion-label>
-      <ion-select type="text" formControlName="age_range">
-        <ion-option *ngFor="let range of ageRanges" [value]="range.id">{{ range.string }}</ion-option>
+    <ion-item class="item-signup">
+      <ion-label stacked>Year of Birth</ion-label>
+      <ion-select type="text" formControlName="year_of_birth">
+        <ion-option *ngFor="let year of years" [value]="year">{{ year }}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item>
-      <ion-label>Password</ion-label>
+    <ion-item class="item-signup">
+      <ion-label stacked>Password</ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
     <button ion-button full color="secondary" type="submit" [disabled]="signup.invalid">Sign Up</button>

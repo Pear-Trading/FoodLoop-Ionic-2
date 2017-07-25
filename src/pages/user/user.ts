@@ -1,18 +1,23 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams , App , Slides} from 'ionic-angular';
+import {
+  NavController,
+  NavParams,
+  App,
+  Slides,
+  ToastController,
+} from 'ionic-angular';
 import { ReceiptPage } from '../receipt/receipt';
 import { OverviewPage } from '../overview/overview';
 import { GamePage } from '../game/game';
 import { ShopPage } from '../shop/shop';
 import { StatPage } from '../stat/stat';
-import { Chart } from 'chart.js';
 import { PeopleService} from '../../providers/people-service';
 import { UserData} from '../../providers/user-data';
 
 /*
   this page is created for navigating user through differnet feature of the app
   as the development goes, more features can be added to this page
-  quite similiar to a index page 
+  quite similiar to a index page
 */
 @Component({
   selector: 'page-user',
@@ -44,14 +49,29 @@ export class UserPage {
   trends: any;
   myRank: any;
   username: any;
-  positionShift: any;   // display different icon based on the current pos and previous pos 
+  positionShift: any;   // display different icon based on the current pos and previous pos
+
+  basicStats = {
+    today_sum: 0,
+    today_count: 0,
+    week_sum: 0,
+    week_count: 0,
+    month_sum: 0,
+    month_count: 0,
+    user_sum: 0,
+    user_count: 0,
+    global_sum: 0,
+    global_count: 0,
+    user_position: 0,
+  };
 
   constructor(
     private  app : App,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public peopleService: PeopleService,
-    public userData : UserData
+    public userData : UserData,
+    private toastCtrl: ToastController,
   ) {
     this.receiptPage = ReceiptPage;
     this.gamePage = GamePage;
@@ -60,28 +80,24 @@ export class UserPage {
     this.status = "Weekly"; // defualt chart is Daily
     // get the username from local stroage
 
-  } 
-  /* When the page is fully loaded */
-  ionViewWillEnter(){
-        this.userData.getUsername().then(value=>{
-      this.username = value; 
-      /* init dashboard variables */
-      var myData;
-      this.userData.getMyData(this.username).then(
-        value => {
-          myData = value;
-          console.log(myData);
-          this.name = this.username;  
-          this.email =  myData.firstStart;
-          this.myPearPoints =  myData.pearPoint;
-          this.trends = 0;
-          this.myRank =  myData.currentPos;  
-          this.positionShift = myData.previousPos - myData.currentPos;
-        }).catch( error=> { alert("Error code: 101")}
-        ); 
-    });
   }
-  
+  /* When the page is fully loaded */
+  public ionViewWillEnter() {
+    this.peopleService.basicStats().subscribe(
+      result => {
+        this.basicStats = result;
+      },
+      err => {
+        let toast = this.toastCtrl.create({
+          message: 'Unable to retrieve stats - are you connected to a network?',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }
+    );
+  }
+
  ionViewDidLoad() {
    //  this.initCharts();
  }
@@ -94,6 +110,21 @@ export class UserPage {
     this.navCtrl.push(OverviewPage);
   }
 
+  getUserDisplayName() {
+    this.userData.getDisplayName().subscribe(
+      result => {
+        if (result) {
+          console.log('Display Name has been received');
+          this.name = result;
+        } else {
+          console.log('Display Name is not available');
+        }
+      },
+      err => {
+        console.log('Display Name could not be received');
+      }
+    );
+  }
 
 
 /*********************** --  Data representation part -- **************************/
@@ -101,7 +132,7 @@ export class UserPage {
   /* navigation and respresentation of the retrieved data */
 
 //  initCharts(){
-//  
+//
 //    this.lineChart = new Chart(this.lineCanvas.nativeElement,this.peopleService.getChartData("Daily"));
 //    this.barChart = new Chart(this.barCanvas.nativeElement,this.peopleService.getChartData("Weekly"));
 //    this.pieChart = new Chart(this.pieCanvas.nativeElement,this.peopleService.getChartData("Monthly"));
@@ -112,11 +143,11 @@ export class UserPage {
     switch(currentIndex){
       case 0:
         this.status = "Weekly";
-        break;  
-      case 1: 
+        break;
+      case 1:
         this.status = "Daily";
         break;
-      case 2: 
+      case 2:
         this.status = "Monthly";
         break;
     }
@@ -128,7 +159,7 @@ export class UserPage {
 
   getIcon(){
     if (this.positionShift > 0)
-      return "md-trending-up"; 
+      return "md-trending-up";
     else if(this.positionShift < 0)
       return "md-trending-down";
     else
@@ -140,7 +171,7 @@ export class UserPage {
       return "secondary";
     else if(this.positionShift < 0)
       return "danger";
-    else 
-      return "light"; 
+    else
+      return "light";
   }
 }

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="header">
+    <button ion-button menuToggle >
+      <ion-icon item-right name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Feedback
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- fit into one screen -->
+<ion-content>
+  <ion-grid class="grid-feedback">
+
+    <ion-row>
+			<ion-col text-center>
+				<h1>Your input is important to us!</h1>
+			</ion-col>
+		</ion-row>
+
+    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+      <ion-item class="item-feedback">
+        <ion-label stacked>Email</ion-label>
+        <ion-input type="text" formControlName="email" [(ngModel)]="loggedInEmail" [readonly]="loggedIn"></ion-input>
+      </ion-item>
+      <ion-item class="item-feedback">
+        <ion-label stacked>Enter Feedback Here</ion-label>
+        <ion-textarea rows="5" type="text" formControlName="feedbacktext"></ion-textarea>
+      </ion-item>
+      <button ion-button type="submit" color="secondary" class="button-feedback" [disabled]="feedbackForm.invalid" block>Submit</button>
+    </form>
+
+  </ion-grid>
+</ion-content>

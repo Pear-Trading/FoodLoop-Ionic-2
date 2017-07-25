@@ -15,6 +15,5 @@ npm install
 You will also want the following tools installed globally:
 
 ```
-npm install --global cordoba ionic
+npm install --global cordova ionic
 ```
-

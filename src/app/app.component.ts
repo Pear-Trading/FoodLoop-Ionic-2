@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FeedbackPage } from '../pages/feedback/feedback';
 import { LoginPage } from '../pages/login/login';
 import { AboutPage } from '../pages/about/about';
-import { IndexPage } from '../pages/index/index';
+import { UserPage} from '../pages/user/user';
 import { ReceiptPage } from '../pages/receipt/receipt';
 import { RankingPage } from '../pages/ranking/ranking';
 import { SettingPage} from '../pages/setting/setting';
-import { StatPage} from '../pages/stat/stat';
-import { AccountPage } from '../pages/account/account';
+// import { StatPage} from '../pages/stat/stat';
+// import { AccountPage } from '../pages/account/account';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 
 import { PeopleService } from '../providers/people-service';
@@ -34,30 +35,34 @@ export interface PageInterface {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // Defines differnet page when this application is first loaded 
+  // Defines differnet page when this application is first loaded
 
-  
-  // for logged in user 
-  loggedInPage: PageInterface[]= [
-    { title: 'Home', component: IndexPage, icon: 'home' },
-	{ title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
-    { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
-	{ title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
+
+  // for logged in user
+  loggedInPages: PageInterface[]= [
+  { title: 'Home', component: UserPage, icon: 'home' },
+  { title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
+  { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
+  // Commented out until it has data
+  // { title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
 	{ title: 'Account',component: SettingPage, index:9,icon: 'person'},
-	{ title: 'About',component: AboutPage, index:11,icon: 'globe'},
-    { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
+	// The about page is currently the Guide page, need a whole guide page and About be about the app
+	{ title: 'Guide',component: AboutPage, index:11,icon: 'globe'},
+  { title: 'Feedback', component: FeedbackPage, index:13,icon: 'mail' },
+  { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
   ];
 
   // for not login user
   loggedOutPages: PageInterface[] = [
     { title: 'Login', component: LoginPage, icon: 'person' },
-    { title: 'About', component: AboutPage, icon: 'person-add' }
+    { title: 'Guide', component: AboutPage, icon: 'globe' },
+    { title: 'Feedback', component: FeedbackPage, icon: 'mail' }
   ];
 
-  // specify which pages to display first  
+  // specify which pages to display first
   public rootPage : any;
 
-  
+
   constructor(
     public platform: Platform,
     public menu: MenuController,
@@ -65,18 +70,18 @@ export class MyApp {
     public userData: UserData,
     public splashScreen: SplashScreen,
     public peopleService: PeopleService,
- 
+
   ) {
 
   /* Check if localCache exsit, if yes, auto-login */
-  /* if not, redirect to the home page for login or sign up*/       
+  /* if not, redirect to the home page for login or sign up*/
 
 
     this.userData.hasLoggedIn().subscribe(
       result => {
         if (result) {
-          console.log('User is logged in, rendering Index');
-          this.renderIndexPage();
+          console.log('User is logged in, rendering User');
+          this.renderUserPage();
         } else {
           console.log('User is not logged in, rendering Login');
           this.renderLoginPage();
@@ -97,8 +102,8 @@ export class MyApp {
     this.platformReady();
   }
 
-  renderIndexPage() {
-    this.rootPage = IndexPage;
+  renderUserPage() {
+    this.rootPage = UserPage;
     this.enableMenu(true);
     this.platformReady();
   }
@@ -117,7 +122,7 @@ export class MyApp {
     });
   }
 
-  
+// if true shows logged in menu, if false shows logged out menu
   enableMenu(loggedIn: boolean) {
     this.menu.enable(loggedIn, 'loggedInMenu');
     this.menu.enable(!loggedIn, 'loggedOutMenu');
@@ -129,19 +134,12 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
-  
+
   openPage(page: PageInterface) {
     // the nav component was found using @ViewChild(Nav)
-    // reset the nav to remove previous pages and only have this page
-    // we wouldn't want the back button to show in this scenario
+    // reset the nav to remove previous pages and only have this pag
 
-    if (page.index) {
-      this.nav.setRoot(page.component, { tabIndex: page.index });
-    } else {
-      this.nav.setRoot(page.component).catch(() => {
-        console.log("Didn't set nav root");
-      });
-    }
+    this.nav.setRoot(page.component);
 
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
@@ -161,13 +159,13 @@ export class MyApp {
     // Tabs are a special case because they have their own navigation
     if (childNav) {
       if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
-        return 'primary';
+        return 'light-grey';
       }
       return;
     }
 
     if (this.nav.getActive() && this.nav.getActive().component === page.component) {
-      return 'primary';
+      return 'light-grey';
     }
     return;
 }

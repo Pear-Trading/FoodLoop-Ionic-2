@@ -9,324 +9,157 @@
 		</ion-toolbar>
 	</ion-header>
 
-	
 <ion-content>
-  
 
  <div class="userdashboard">
   <ion-grid>
-    <ion-row class="greeting">  
-		<ion-col> 
+    <ion-row class="greeting">
+		<ion-col>
 			<ion-item  no-lines>
 				<ion-avatar item-left><img src="assets/img/icon1.png"></ion-avatar>
-				<h1 class="username"> {{name}}</h1>
-				<h1 class="useremail"> {{email}}</h1>
+				<h1 class="username">Hello {{name}}</h1>
 			</ion-item>
 		</ion-col>
     </ion-row>
 
 
     <!-- shows pear points -->
-    <ion-row class="pearstatus">
-      <ion-col> 
+    <ion-row class="pearstatustop">
+      <ion-col>
         <div class="statusheader">My Points</div>
-        <div class="statuscontent"> 
-          {{myPearPoints}} 
+        <div class="statuscontent">
+          {{ basicStats.user_sum / 10 | number:'1.0-0' }}
         </div>
       </ion-col>
- 
-      <ion-col> 
+
+      <ion-col>
         <div class="statusheader">My Rank</div>
-        <div class="statuscontent"> 
-          {{myRank}}
+				<!-- Should use ngIfElse once ng-template can have CSS bound to it -->
+				<div *ngIf="basicStats.user_position == 0" class="statuscontent">
+          Unranked
+        </div>
+				<div *ngIf="basicStats.user_position != 0" class="statuscontent">
+					{{ basicStats.user_position }}
+				</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="pearstatusbottom">
+      <ion-col>
+        <div class="statusheader">My Total Spend</div>
+        <div class="statuscontent">
+          {{ basicStats.user_sum | currency:'GBP':true:'1.2-2' }}
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div class="statusheader">Value to Local Economy</div>
+        <div class="statuscontent">
+          {{ basicStats.user_sum * 2.3 | currency:'GBP':true:'1.2-2' }}
         </div>
       </ion-col>
     </ion-row>
 
-	  
-
-
-
-    <ion-row class="innerChart" >
-        <ion-slides (ionSlideDidChange)="slideChanged()"> 
+        <ion-slides (ionSlideDidChange)="slideChanged()">
           <ion-slide>
-  <div class="currentstats">  
+	<div class="currentstats">
 		<ion-row>
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Total</div>
-                <div class="statboxcontent"> £88.88 </div>
+              <div (click)="navCtrl.push(statPage)" class="statbox">
+                <div class="statboxheader">Total Today</div>
+                <div class="statboxcontent">{{ basicStats.today_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
   			</ion-col>
-			<ion-col width-10> 
+			<ion-col col-1>
 			</ion-col>
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Today</div>
-                <div class="statboxcontent"> £108.89 </div>
+              <div (click)="navCtrl.push(statPage)" class="statbox">
+                <div class="statboxheader">Avg. Spend Today</div>
+                <div class="statboxcontent">{{ basicStats.today_sum / (basicStats.today_count ? basicStats.today_count : 1) | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
         </ion-row>
-</div>
+	</div>
 
-  <div class="currentstats">  
+	<div class="currentstats">
 		<ion-row>
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Week</div>
-                <div class="statboxcontent"> £88.88 </div>
+              <div (click)="navCtrl.push(statPage)" class="statbox">
+                <div class="statboxheader">Last Week Total</div>
+                <div class="statboxcontent">{{ basicStats.week_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
-			</ion-col> 
-			<ion-col width-10> 
+			</ion-col>
+			<ion-col col-1>
 			</ion-col>
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Month</div>
-                <div class="statboxcontent"> £108.89 </div>
+              <div (click)="navCtrl.push(statPage)" class="statbox">
+                <div class="statboxheader">Last Week Avg. Spend</div>
+                <div class="statboxcontent">{{ basicStats.week_sum / (basicStats.week_count ? basicStats.week_count : 1) | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
         </ion-row>
-</div>
+	</div>
 
-  <div class="currentstats">  
+	<div class="currentstats">
 		<ion-row>
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Global</div>
-                <div class="statboxcontent"> £88.88 </div>
+              <div (click)="navCtrl.push(statPage)" class="statbox">
+                <div class="statboxheader">Last Month Total</div>
+                <div class="statboxcontent">{{ basicStats.month_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
-			</ion-col> 
-			<ion-col width-10> 
+			</ion-col>
+			<ion-col col-1>
 			</ion-col>
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Global Avg.</div>
-                <div class="statboxcontent"> £108.89 </div>
+              <div (click)="navCtrl.push(statPage)" class="statbox">
+                <div class="statboxheader">Last Month Avg. Spend</div>
+                <div class="statboxcontent">{{ basicStats.month_sum / (basicStats.month_count ? basicStats.month_count : 1) | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
         </ion-row>
-</div>
-          </ion-slide>
-          
-          <ion-slide>
-            <canvas #barCanvas></canvas> 
-          </ion-slide>
-          
-          <ion-slide>
-            <canvas #lineCanvas></canvas>
-          </ion-slide>
-          
-          <ion-slide>
-            <canvas #pieCanvas></canvas> 
-          </ion-slide>
+	</div>
 
-
-          <ion-slide>
-  <div class="currentstats">  
+	<div class="currentstats">
 		<ion-row>
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Local Week</div>
-                <div class="statboxcontent"> 3 </div>
-              </div>
-			</ion-col> 
-			<ion-col width-10> 
-			</ion-col>
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Global Week</div>
-                <div class="statboxcontent"> 130 </div>
+              <div (click)="navCtrl.push(statPage)" class="statbox">
+                <div class="statboxheader">User Total</div>
+                <div class="statboxcontent">{{ basicStats.user_sum | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
-        </ion-row>
-</div>
-
-  <div class="currentstats">  
-		<ion-row>
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Local Month</div>
-                <div class="statboxcontent"> 3 </div>
-              </div>
-			</ion-col> 
-			<ion-col width-10> 
+			<ion-col col-1>
 			</ion-col>
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Global Month</div>
-                <div class="statboxcontent"> 130 </div>
+              <div (click)="navCtrl.push(statPage)" class="statbox">
+                <div class="statboxheader">User Avg. Spend</div>
+                <div class="statboxcontent">{{ basicStats.user_sum / (basicStats.user_count ? basicStats.user_count : 1) | currency:'GBP':true:'1.2-2' }}</div>
               </div>
 			</ion-col>
         </ion-row>
-</div>
+	</div>
+     </ion-slide>
 
-  <div class="currentstats">  
-		<ion-row>
+	  </ion-slides>
+
+		<!-- Useless to have until multiple slides available -->
+		<!-- <ion-row class="stat_button">
 			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Local Year</div>
-                <div class="statboxcontent"> 3 </div>
-              </div>
-			</ion-col> 
-			<ion-col width-10> 
+				<ion-segment [(ngModel)]="status" mode="md" >
+					<ion-segment-button value="Spend"  (ionSelect)="goToSlide(0)">Spend</ion-segment-button>
+				</ion-segment>
 			</ion-col>
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Global Year</div>
-                <div class="statboxcontent"> 130 </div>
-              </div>
-			</ion-col>
-        </ion-row>
-</div>
-          </ion-slide>
-          
+		</ion-row> -->
 
-
-          <ion-slide>
-  <div class="currentstats">  
-		<ion-row>
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Days Logged</div>
-                <div class="statboxcontent"> 105 of 123 </div>
-              </div>
-			</ion-col> 
-			<ion-col width-10> 
-			</ion-col>
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Highest Spend</div>
-                <div class="statboxcontent"> £108.89 </div>
-              </div>
-			</ion-col>
-        </ion-row>
-</div>  
-
-<div class="currentstats">  
-		<ion-row>
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Best Week Points</div>
-                <div class="statboxcontent"> 97 </div>
-              </div>
-			</ion-col> 
-			<ion-col width-10> 
-			</ion-col>			
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Best Month Points</div>
-                <div class="statboxcontent"> 256 </div>
-              </div>
-			</ion-col>
-        </ion-row>
-</div>
-
-<div class="currentstats">  
-		<ion-row>
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Hero Total</div>
-                <div class="statboxcontent"> 18,987 </div>
-              </div>
-			</ion-col> 
-			<ion-col width-10> 
-			</ion-col>
-			<ion-col>
-              <div (click)="navCtrl.push(statPage)" class="statbox"> 
-                <div class="statboxheader">Hero Status</div>
-                <div class="statboxcontent"> Legendary </div>
-              </div>
-			</ion-col>
-        </ion-row>
-</div>
-          </ion-slide>
-
- 
-		  
-        </ion-slides>
-</ion-row>
-
-    <ion-row class="stat_button">
-      <ion-segment [(ngModel)]="status" mode="md" >
-        <ion-segment-button value="Spend"  (ionSelect)="goToSlide(0)">Spend</ion-segment-button>
-        <ion-segment-button value="Top5"  (ionSelect)="goToSlide(1)">Top 5</ion-segment-button>
-        <ion-segment-button value="Chart" (ionSelect)="goToSlide(2)">Chart</ion-segment-button>
-        <ion-segment-button value="Global"(ionSelect)="goToSlide(3)">Global</ion-segment-button>
-        <ion-segment-button value="Ranks" (ionSelect)="goToSlide(4)">Ranks</ion-segment-button>
-        <ion-segment-button value="Awards"(ionSelect)="goToSlide(5)">Awards</ion-segment-button>
-      </ion-segment>
-    </ion-row>
-
-	</ion-grid>
 
 <div  class="pearUpCtrl">
-	<ion-grid>
-		<ion-row> 
-			<button ion-button [navPush]="receiptPage"  large icon-right full > Add<br />Receipt
-			<!--  <ion-icon name="flame" md="md-flame" color="foodloop"> </ion-icon> -->
+		<ion-row>
+			<button ion-button [navPush]="receiptPage"> Add<br />Receipt
 			</button>
        </ion-row>
-	</ion-grid>
 </div>
 
-<!--
-	<ion-grid>
-    <ion-row class="innerTab">
-      <ion-segment [(ngModel)]="status" mode="md" >
-        <ion-segment-button value="Weekly"  (ionSelect)="goToSlide(0)">Top Players</ion-segment-button>
-        <ion-segment-button value="Daily" (ionSelect)="goToSlide(1)">My Stat </ion-segment-button>
-        <ion-segment-button value="Monthly"(ionSelect)="goToSlide(2)">Overall</ion-segment-button>
-      </ion-segment>
-    </ion-row>
-
-
-    <ion-row class="innerChart" >
-        <ion-slides pager (ionSlideDidChange)="slideChanged()"> 
-          <ion-slide>
-            <canvas #barCanvas></canvas> 
-          </ion-slide>
-          
-          <ion-slide>
-            <canvas #lineCanvas></canvas>
-          </ion-slide>
-          
-          <ion-slide>
-            <canvas #pieCanvas></canvas> 
-          </ion-slide>
-        </ion-slides>
-
-
-    </ion-row>
-</ion-grid>
--->
+	</ion-grid>
 
  </div>
 
-
-
-
-
-
 </ion-content>
-
-<!--
-  <ion-toolbar>
-  </ion-toolbar>
-  
-    <div class="cardContent"> 
-     <ion-grid>
-       <ion-row> 
-           <ion-col width-50> 
-              <button ion-button full large block outline [navPush]="gamePage">
-                  <ion-icon name="cube"></ion-icon>
-                     Game center </button>
-           </ion-col>
-            
-            <ion-col width-50> 
-              <button ion-button full large block outline [navPush]="shopPage">
-                  <ion-icon name="cube"></ion-icon>
-                     Shopping center </button>
-           </ion-col>
-        </ion-row>
-     </ion-grid>
-   </div> -->

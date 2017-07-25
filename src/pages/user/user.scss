@@ -1,7 +1,6 @@
 page-user{
-	scroll: on;
+	scroll: auto;
 
-	
 	.userdashboard{
 		margin: 0%;
 		border: 0px solid black;
@@ -9,7 +8,7 @@ page-user{
 		
 		.greeting{
 			padding-top: 0px;
-			height: 6.5em;
+			height: 5em;
 				.username{
 					font-size: 1.5em;
 					color: rgba(255, 255, 255, 1);	
@@ -32,10 +31,10 @@ page-user{
 			line-height: 1em;
 		}
 
-		.pearstatus{
+		.pearstatusbottom{
 			border-bottom: 3px solid rgba(255, 255, 255, .6);
-			margin: 0;
-			padding: 0em 0em 1.4em 0em;
+			margin: 0em 0em 1em 0em;
+			padding: 0em 0em .6em 0em;
 
 			
 			.statusheader{
@@ -46,46 +45,62 @@ page-user{
 
 			.statuscontent{
 				color: rgba(255, 255, 255, 1);
-				font-size: 1.3em;
+				font-size: 1.1em;
 				text-align: center;
 			}		
 		}
 
+		.pearstatustop{
+			margin: 0;
+			padding: 0em 0em 0em 0em;
+
+			
+			.statusheader{
+				color: rgba(220, 220, 220, 1);
+				font-size: 1em;
+				text-align: center;
+			}
+
+			.statuscontent{
+				color: rgba(255, 255, 255, 1);
+				font-size: 1.1em;
+				text-align: center;
+			}		
+		}
+		
 	}
 
 	.stat_button{
 		background: rgba(167, 136, 60, .2);
 		height: 3em;
-		margin: 10px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
 		}
 	
 
 	.currentstats{ 
-		padding: 10px 35px 0px 35px;
+		padding: 3px 15px 0px 15px;
 	}
   
 	.statbox{
-		margin: 0;
-		padding: 0px;
-		border: 1px solid rgba(255, 255, 255, .8);
+		border: 2px solid rgba(255, 255, 255, .8);
 		transition: 0.3s;
-		border-radius: 5px;
+		border-radius: 10px;
+		margin: 5px 0px 0px 0px;
 		background-color: rgba(255, 255, 255, 0);
 	  
 		.statboxheader{
-			background-color: rgba(255, 255, 255, .6);
-			border-radius: 3px 3px 0px 0px;
+			background-color: rgba(255, 255, 255, .4);
+			border-radius: 5px 5px 0px 0px;
 			color: rgba(50, 50, 50, 1); 
 			font-size: .8em;
-			padding: 1%;
 			text-align: center;
 		}
 
 		.statboxcontent{
 			color: rgba(255, 255, 255, 1);
-			font-size: 1em; 
-			padding: .2em;
-			text-align: center;  
+			font-size: .8em; 
+			text-align: center; 
+			padding: 3px;
 		}
 
      
@@ -93,11 +108,11 @@ page-user{
 
 	.pearUpCtrl{
 		position: fixed;
-		bottom: 3.5em; 
+		bottom: 3.3em; 
 		left: 0%;
 		right: 0%;
 		background-color: rgba(204, 204, 204, .0);
-		height: 10em;
+		height: 9.8em;
 		z-index: 99;
    
 		button{
