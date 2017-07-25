@@ -1,25 +1,35 @@
 
-.logo{
-    text-align: center;
-    font-size: 5.0em;
-    padding-top: 20%;
+h1 {
+	font-size: 3em;
+	color: rgba(255, 255, 255, .8);
+	margin: 0px 0px 20px 0px;
 }
 
-.loginRow{
-    padding-top:30%;
-    ion-item{
-        background: transparent;
-    }
-    //   background: url("../assets/img/home2.png") no-repeat center center fixed;
-  background-size: cover;
-
+.item-login {
+	font-size: 1.2em;
+	color: rgba(255, 255, 255, .8);
+	background: rgba(255, 255, 255, .5);
+	margin: 1px auto 20px;
+	width: 90%;
+	border: 3px solid rgba(255, 255, 255, .8);
+	border-radius: 10px;
 }
 
-.cok{
-    background: transparent;  
+.button-login {
+	font-size: 1.1em;
+	color: rgba(255, 255, 255, .8);
+	margin: 5px auto;
+	width: 90%;
+	border: 3px solid rgba(255, 255, 255, .8);
+	border-radius: 10px;
 }
-.home-background {
-  background: url("../assets/img/home2.png") no-repeat center center fixed;
-  background-size: cover;
 
+.grid-login {
+	margin-top: 20%;
+}
+
+.icon-login {
+	height: 25%;
+	margin: 30px auto;
+	display: block;
 }

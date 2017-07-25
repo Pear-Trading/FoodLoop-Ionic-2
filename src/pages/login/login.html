@@ -1,24 +1,39 @@
-<ion-content class="home-background">
- <!--Defines the actual content of this page -->
-<div class="logo">Foodloop</div>
-  <ion-list class="loginRow" >
-    <ion-item>
-      <ion-label stacked>Username/email</ion-label>
-      <ion-input class="cok" type="text" [(ngModel)]="username" ></ion-input>
-    </ion-item>
+<ion-header>
+	<ion-toolbar color="header">
+		<button ion-button menuToggle >
+			<ion-icon item-right name='menu'></ion-icon>
+		</button>
+		<ion-title>
+			Login
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
 
-    <ion-item>
-      <ion-label stacked>Password </ion-label>
-      <ion-input type="password" [(ngModel)]="password" ></ion-input>
-    </ion-item>
+<ion-content>
+	<ion-grid class="grid-login">
+		<ion-row>
+			<ion-col text-center>
+				<h1>LocalLoop</h1>
+			</ion-col>
+		</ion-row>
 
-  </ion-list>
+			<form [formGroup]="login" (ngSubmit)="onSubmit()">
+				<ion-item class="item-login">
+					<ion-label stacked>Email</ion-label>
+					<ion-input type="text" formControlName="email"></ion-input>
+				</ion-item>
+				<ion-item class="item-login">
+					<ion-label stacked>Password</ion-label>
+					<ion-input type="password" formControlName="password"></ion-input>
+				</ion-item>
+<!-- The CSS for the buttons needs fixing so color="secondary" is no longer required -->
+			<button ion-button type="submit" color="secondary" class="button-login" [disabled]="login.invalid" block>Sign In</button>
+				</form>
+			<button ion-button (click)="goToSignup()"  class="button-login" color="secondary" block>Create an account</button>
 
-  <div padding>
-    <button ion-button (click)="signin()" color="primary" block>Sign In</button>
-       <button ion-button [navPush]="tokenPage" color="secondary" block> Create an account </button>
-  </div>
+
+	</ion-grid>
+
+	<img class="icon-login" src="assets/img/icon1.png">
 
 </ion-content>
-
-

@@ -1,33 +1,47 @@
 page-ranking{
+
   // display top three players in red 
-  .topThree{
+
+	.topThree{
         p{
-          color:orangered; 
-          font-weight: bold;
+			color: rgba(255, 100, 100, 1); 
+			font-weight: 700;
         }
     }
+  
   // position list 
-  .listCtrl{
-    ion-list{
-      margin-top: 5px;
-      margin-left: -15px;
-    }
-  }
-  // position icon 
-  .pos{
-      margin-left:-30px;
+	.listCtrl{
+		ion-list{
+			margin: 0px;
+			background-color: rgba(255, 255, 255, .6);
+	}
   }
 
+  // position icon 
+	.pos{
+		margin-left:-30px;
+	}
+
   // dispaly user in black and highlighted
-  .user{
-    background-color:#eafafa;
-    p{
-      font-weight: bold;
-      color:black;    
-    }
-    font-weight: bold;
-    color:black;
-  }
+	.user{
+		background-color: red;
+		font-weight: bold;
+		color: green;
+
+		p{
+			font-weight: bold;
+			color:black;    
+		}
+    
+	}
+
+	.item-md {
+		background: none;
+	}
+	
+	.ranking-segment-button{
+		color: rgba(200, 200, 255, 1);
+	}
 }
 
 

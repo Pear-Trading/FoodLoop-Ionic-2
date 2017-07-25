@@ -1,118 +1,408 @@
 <!-- this page is a navgation page for all gamify elements -->
-<ion-header>
+	<ion-header>
+		<ion-toolbar color="header">
+			<button ion-button menuToggle >
+				<ion-icon item-right name='menu'></ion-icon>
+			</button>
+			<ion-title>
+				Personal Statistics
+			</ion-title>
+		</ion-toolbar>
+	</ion-header>
 
-  <ion-navbar>
-    <ion-title>My Personal overview</ion-title>
-  </ion-navbar>
-
-</ion-header>
 
 <ion-content>
 
-  <!-- display inter-tab for controlling chart display -->
-  <ion-row class="innerTab">
-    <ion-segment [(ngModel)]="innerTabCtrl" color="primary">
-      <ion-segment-button value="Chart"> Chart </ion-segment-button>
-      <ion-segment-button value="List" > List </ion-segment-button>
-    </ion-segment>
-  </ion-row>
+	<ion-row class="innerTab">
+		<ion-segment [(ngModel)]="innerTabCtrl" color="primary">
+			<ion-segment-button value="List" > List </ion-segment-button>
+			<ion-segment-button value="Chart"> Charts </ion-segment-button>
+		</ion-segment>
+	</ion-row>
 
-  <div [ngSwitch]="innerTabCtrl">
-
-    <!-- Graphic representation of the data-->
-    <div *ngSwitchCase="'Chart'" ng-init="initCharts()">
-      <ion-card>
-        <div class="cardHeader"> My rank </div>
-        <div class="cardContent"> 
-          <canvas #lineCanvas></canvas>
-        </div>
-      </ion-card>  
-    </div>
-  
-  <!-- Text representation of the data -->
-  <div *ngSwitchCase="'List'"> 
-
-    <!-- First section -->
-    <ion-card> 
-      <div class="cardHeader yellowCard"> My rank </div>
-      <div class="cardContent">
-        <div class="cardItem"> 
-            <div class="cardItemHeader"> My position in leader board 
-              <span class="cardItemHeaderRight"> 1 </span> </div>
-              <div class="cardItemContent"> 
-                  Your previous position in leader board is 3 
-              </div>
-        </div>
-      </div>
-    </ion-card><!-- First section end -->
+  <div [ngSwitch]="innerTabCtrl"> 
+	<div *ngSwitchCase="'List'"> 
+		<ion-card> 
+			<div class="cardHeader greenCard">
+				Current Rank
+			</div>
+			<div class="cardContent">
+				<div class="cardItem"> 
+					<div class="cardItemHeader">
+						My position in regional leaderboard 
+						<span class="cardItemHeaderRight"> 1 </span> 
+					</div>
+					<div class="cardItemContent"> 
+						Your previous position in leader board is: 3 
+					</div>
+					<div class="cardItemContent"> 
+						Your Hero Status is: Looking for a New Cape
+					</div>
+				</div>
+			</div>
+		</ion-card>
  
-  <!-- Second section -->
-  <ion-card>
-    <!-- Spent -->
-    <div class="cardHeader purpleCard"> My spent </div>
-    <div class="cardContent"> 
+		<ion-card>
+			<div class="cardHeader purpleCard">
+				My Spending
+			</div>
+			<div class="cardContent"> 
+				<div class="cardItem"> 
+					<div class="cardItemHeader">
+						Daily
+						<span class="cardItemHeaderRight"> £30 </span>
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      
       
-      <!-- item -->
-      <div class="cardItem"> 
-        <div class="cardItemHeader"> Daily
-          <span class="cardItemHeaderRight"> £30 </span> </div>
-        <div class="cardItemContent"> </div>
-      </div>      
-      
-      <!-- item -->
-      <div class="cardItem"> 
-        <div class="cardItemHeader"> Weekly
-          <span class="cardItemHeaderRight"> £60 </span> 
-        </div>
-        <div class="cardItemContent"> </div>
-      </div>
+				<div class="cardItem"> 
+					<div class="cardItemHeader">
+						Weekly
+						<span class="cardItemHeaderRight"> £60 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
 
-      <!-- item -->
-      <div class="cardItem"> 
-        <div class="cardItemHeader"> Monthly
-          <span class="cardItemHeaderRight"> £90 </span> 
-        </div>
-        <div class="cardItemContent"></div>
-      </div>
-    </div><!-- card-content-end-->
-  </ion-card><!-- Second section end -->
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Monthly
+						<span class="cardItemHeaderRight"> £90 </span> 
+					</div>
+					<div class="cardItemContent">
+					</div>
+				</div>
 
-  <!-- Third section -->
-  <ion-card>
-    <!-- respent -->
-    <div class="cardHeader blueCard"> My re-spent </div>
-    <div class="cardContent"> 
-      
-      <!-- item -->
-      <div class="cardItem"> 
-        <div class="cardItemHeader"> Daily re-spent
-          <span class="cardItemHeaderRight"> £10 </span> </div>
-        <div class="cardItemContent"> 
-    
-        </div>
-      </div>      
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Grand Total
+						<span class="cardItemHeaderRight"> £1,290 </span> 
+					</div>
+					<div class="cardItemContent">
+					</div>
+				</div>
 
-      <!-- item -->
-      <div class="cardItem"> 
-        <div class="cardItemHeader"> Weekly re-spent
-          <span class="cardItemHeaderRight"> £20 </span> </div>
-        <div class="cardItemContent"> 
-    
-        </div>
-      </div>
-      
-      <!-- item -->
-      <div class="cardItem"> 
-        <div class="cardItemHeader"> Monthly re-spent
-          <span class="cardItemHeaderRight"> £30 </span> </div>
-        <div class="cardItemContent"> 
-    
-        </div>
-      </div>
-    </div><!-- card content end -->
-  </ion-card><!-- Third section end -->
+			</div>
+		</ion-card>
+  
+		<ion-card>
+			<div class="cardHeader blueCard"> 
+				Regional Average Spending
+			</div>
+			<div class="cardContent"> 
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Weekly
+						<span class="cardItemHeaderRight"> £10 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      
 
-  </div><!-- Graphic representation end -->
-</div><!-- ngSwitch end-->
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Monthly
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Yearly
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Grand Total
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+			</div>
+		</ion-card>
+		
+		<ion-card>
+			<div class="cardHeader orangeCard"> 
+				Global Average Spending
+			</div>
+			<div class="cardContent"> 
+   				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Monthly
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Yearly
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Grand Total
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+			</div>
+		</ion-card>		
+
+		<ion-card>
+			<div class="cardHeader tanCard"> 
+				Regional Ranking
+			</div>
+			<div class="cardContent"> 
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Regional Weekly Rank
+						<span class="cardItemHeaderRight"> £10 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Regional Monthly Rank
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Regional Yearly Rank
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+			</div>
+		</ion-card>
+
+		<ion-card>
+			<div class="cardHeader tealCard"> 
+				Global Ranking
+			</div>
+			<div class="cardContent"> 
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Global Weekly Rank
+						<span class="cardItemHeaderRight"> £10 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Global Monthly Rank
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Global Yearly Rank
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+			</div>
+		</ion-card>		
+
+		<ion-card>
+			<div class="cardHeader tealCard"> 
+				Awards and Achievements
+			</div>
+			<div class="cardContent"> 
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Days Logged Spend (Total)
+						<span class="cardItemHeaderRight"> £10 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Days Logged In (Sequence)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Highest Spend (cash)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Favourite Supplier (Spend)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Best Day (Points)
+						<span class="cardItemHeaderRight"> £10 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Best Week (Points)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Best Month (Points)
+						<span class="cardItemHeaderRight"> £10 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      				
+				
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Favourtie Supplier (Points)
+						<span class="cardItemHeaderRight"> £10 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Highest Rank (Regional, Monthly)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Highest Rank (Global, Monthly)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Regional Average Points (Monthly)
+						<span class="cardItemHeaderRight"> £10 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>      
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Global Average Points (Monthly)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Hero Points
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Hero Level
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Regional Hero Points (Average)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+				<div class="cardItem"> 
+					<div class="cardItemHeader"> 
+						Global Hero Points (Average)
+						<span class="cardItemHeaderRight"> £20 </span> 
+					</div>
+					<div class="cardItemContent"> 
+					</div>
+				</div>
+				
+			</div>
+		</ion-card>	
+		
+	</div>
+
+    <div *ngSwitchCase="'Chart'" ng-init="initCharts()">
+		<ion-card>
+			<div class="cardHeader"> 
+				My rank
+			</div>
+			<div class="cardContent"> 
+				<canvas #lineCanvas></canvas>
+			</div>
+		</ion-card>  
+    </div>
+  </div>
+	
+  
+
+  
  
 </ion-content>

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { PeopleService } from '../../providers/people-service';
+import { UserData } from '../../providers/user-data';
+import 'rxjs/add/operator/timeout';
 
 /*
   About page
@@ -9,8 +12,30 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'about.html'
 })
 export class AboutPage {
+  loggedIn: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private peopleService: PeopleService,
+    private userData: UserData,
+  ) {
+    this.userData.hasLoggedIn().subscribe(
+      result => {
+        if (result) {
+          console.log('User is logged in');
+          this.loggedIn = true;
+        } else {
+          console.log('User is not logged in');
+          this.loggedIn = false;
+        }
+      },
+      err => {
+        console.log('Error checking if logged in, assuming not');
+        this.loggedIn = false;
+      }
+    );
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutPage');

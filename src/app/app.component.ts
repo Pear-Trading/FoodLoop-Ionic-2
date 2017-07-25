@@ -1,16 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { FeedbackPage } from '../pages/feedback/feedback';
 import { LoginPage } from '../pages/login/login';
-import { TokenPage } from '../pages/token/token';
-import { SignupPage } from '../pages/signup/signup';
 import { AboutPage } from '../pages/about/about';
-import { IndexPage } from '../pages/index/index';
+import { UserPage} from '../pages/user/user';
 import { ReceiptPage } from '../pages/receipt/receipt';
 import { RankingPage } from '../pages/ranking/ranking';
-import { AccountPage } from '../pages/account/account';
+import { SettingPage} from '../pages/setting/setting';
+// import { StatPage} from '../pages/stat/stat';
+// import { AccountPage } from '../pages/account/account';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
+import { PeopleService } from '../providers/people-service';
 import { UserData } from '../providers/user-data';
 
 export interface PageInterface {
@@ -27,63 +28,85 @@ export interface PageInterface {
 /* This file is usually used as shell to load other Components*/
 @Component({
   templateUrl: 'app.html',
-  providers: [UserData,Storage]  
+  providers: [UserData, PeopleService]
 })
 
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // Defines differnet page when this application is first loaded 
+  // Defines differnet page when this application is first loaded
 
-  
-  // for logged in user 
-  loggedInPage: PageInterface[]= [
-    { title: 'Home', component: IndexPage, icon: 'person' },
-    { title: 'Leaderboard',component: IndexPage, index:1,icon: 'stats'},
-    { title: 'Logout', component: LoginPage, icon: 'log-out',index:3, logsOut: true }
+
+  // for logged in user
+  loggedInPages: PageInterface[]= [
+  { title: 'Home', component: UserPage, icon: 'home' },
+  { title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
+  { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
+  // Commented out until it has data
+  // { title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
+	{ title: 'Account',component: SettingPage, index:9,icon: 'person'},
+	// The about page is currently the Guide page, need a whole guide page and About be about the app
+	{ title: 'Guide',component: AboutPage, index:11,icon: 'globe'},
+  { title: 'Feedback', component: FeedbackPage, index:13,icon: 'mail' },
+  { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
   ];
 
   // for not login user
   loggedOutPages: PageInterface[] = [
     { title: 'Login', component: LoginPage, icon: 'person' },
-    { title: 'About', component: AboutPage, icon: 'person-add' }
+    { title: 'Guide', component: AboutPage, icon: 'globe' },
+    { title: 'Feedback', component: FeedbackPage, icon: 'mail' }
   ];
 
-  // specify which pages to display first  
+  // specify which pages to display first
   public rootPage : any;
 
-  
+
   constructor(
     public platform: Platform,
     public menu: MenuController,
     public events: Events,
     public userData: UserData,
-    public storage: Storage
- 
+    public splashScreen: SplashScreen,
+    public peopleService: PeopleService,
+
   ) {
 
   /* Check if localCache exsit, if yes, auto-login */
-  /* if not, redirect to the home page for login or sign up*/       
+  /* if not, redirect to the home page for login or sign up*/
 
-  
-    this.userData.hasLoggedIn()
-      .then((hasLoggedIn) => {
-        if (hasLoggedIn) {
-          this.rootPage = IndexPage;
-          this.enableMenu(true);
+
+    this.userData.hasLoggedIn().subscribe(
+      result => {
+        if (result) {
+          console.log('User is logged in, rendering User');
+          this.renderUserPage();
         } else {
-          this.rootPage = LoginPage;
-
+          console.log('User is not logged in, rendering Login');
+          this.renderLoginPage();
         }
-        this.platformReady()
-      })
+      },
+      err => {
+        console.log('Error checking if logged in, assuming not');
+        this.renderLoginPage();
+      }
+    );
 
-    
     this.listenToLoginEvents();
+  }
 
-    
-   }
+  renderLoginPage() {
+    this.rootPage = LoginPage;
+    this.enableMenu(false);
+    this.platformReady();
+  }
+
+  renderUserPage() {
+    this.rootPage = UserPage;
+    this.enableMenu(true);
+    this.platformReady();
+  }
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
@@ -99,7 +122,7 @@ export class MyApp {
     });
   }
 
-  
+// if true shows logged in menu, if false shows logged out menu
   enableMenu(loggedIn: boolean) {
     this.menu.enable(loggedIn, 'loggedInMenu');
     this.menu.enable(!loggedIn, 'loggedOutMenu');
@@ -108,27 +131,24 @@ export class MyApp {
   platformReady() {
     // Call any initial plugins when ready
     this.platform.ready().then(() => {
-      Splashscreen.hide();
+      this.splashScreen.hide();
     });
   }
-  
+
   openPage(page: PageInterface) {
     // the nav component was found using @ViewChild(Nav)
-    // reset the nav to remove previous pages and only have this page
-    // we wouldn't want the back button to show in this scenario
+    // reset the nav to remove previous pages and only have this pag
 
-    if (page.index) {
-      this.nav.setRoot(page.component, { tabIndex: page.index });
-    } else {
-      this.nav.setRoot(page.component).catch(() => {
-        console.log("Didn't set nav root");
-      });
-    }
+    this.nav.setRoot(page.component);
 
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
       setTimeout(() => {
-        this.userData.logout();
+        this.events.publish('user:logout');
+        this.peopleService.logout().subscribe(
+          result => console.log('successfully logged out'),
+          err => console.log('something went wrong when logging out'),
+        );
       }, 1000);
     }
   }
@@ -139,13 +159,13 @@ export class MyApp {
     // Tabs are a special case because they have their own navigation
     if (childNav) {
       if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
-        return 'primary';
+        return 'light-grey';
       }
       return;
     }
 
     if (this.nav.getActive() && this.nav.getActive().component === page.component) {
-      return 'primary';
+      return 'light-grey';
     }
     return;
 }

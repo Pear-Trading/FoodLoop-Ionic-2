@@ -1,27 +1,298 @@
 <!-- About page -->
-<ion-header>
+	<ion-header>
+		<ion-toolbar color="header">
+			<button ion-button menuToggle >
+				<ion-icon item-right name='menu'></ion-icon>
+			</button>
+			<ion-title>
+				About
+			</ion-title>
+		</ion-toolbar>
+	</ion-header>
 
-  <ion-navbar>
-    <ion-title>About</ion-title>
-  </ion-navbar>
-
-</ion-header>
 
 
-<ion-content padding>
+
+
+<ion-content>
+
+<ion-slides pager class="about-cards">
+	<ion-slide *ngIf="!loggedIn" class="whitecard">
+    <h2>Login</h2>
+	<p>Here is your login page. Simply enter your email you used for login with the password. Once the details are filled you can click the 'Sign In' button. If you do not have an account press 'Create Account', then follow the instructions given if you swipe right here.</p>
+	<img class="img-200" src="assets/img/login.png" />
+	<p class="right">swipe >> Register</p>
+	</ion-slide>
+
+	<ion-slide *ngIf="!loggedIn" class="whitecard">
+    <h2>Register</h2>
+	<p>Here you register your account using the token provided to you. Fill in all the details as given, then click the 'Sign Up' button to proceed.</p>
+	<img class="img-200" src="assets/img/register.png" />
+	<p class="right">swipe >> How to use this App</p>
+	<p class="right">swipe << Login</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>How to use this Application</h2>
+	<p>This is your home screen. Let's examine the features.</p>
+	<img class="img-200" src="assets/img/home_screen.png" />
+	<p class="right">swipe >> My Points</p>
+	<p *ngIf="!loggedIn" class="right">swipe << Register</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>My Points</h2>
+	<p>This is your Local Loop points that will change dependent on how you shop locally and how your suppliers shop.</p>
+	<img src="assets/img/points.png" />
+	<p class="right">swipe >> My Rank</p>
+	<p class="right">swipe << How to use this Application</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>My Rank</h2>
+	<p>Your rank is your position to your 'local' group only.</p>
+	<img src="assets/img/rank.png" />
+	<p class="right">swipe >> My Spend</p>
+	<p class="right">swipe << My Points</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>My Spend</h2>
+	<p>This is the all time tally of how much you have spent.</p>
+	<img src="assets/img/spend.png" />
+	<p class="right">swipe >> Value to the Local Economy</p>
+	<p class="right">swipe << My Rank</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Value to the Local Economy</h2>
+	<p>The value to your local economy is a complex calculation of how your money has been spent and re-spent locally in the chain of where you buy from and who they buy from.</p>
+	<img src="assets/img/value.png" />
+	<p class="right">swipe >> Averages</p>
+	<p class="right">swipe << My Spend</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Averages</h2>
+	<p>This shows you your total and average spend within various time frames. See how well you compare.</p>
+	<img src="assets/img/stats.png" />
+	<p class="right">swipe >> Add a Receipt</p>
+	<p class="right">swipe << Value to the Local Economy</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Add a Receipt</h2>
+	<p>When you press this button you will be taken to the Add a Receipt page, pressing 'Add Receipt' in the menu does the same thing.</p>
+	<img class="img-100" src="assets/img/receipt.png" />
+	<p class="right">swipe >> Enter a Shop Name</p>
+	<p class="right">swipe << Averages</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Enter a Shop Name</h2>
+	<p>Here you search for the business you shopped at. Simply search the name, then click the found establishment. If this does not work, swipe right here for more instruction.</p>
+	<img class="img-200" src="assets/img/searchstore1.png" />
+	<p class="right">swipe >> Add a Receipt</p>
+	<p class="right">swipe << Enter a New Shop</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Enter a New Shop</h2>
+	<p><b>Ignore if you found a store in the previous step and simply click 'Next'.</b>If the business could not be found, here you can enter its details by filling all the form fiels. Once all have been filled, you can proceed with 'Next'.</p>
+	<img class="img-200" src="assets/img/searchstore2.png" />
+	<p class="right">swipe >> Enter Amount Spent</p>
+	<p class="right">swipe << Enter a Shop Name</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Enter Amount Spent</h2>
+	<p>Enter the amount of money spent in pounds (and pence) in the field. Once filled, you can proceed with 'Next'.</p>
+	<img src="assets/img/enteramount.png" />
+	<p class="right">swipe >> Take Photo and Submit</p>
+	<p class="right">swipe << Enter a New Shop</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Take Photo and Submit</h2>
+	<p>Here you take a photo of a receipt, or upload an image previously taken, so that the transaction can be verified. Once this has been done you can retake the photo if unsatisfactory. If satisfied, click the now enabled 'Submit' button to submit the receipt.</p>
+	<img class="img-200" src="assets/img/takephoto.png" />
+	<p class="right">swipe >> Leaderboards</p>
+	<p class="right">swipe << Enter Amount Spent</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Leaderboards</h2>
+	<p>On the Leaderboard page you can select a leaderboard by clicking the region showing as 'Last Week Total' on this image. It displays your position in the leaderboards with the relevant comparative statistic, along with the trend of if you have been going up or down the ranks.</p>
+	<img class="img-200" src="assets/img/leaderboard.png" />
+	<p class="right">swipe >> Giving Feedback</p>
+	<p class="right">swipe << Take Photo and Submit</p>
+	</ion-slide>
+
+	<ion-slide class="whitecard">
+    <h2>Giving Feedback</h2>
+	<p>We value your feedback, especially while this app is in development! To provide us with feedback on how we can improve your experience, simply go to the Feedback page and enter the information as requested. If you are logged in, it will use the email of your current login.</p>
+	<img class="img-200" src="assets/img/feedback.png" />
+	<p class="right">swipe << Leaderboards</p>
+	</ion-slide>
+
+</ion-slides>
+
+<ion-slides pager class="about-cards">
+	<ion-slide class="redcard">
+    <h2>What is the Local Loop Application?</h2>
+	<p>The Local Loop System is a fun way to reflect your spending, more specifically your local spernding. At the same time it will help us all to understand better how money circulates around the local economy. To do this we need to collect some information about you and your spending.</p>
+	<p class="right">swipe >> for what information do you need?</p>
+	</ion-slide>
+
+
+	<ion-slide class="redcard">
+    <h2>What Information Do You Need?</h2>
+	<p>In order to understand the money being sepnt and where we need to have certain pieces of information. We have to know where you live (a postcode) and where you shop (the spend). We use this information to calculate if you spent locally and if the people you spend with also spend locally etc. This way we track the money. If the money returns to you by some means that is a 'perfect loop'.</p>
+	<p class="right">swipe >> for what about my personal data?</p>
+	<p class="right">swipe << What is the Local Loop Application</p>
+	</ion-slide>
+
+
+	<ion-slide class="redcard">
+    <h2>What About my Personal Data?</h2>
+	<p>We care very deeply about your data and about your privacy. We ask your name/email for login/help and to log your spend/points. Your age band helps us to understand how spending changes between generations. We need to know where you live to understand what is local. We ask you to put in your income and if you are employed locally to understand how local spend affects you and to make loops. We don't collect gender or other personal details and we will never share your details except with you.</p>
+	<p class="right">swipe >> for What Data is Shared?</p>
+	<p class="right">swipe << What Information Do You Need?</p>
+	</ion-slide>
+
+
+	<ion-slide class="redcard">
+    <h2>What Data is Shared?</h2>
+	<p>We believe that the data on local spending (how it makes better local economies) will help organisations, individulas, government and industry invest and plan for the local communities. We therefore wish to share this data with them freely. We will anonymise the data (remove the personal details) as they will never need to be shared. So we will share the loops and how the money is spent and re-spent in a local area and statistical analysis based upon this record.</p>
+	<p class="right">swipe >> Can I see my Data?</p>
+	<p class="right">swipe << What About My Personal Data</p>
+	</ion-slide>
+
+
+	<ion-slide class="redcard">
+    <h2>Can I see my data?</h2>
+	<p>yes. You can see your data but no one else can. The only data other people see is a leaderboard ranking which does not include your personal details. We use nicknames/avatars to further distance data collection and display from real names. Your data is important but not as much as your privacy.</p>
+	<p class="right">swipe >> for What are all the Tables?</p>
+	<p class="right">swipe << What Data is Shared</p>
+	</ion-slide>
+
+
+	<ion-slide class="redcard">
+    <h2>What are all the Tables</h2>
+	<p>Ẁe want you to have fun in collecting the information and so we have created several ways in which to show the data to you. One of the most important is a leaderboard of the localregion and global regions so you can see your ranking and position change on a daily, weekly and yearly basis. You will also see your region in comparisson to others.</p>
+	<p class="right">swipe << Can I See My Data</p>
+	</ion-slide>
+
+</ion-slides>
+
+
+<ion-slides pager class="about-cards">
+
+  <ion-slide class="greencard">
+    <h2>What is the Local Loop Game?</h2>
+	<p> How much does your money actually make and why is it important are questions that are increasingly relevant to many people. We have decided to collect the data and examine how the money circulates around our local economy. We have also added some fun by awarding you points when you make a local spend, or a company you spend with uses local suppliers and contributes to the local economy. </p>
+	<p class="right">swipe >> for how are points calculated?</p>
+	</ion-slide>
+
+  <ion-slide class="greencard">
+    <h2>How are Points Calculated?</h2>
+	<p>Points are calculated on the value of your spend and the subsequent re-spend. When the receipt you submit is “local” (defined by distance to your postcode), you are awarded points. More points are awarded when the money you have spent is re-spent by the business you spent with. So local shopping for you and the companies you spend with are always rewarded.</p>
+	<p class="right">swipe >> for what is local?</p>
+	<p class="right">swipe << What is the Local Loop Game</p>
+	</ion-slide>
+
+  <ion-slide class="greencard">
+    <h2>What is Local?</h2>
+	<p>Local is variable distance with some mathematics and common sense applied. For some goods and services, food, for instance, local might be a 20-30 mile distance from your home address. However for a digital technology company, local might be the town where you live. The key thing we measure is how things are local relative to you. And what we are looking for is for spending that stays in the local area and which, ultimately, in the case of your own spending, enhances the local economy and therefore gives return to you.</p>
+	<p class="right">swipe >> for the value of local</p>
+	<p class="right">swipe << How are Points Calculated</p>
+	</ion-slide>
+
+	<ion-slide class="greencard">
+    <h2>What is the Value of Local?</h2>
+	<p>People say shopping local is best, but what is the proof? We can claim that a pound spent with a local shop that is re-spent with a local supplier who employs local staff is enhancing the local economy, but can we prove that? By collecting this data and seeing where the money goes we can look at how your spending affects local businesses, how you make a direct difference and how that is returned to you. </p>
+	<p class="right">swipe >> for hero level</p>
+	<p class="right">swipe << What is Local</p>
+	</ion-slide>
+
+  <ion-slide class="greencard">
+    <h2>What is the Hero Level?</h2>
+	<p>The people who track their spending and help us to better understand our economy and how it affects and enriches our lives are Heroes. The Hero Level is calculated from your current points with the number of days you log and one or two other special bonuses. Hero levels always increase so it is good to see you develop over time.</p>
+	<p class="right">swipe >> for </p>
+	<p class="right">swipe << What is the Hero Level</p>
+	</ion-slide>
+
+</ion-slides>
+
+
+<ion-slides pager class="about-cards">
+
+  <ion-slide class="bluecard">
+    <h2>What Are Local Loops?</h2>
+	<p>A local loop is money that travels around the local economy. You spend with local shops, who buys from local suppliers, who employs local people. The money doesn't leave the system it loops around it.</p>
+	<img src="assets/img/looppizza.png" />
+	<p class="right">swipe >> for local multiplier</p>
+  </ion-slide>
+
+  <ion-slide class="bluecard">
+    <h2>The Local Multiplier</h2>
+	<p>The New Economics Foundation defined a Local Loop Multiplier which inspired the creation of the Local Loop system. This system is intended to further quantify local spending. It intends to go further than the Leaky Bucket Metaphor which is used by NEF to signify data that can no longer be tracked or has left the local economy.</p>
+	<p class="right">swipe >> for quadruple bottom line</p>
+	<p class="right">swipe << What Are Local Loops</p>
+	</ion-slide>
+
+  <ion-slide class="bluecard">
+    <h2>the Quadruple Bottom Line</h2>
+	<p>The application is intended to operate by the principles of the Quadruple Bottom Line as defined by the Small Green Consultancy and used by the Ethical Small Traders Association. These are: enhancing economic well-being; environmental care, cultivating social well-being; ongoing personal development.</p>
+	<p class="right">swipe >> for enhancing economic well-being</p>
+	<p class="right">swipe << The Local Multiplier</p>
+</ion-slide>
+
+  <ion-slide class="bluecard">
+    <h2>Enhancing Economic Well-Being</h2>
+	<p>Creating local wealth through intelligent collaboration and cooperation. Using innovation to create and develop local and global markets based on fair an mutually agreed business practices.</p>
+	<p class="right">swipe >> for environmental care</p>
+	<p class="right">swipe << The Quadruple Bottom Line</p>
+</ion-slide>
+
+
+  <ion-slide class="bluecard">
+    <h2>Environmental Care</h2>
+	<p>Looking at the whole life-cycle of products. Shrinking our carbon and resource ‘footprint’. Enhancing, rather than impoverishing and destabilising our local natural environment.</p>
+	<p class="right">swipe >> for cultivating social well-being</p>
+	<p class="right">swipe << Enhancing Economic Well-Being</p>
+</ion-slide>
+
+  <ion-slide class="bluecard">
+    <h2>Cultivating Social Well-being</h2>
+	<p>Respecting the welfare and dignity of partners, staff, contractors and volunteers. Being open and honest with customers and suppliers. Providing high quality service and support and providing wider community benefit through our business activities.</p>
+	<p class="right">swipe >> for ongoing personal development</p>
+	<p class="right">swipe << Environmental Care</p>
+</ion-slide>
+
+
+  <ion-slide class="bluecard">
+    <h2>Ongoing Personal Development</h2>
+	<p>Supporting the inner-growth and development of all those we work with and trade with, including ourselves. Helping each other reach our full potential.</p>
+	<p class="right">swipe >> for who are the developers?</p>
+	<p class="right">swipe << Cultivating Social Well-being</p>
+	</ion-slide>
+
+  <ion-slide class="bluecard">
+    <h2>Who are the Developers?</h2>
+	<p>The application is under continuous development by a number of different parties. The origination is with the Small Green Consultancy. Technical work and project management is supplied by Shadowcat Systems Limited. The applicaton is developed under the Pear Trading brand and has been enhanced by association with the Ethical Small Traders Association.</p>
+	<p class="right">swipe >> for </p>
+	<p class="right">swipe << Ongoing Personal Development</p>
+</ion-slide>
+
+</ion-slides>
+
   <div style='-webkit-user-drag: none; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;'>
-    <p>
-      This app is designed to highlight and make visible local spending and to keep track of it as it moves around the local economy. It is inspired by the Local Multiplier work done my done by the New Economics Foundation and operates according to the principles of the Quadruple Bottom Line, as designed by The Small Green Consultancy. This app is the work of Shadowcat Systems Ltd and The Small Green Consultancy Ltd.
-    </p>
-    
-    <p>
-      Points are generated on the value of your spend and re-spend. If the receipt you submit is designated “local” defined by postcode to postcode, then you are awarded one point per £10 spent, or fraction thereof. Further points are awarded when the money you have spent is re-spent by the business you spent with. The number of points awarded halves with each successive re-spend. ie. 1, 0,5, 0,25 etc.
-    </p>
-   
-    <p> 
-      What we consider local is variable. For some goods and services, food, for instance, local might be a 20 or 30 like radius whereas, for other things like digital technology companies, local might be the town you live in. The key thing we measure is how things are local relative to you. And what we are looking for is for spending that stays in the local area and which, ultimately, in the case of your own spending, returns to you.
-    </p>
-  
+
+
+
+
+
   </div><!-- Style end -->
 
 </ion-content>
