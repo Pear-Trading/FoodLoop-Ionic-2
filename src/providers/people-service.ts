@@ -13,7 +13,8 @@ import { ConfigurationService } from './configuration.service';
 
 @Injectable()
 export class PeopleService {
-  private apiUrl = ConfigurationService.apiUrl;
+  // private apiUrl = ConfigurationService.apiUrl;
+  private apiUrl = 'http://localhost:3000/api';
 
   constructor(
     private http: Http,
