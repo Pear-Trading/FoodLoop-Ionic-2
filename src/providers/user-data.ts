@@ -56,28 +56,12 @@ export class UserData {
     this.storage.set('displayname',display_name);
   }
 
-  // Get all account details to view on Account Edit
-
-  public setAccountEditInfo(
-    email: string,
-    full_name: string,
-    display_name: string,
-    postcode: string) {
-    console.log("set AccountEditInfo");
-    this.storage.set('email',email);
-    this.storage.set('displayname',display_name);
-    this.storage.set('fullname',full_name);
-    this.storage.set('postcode',postcode);
-  }
-
   // Deletes account details on logout
 
   public removeUserInfo() {
     console.log("remove UserInfo");
     this.storage.remove('email');
     this.storage.remove('displayname');
-    this.storage.remove('full_name');
-    this.storage.remove('postcode');
   }
 
   public getFullName() {

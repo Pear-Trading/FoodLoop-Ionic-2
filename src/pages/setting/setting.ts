@@ -34,11 +34,37 @@ export class SettingPage {
         display_name  : ['', [Validators.required]],
         email         : ['', [Validators.required]],
         postcode      : ['', [Validators.required]],
-        password      : [''],
+        password      : ['', [Validators.required]],
+        new_password   : [''],
       });
 
 
-    }
+  }
+
+  /* When the page is fully loaded */
+  public ionViewWillEnter() {
+    this.peopleService.accountFullLoad().subscribe(
+      result => {
+        this.setting.setValue({
+          full_name: result.full_name,
+          display_name: result.display_name,
+          email: result.email,
+          postcode: result.postcode,
+          password: '',
+          new_password: '',
+        });
+        this.userData.setUserInfo( result.email, result.display_name );
+      },
+      err => {
+        let toast = this.toastCtrl.create({
+          message: 'Unable to retrieve account - are you connected to a network?',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }
+    );
+  }
 
   goToAccountPage(){
     this.navCtrl.push(AccountPage);
@@ -53,12 +79,12 @@ export class SettingPage {
     loading.present();
 
     this.peopleService
-      .register(this.setting.value)
+      .accountEditUpdate(this.setting.value)
       .subscribe(
         result => {
           loading.dismiss();
           let toast = this.toastCtrl.create({
-            message: 'Registered Successfully',
+            message: 'Edited Account Successfully',
             duration: 3000,
             position: 'top'
           });
@@ -76,22 +102,6 @@ export class SettingPage {
           toast.present();
         }
       );
-  }
-
-  getUserInformation() {
-    this.userData.getDisplayName().subscribe(
-      result => {
-        if (result) {
-          console.log('Display Name has been received');
-          // this.setting.display_name = result;
-        } else {
-          console.log('Display Name is not available');
-        }
-      },
-      err => {
-        console.log('Display Name could not be received');
-      }
-    );
   }
 
   signout(){

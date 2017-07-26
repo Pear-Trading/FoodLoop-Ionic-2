@@ -115,6 +115,8 @@ export class PeopleService {
       ).map( response => response.json() );
   }
 
+  // Used for frontpage stats
+
   public basicStats() {
     return this.userData.getSessionKey()
       .flatMap(
@@ -125,6 +127,27 @@ export class PeopleService {
           );
         },
       ).map( response => response.json() );
+  }
+
+  // Used for account edit page
+
+  public accountFullLoad() {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          return this.http.post(
+            this.apiUrl + '/user/account',
+            { session_key : key },
+          );
+        },
+      ).map( response => response.json() );
+  }
+
+  public accountEditUpdate(data) {
+    return this.http.post(
+      this.apiUrl + '/user/account/update',
+      data
+    ).map( response => response.json() );
   }
 
   public leaderboard(lb_type) {
