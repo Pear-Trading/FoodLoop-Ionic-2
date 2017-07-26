@@ -56,9 +56,7 @@ export class LoginPage {
           // this.userData.setEmail( this.login.value.email );
           this.userData.setUserInfo(
             this.login.value.email,
-            result.full_name,
             result.display_name,
-            result.postcode
             );
           this.events.publish('user:login')
           loading.dismiss();
