@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, Events, ToastController, LoadingController } from 'ionic-angular';
 import { AccountPage } from '../account/account';
-import { LoginPage } from '../login/login';
 import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
 
@@ -66,10 +65,6 @@ export class SettingPage {
     );
   }
 
-  goToAccountPage(){
-    this.navCtrl.push(AccountPage);
-  }
-
   onSubmit() {
     console.log(this.setting.value, this.setting.valid);
 
@@ -102,17 +97,5 @@ export class SettingPage {
           toast.present();
         }
       );
-  }
-
-  signout(){
-    // Give the menu time to close before changing to logged out
-    setTimeout(() => {
-      this.events.publish('user:logout');
-      this.peopleService.logout().subscribe(
-        result => console.log('successfully logged out'),
-        err => console.log('something went wrong when logging out'),
-      );
-    }, 1000);
-    this.navCtrl.setRoot(LoginPage);
   }
 }

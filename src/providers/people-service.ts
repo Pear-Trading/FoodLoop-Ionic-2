@@ -136,7 +136,7 @@ export class PeopleService {
       .flatMap(
         key => {
           return this.http.post(
-            this.apiUrl + '/user/account',
+            this.apiUrl + '/user',
             { session_key : key },
           );
         },
@@ -145,7 +145,7 @@ export class PeopleService {
 
   public accountEditUpdate(data) {
     return this.http.post(
-      this.apiUrl + '/user/account/update',
+      this.apiUrl + '/user/account',
       data
     ).map( response => response.json() );
   }
