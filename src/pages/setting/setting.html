@@ -15,14 +15,38 @@
 		</ion-toolbar>
 	</ion-header>
 
-
+	<ion-content padding>
+	  <form [formGroup]="setting" (ngSubmit)="onSubmit()">
+	    <ion-item class="item-signup">
+	      <ion-label stacked>Full Name</ion-label>
+	      <ion-input type="text" formControlName="full_name"></ion-input>
+	    </ion-item>
+	    <ion-item class="item-signup">
+	      <ion-label stacked>Display Name</ion-label>
+	      <ion-input type="text" formControlName="display_name"></ion-input>
+	    </ion-item>
+	    <ion-item class="item-signup">
+	      <ion-label stacked>Email</ion-label>
+	      <ion-input type="text" formControlName="email"></ion-input>
+	    </ion-item>
+	    <ion-item class="item-signup">
+	      <ion-label stacked>Postcode</ion-label>
+	      <ion-input type="text" formControlName="postcode"></ion-input>
+	    </ion-item>
+	    <ion-item class="item-signup">
+	      <ion-label stacked>Password</ion-label>
+	      <ion-input type="password" formControlName="password"></ion-input>
+	    </ion-item>
+	    <button ion-button full color="secondary" type="submit" [disabled]="setting.invalid">Edit Details</button>
+	  </form>
+	</ion-content>
 
 <ion-content padding>
   <ion-list>
 
-    
+
     <ion-item>
-      <ion-label (click)="signout()" >Sign Out</ion-label>  
+      <ion-label (click)="signout()" >Sign Out</ion-label>
       <ion-icon name="send"></ion-icon>
     </ion-item>
 

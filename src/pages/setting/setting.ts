@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Events } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { NavController, NavParams, Events, ToastController, LoadingController } from 'ionic-angular';
 import { AccountPage } from '../account/account';
 import { LoginPage } from '../login/login';
 import { PeopleService } from '../../providers/people-service';
@@ -18,16 +19,80 @@ import { UserData } from '../../providers/user-data';
   providers: [UserData]
 })
 export class SettingPage {
+  setting: FormGroup;
+
   constructor(
     public userData: UserData,
     public events: Events,
     public peopleService: PeopleService,
-    public navCtrl: NavController, public navParams: NavParams) {}
+    private formBuilder: FormBuilder,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    public navCtrl: NavController, public navParams: NavParams) {
+      this.setting = this.formBuilder.group({
+        full_name     : ['', [Validators.required]],
+        display_name  : ['', [Validators.required]],
+        email         : ['', [Validators.required]],
+        postcode      : ['', [Validators.required]],
+        password      : [''],
+      });
+
+
+    }
 
   goToAccountPage(){
     this.navCtrl.push(AccountPage);
   }
 
+  onSubmit() {
+    console.log(this.setting.value, this.setting.valid);
+
+    let loading = this.loadingCtrl.create({
+       content: 'Editing your account...'
+    });
+    loading.present();
+
+    this.peopleService
+      .register(this.setting.value)
+      .subscribe(
+        result => {
+          loading.dismiss();
+          let toast = this.toastCtrl.create({
+            message: 'Registered Successfully',
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+          this.navCtrl.popToRoot();
+        },
+        error => {
+          loading.dismiss();
+          console.log( error._body );
+          let toast = this.toastCtrl.create({
+            message: JSON.parse(error._body).message,
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        }
+      );
+  }
+
+  getUserInformation() {
+    this.userData.getDisplayName().subscribe(
+      result => {
+        if (result) {
+          console.log('Display Name has been received');
+          // this.setting.display_name = result;
+        } else {
+          console.log('Display Name is not available');
+        }
+      },
+      err => {
+        console.log('Display Name could not be received');
+      }
+    );
+  }
 
   signout(){
     // Give the menu time to close before changing to logged out

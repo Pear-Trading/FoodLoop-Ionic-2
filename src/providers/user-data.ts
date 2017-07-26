@@ -19,6 +19,8 @@ export class UserData {
     this.loadTestingData();
   }
 
+  // Session Key transactions
+
   public setSessionKey(key: string) {
     console.log("set sessionKey");
     this.storage.set('SessionKey',key);
@@ -36,32 +38,41 @@ export class UserData {
     this.storage.remove('SessionKey');
   }
 
+  // Checks for login status
+
   public hasLoggedIn() {
     return this.getSessionKey().map(
       result => result ? true : false
     );
   }
 
-  public setEmail(email: string) {
-    console.log("set Email");
+  // Pulls user info to store locally
+
+  public setUserInfo(
+    email: string,
+    full_name: string,
+    display_name: string,
+    postcode: string) {
+    console.log("set UserInfo");
     this.storage.set('email',email);
+    this.storage.set('fullname',full_name);
+    this.storage.set('displayname',display_name);
+    this.storage.set('postcode',postcode);
   }
 
-  public getEmail() {
-    console.log("get email");
-    return Observable.fromPromise(
-      this.storage.get('email')
-    );
-  }
-
-  public removeEmail() {
-    console.log("remove email");
+  public removeUserInfo() {
+    console.log("remove UserInfo");
     this.storage.remove('email');
+    this.storage.remove('fullname');
+    this.storage.remove('displayname');
+    this.storage.remove('postcode');
   }
 
-  public setDisplayName(displayname: string) {
-    console.log("set Display Name");
-    this.storage.set('displayname',displayname);
+  public getFullName() {
+    console.log("get Full Name");
+    return Observable.fromPromise(
+      this.storage.get('fullname')
+    );
   }
 
   public getDisplayName() {
@@ -71,9 +82,37 @@ export class UserData {
     );
   }
 
-  public removeDisplayName() {
-    console.log("remove Display Name");
-    this.storage.remove('displayname');
+  public getPostcode() {
+    console.log("get Postcode");
+    return Observable.fromPromise(
+      this.storage.get('postcode')
+    );
+  }
+
+  public getYearOfBirth() {
+    console.log("get Year of Birth");
+    return Observable.fromPromise(
+      this.storage.get('yearofbirth')
+    );
+  }
+
+  public getEmail() {
+    console.log("get email");
+    return Observable.fromPromise(
+      this.storage.get('email')
+    );
+  }
+
+  // Remove below if above code works
+
+  public setEmail(email: string) {
+    console.log("set Email");
+    this.storage.set('email',email);
+  }
+
+  public removeEmail() {
+    console.log("remove email");
+    this.storage.remove('email');
   }
 
   /* Testing purpose, ideally, these variable should be initilizaed via calling */
