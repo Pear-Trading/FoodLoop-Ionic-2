@@ -83,6 +83,7 @@ export class UserPage {
   }
   /* When the page is fully loaded */
   public ionViewWillEnter() {
+    this.getUserDisplayName();
     this.peopleService.basicStats().subscribe(
       result => {
         this.basicStats = result;

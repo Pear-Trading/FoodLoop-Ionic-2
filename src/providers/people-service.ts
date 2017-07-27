@@ -66,8 +66,8 @@ export class PeopleService {
       .flatMap(
         key => {
           this.userData.removeSessionKey();
-          this.userData.removeEmail();
-          this.userData.removeDisplayName();
+          // this.userData.removeEmail();
+          this.userData.removeUserInfo();
           return this.http.post(
             this.apiUrl + '/logout',
             { session_key : key }
@@ -114,6 +114,8 @@ export class PeopleService {
       ).map( response => response.json() );
   }
 
+  // Used for frontpage stats
+
   public basicStats() {
     return this.userData.getSessionKey()
       .flatMap(
@@ -121,6 +123,33 @@ export class PeopleService {
           return this.http.post(
             this.apiUrl + '/stats',
             { session_key : key },
+          );
+        },
+      ).map( response => response.json() );
+  }
+
+  // Used for account edit page
+
+  public accountFullLoad() {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          return this.http.post(
+            this.apiUrl + '/user',
+            { session_key : key },
+          );
+        },
+      ).map( response => response.json() );
+  }
+
+  public accountEditUpdate(data) {
+    return this.userData.getSessionKey()
+      .flatMap(
+        value => {
+          data.session_key = value;
+          return this.http.post(
+            this.apiUrl + '/user/account',
+            data
           );
         },
       ).map( response => response.json() );
