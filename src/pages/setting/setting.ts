@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, NavParams, Events, ToastController, LoadingController } from 'ionic-angular';
-import { AccountPage } from '../account/account';
+import { Events, ToastController, LoadingController } from 'ionic-angular';
 import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
 
@@ -26,8 +25,8 @@ export class SettingPage {
     public peopleService: PeopleService,
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController,
-    public navCtrl: NavController, public navParams: NavParams) {
+    private toastCtrl: ToastController
+  ) {
       this.setting = this.formBuilder.group({
         full_name     : ['', [Validators.required]],
         display_name  : ['', [Validators.required]],
@@ -84,7 +83,6 @@ export class SettingPage {
             position: 'top'
           });
           toast.present();
-          this.navCtrl.popToRoot();
         },
         error => {
           loading.dismiss();

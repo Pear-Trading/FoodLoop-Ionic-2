@@ -144,10 +144,16 @@ export class PeopleService {
   }
 
   public accountEditUpdate(data) {
-    return this.http.post(
-      this.apiUrl + '/user/account',
-      data
-    ).map( response => response.json() );
+    return this.userData.getSessionKey()
+      .flatMap(
+        value => {
+          data.session_key = value;
+          return this.http.post(
+            this.apiUrl + '/user/account',
+            data
+          );
+        },
+      ).map( response => response.json() );
   }
 
   public leaderboard(lb_type) {
