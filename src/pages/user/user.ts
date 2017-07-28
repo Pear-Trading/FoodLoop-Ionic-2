@@ -91,7 +91,7 @@ export class UserPage {
       err => {
         let toast = this.toastCtrl.create({
           message: 'Unable to retrieve stats - are you connected to a network?',
-          duration: 3000,
+          duration: 6000,
           position: 'top'
         });
         toast.present();

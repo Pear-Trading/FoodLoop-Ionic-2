@@ -67,7 +67,7 @@ export class LoginPage {
           this.events.publish('user:logout')
           let toast = this.toastCtrl.create({
             message: JSON.parse(error._body).message,
-            duration: 3000,
+            duration: 6000,
             position: 'top'
           });
           toast.present();

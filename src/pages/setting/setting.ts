@@ -56,7 +56,7 @@ export class SettingPage {
       err => {
         let toast = this.toastCtrl.create({
           message: 'Unable to retrieve account - are you connected to a network?',
-          duration: 3000,
+          duration: 6000,
           position: 'top'
         });
         toast.present();
@@ -79,7 +79,7 @@ export class SettingPage {
           loading.dismiss();
           let toast = this.toastCtrl.create({
             message: 'Edited Account Successfully',
-            duration: 3000,
+            duration: 6000,
             position: 'top'
           });
           toast.present();
@@ -89,7 +89,7 @@ export class SettingPage {
           console.log( error._body );
           let toast = this.toastCtrl.create({
             message: JSON.parse(error._body).message,
-            duration: 3000,
+            duration: 6000,
             position: 'top'
           });
           toast.present();
