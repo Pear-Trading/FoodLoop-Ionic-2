@@ -202,13 +202,15 @@ export class ReceiptPage {
     console.log(this.platform);
     // Create options for the Camera Dialog
     var options: CameraOptions = {
-      quality: 100,
+      quality: 50,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
-      correctOrientation: true
+      correctOrientation: true,
+      targetWidth: 1200,
+      targetHeight: 1200
     };
 
     // Get the data of an image
