@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FeedbackPage } from '../pages/feedback/feedback';
+import { IntroPage } from '../pages/intro/intro';
 import { LoginPage } from '../pages/login/login';
 import { AboutPage } from '../pages/about/about';
 import { UserPage} from '../pages/user/user';
@@ -97,6 +98,24 @@ export class MyApp {
   }
 
   renderLoginPage() {
+    this.userData.getReturningEntry().subscribe(
+      result => {
+        if (result == true) {
+          console.log('Returning User, do not show intro page');
+          this.rootPage = LoginPage;
+          this.enableMenu(false);
+          this.platformReady();
+        } else {
+          console.log('First time user, show intro page');
+          this.rootPage = IntroPage;
+          this.enableMenu(false);
+          this.platformReady();
+        }
+      },
+      err => {
+        console.log('Error checking if returning user');
+      }
+    );
     this.rootPage = LoginPage;
     this.enableMenu(false);
     this.platformReady();

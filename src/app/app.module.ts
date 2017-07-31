@@ -32,6 +32,7 @@ import { OverviewPage } from '../pages/overview/overview';
 import { AccountPage } from '../pages/account/account';
 import { ShopPage } from '../pages/shop/shop';
 import { StatPage } from '../pages/stat/stat';
+import { IntroPage } from '../pages/intro/intro';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { StatPage } from '../pages/stat/stat';
     AchievementPage,
     ShopPage,
     StatPage,
+    IntroPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false }),
@@ -77,6 +79,7 @@ import { StatPage } from '../pages/stat/stat';
     AchievementPage,
     ShopPage,
     StatPage,
+    IntroPage,
   ],
   providers: [
     Transfer,

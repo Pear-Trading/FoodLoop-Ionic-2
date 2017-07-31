@@ -1,0 +1,26 @@
+page-intro {
+	h1 {
+		font-size: 3em;
+		color: rgba(255, 255, 255, .8);
+		margin: 0px 0px 20px 0px;
+	}
+
+	.button-intro {
+		font-size: 1.1em;
+		color: rgba(255, 255, 255, .8);
+		margin: 5px auto;
+		width: 90%;
+		border: 3px solid rgba(255, 255, 255, .8);
+		border-radius: 10px;
+	}
+
+	.grid-intro {
+		margin-top: 20%;
+	}
+
+	.icon-intro {
+		height: 25%;
+		margin: 30px auto;
+		display: block;
+	}
+}
