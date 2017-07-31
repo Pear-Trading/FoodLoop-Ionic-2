@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController} from 'ionic-angular';
 import { PeopleService } from '../../providers/people-service';
-import { TruncateModule } from 'ng2-truncate';
 
 /*
  This page represent a leaderboard page/leaderboard.
