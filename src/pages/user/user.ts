@@ -5,9 +5,11 @@ import {
   App,
   Slides,
   ToastController,
+  AlertController,
 } from 'ionic-angular';
 import { ReceiptPage } from '../receipt/receipt';
 import { OverviewPage } from '../overview/overview';
+import { AboutPage } from '../about/about';
 import { GamePage } from '../game/game';
 import { ShopPage } from '../shop/shop';
 import { StatPage } from '../stat/stat';
@@ -72,13 +74,13 @@ export class UserPage {
     public peopleService: PeopleService,
     public userData : UserData,
     private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
   ) {
     this.receiptPage = ReceiptPage;
     this.gamePage = GamePage;
     this.shopPage = ShopPage;
     this.statPage = StatPage;
     this.status = "Weekly"; // defualt chart is Daily
-    // get the username from local stroage
 
   }
   /* When the page is fully loaded */
@@ -97,6 +99,20 @@ export class UserPage {
         toast.present();
       }
     );
+    this.userData.getReturningLogin().subscribe(
+      result => {
+        if (result == true) {
+          console.log('Returning User, do not show guide');
+        } else {
+          console.log('First time user, prompt the guide');
+          this.readGuidePrompt();
+          this.userData.setReturningLogin();
+        }
+      },
+      err => {
+        console.log('Error checking if returning user');
+      }
+    );
   }
 
  ionViewDidLoad() {
@@ -104,11 +120,11 @@ export class UserPage {
  }
 
   addReceipt(){
-    this.navCtrl.push(ReceiptPage);
+    this.navCtrl.setRoot(ReceiptPage);
   }
 
   overview(){
-    this.navCtrl.push(OverviewPage);
+    this.navCtrl.setRoot(OverviewPage);
   }
 
   getUserDisplayName() {
@@ -126,6 +142,30 @@ export class UserPage {
       }
     );
   }
+
+  readGuidePrompt() {
+  let alert = this.alertCtrl.create({
+    title: 'Welcome new user!',
+    message: 'As this may be your first time here, do you want to read the intro guide?',
+    buttons: [
+      {
+        text: 'No Thanks',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Show Me!',
+        handler: () => {
+          console.log('Redirect clicked');
+          this.navCtrl.setRoot(AboutPage);
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 
 
 /*********************** --  Data representation part -- **************************/
