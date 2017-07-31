@@ -12,6 +12,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { FilePath } from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
 import { AppVersion } from '@ionic-native/app-version';
+import { TruncateModule } from 'ng2-truncate';
 
 // import { AppProviders } from './app.providers';
 
@@ -56,6 +57,7 @@ import { StatPage } from '../pages/stat/stat';
     IonicStorageModule.forRoot(),
     BrowserModule,
     HttpModule,
+    TruncateModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
