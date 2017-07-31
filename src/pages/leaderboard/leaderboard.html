@@ -4,7 +4,7 @@
       <ion-icon item-right name='menu'></ion-icon>
     </button>
     <ion-title>
-      League Tables
+      Leaderboard
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -44,9 +44,9 @@
 
     <div class="listCtrl">
       <ion-list>
-        <ion-item [ngClass]="getClass(item)" *ngFor="let item of rankingData">
+        <ion-item [ngClass]="getClass(item)" *ngFor="let item of leaderboardData">
           <ion-grid>
-            <ion-row class="ranking-list">
+            <ion-row class="leaderboard-list">
               <!-- Current Position -->
               <ion-col  width-10><p>{{ item.position }}<p></ion-col>
               <!-- Display position shift using different icon and color -->

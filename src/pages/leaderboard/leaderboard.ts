@@ -3,17 +3,17 @@ import { NavController, NavParams, ToastController} from 'ionic-angular';
 import { PeopleService } from '../../providers/people-service';
 
 /*
- This page represent a ranking page/leaderboard.
+ This page represent a leaderboard page/leaderboard.
  display players in leaderboard and highlight important information
 */
 @Component({
-  selector: 'page-ranking',
-  templateUrl: 'ranking.html',
+  selector: 'page-leaderboard',
+  templateUrl: 'leaderboard.html',
   providers: [PeopleService]
 })
-export class RankingPage {
+export class LeaderboardPage {
 
-  rankingData: Array<any>;
+  leaderboardData: Array<any>;
   currentPos: number;
   listType: any = 'daily_total';
 
@@ -28,7 +28,7 @@ export class RankingPage {
     this.peopleService.leaderboard(this.listType)
       .subscribe(
         result => {
-          this.rankingData = result.leaderboard;
+          this.leaderboardData = result.leaderboard;
           this.currentPos = result.user_position;
         }
       );

@@ -23,7 +23,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { AboutPage } from '../pages/about/about';
 import { ReceiptPage } from '../pages/receipt/receipt';
 import { UserPage } from '../pages/user/user';
-import { RankingPage } from '../pages/ranking/ranking';
+import { LeaderboardPage } from '../pages/leaderboard/leaderboard';
 import { SettingPage } from '../pages/setting/setting';
 import { GamePage } from '../pages/game/game';
 import { AchievementPage } from '../pages/achievement/achievement';
@@ -42,7 +42,7 @@ import { StatPage } from '../pages/stat/stat';
     AboutPage,
     ReceiptPage,
     UserPage,
-    RankingPage,
+    LeaderboardPage,
     SettingPage,
     AccountPage,
     OverviewPage,
@@ -67,7 +67,7 @@ import { StatPage } from '../pages/stat/stat';
     AboutPage,
     ReceiptPage,
     UserPage,
-    RankingPage,
+    LeaderboardPage,
     SettingPage,
     AccountPage,
     OverviewPage,
