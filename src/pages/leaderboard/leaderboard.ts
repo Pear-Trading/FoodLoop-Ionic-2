@@ -15,7 +15,7 @@ export class LeaderboardPage {
 
   leaderboardData: Array<any>;
   currentPos: number;
-  listType: any = 'daily_total';
+  listType: any = 'weekly_total';
 
   constructor(
     public navCtrl: NavController,
