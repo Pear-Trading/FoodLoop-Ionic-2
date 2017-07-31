@@ -48,13 +48,13 @@
           <ion-grid>
             <ion-row class="leaderboard-list">
               <!-- Current Position -->
-              <ion-col  width-10><p>{{ item.position }}<p></ion-col>
+              <ion-col col-1><p>{{ item.position }}<p></ion-col>
               <!-- Display position shift using different icon and color -->
-              <ion-col width-20><ion-icon [color]="getTrendIconColor(item)" [name]="getTrendIcon(item)"></ion-icon></ion-col>
+              <ion-col col-1><ion-icon [color]="getTrendIconColor(item)" [name]="getTrendIcon(item)"></ion-icon></ion-col>
               <!-- Display name based current user -->
-              <ion-col *ngIf="item.position == currentPos"  width-50> <p>You<p> </ion-col>
-              <ion-col *ngIf="item.position != currentPos" width-50>{{ item.display_name | truncate : 9 }}</ion-col>
-              <ion-col width-20>{{ listType.includes('total') ? (item.value  | currency:'GBP':true:'1.2-2') : (item.value | number:'1.0-0') }}</ion-col>
+              <ion-col *ngIf="item.position == currentPos"> <p>You<p> </ion-col>
+              <ion-col *ngIf="item.position != currentPos">{{ item.display_name | truncate : 16 }}</ion-col>
+              <ion-col col-3>{{ listType.includes('total') ? (item.value  | currency:'GBP':true:'1.2-2') : (item.value | number:'1.0-0') }}</ion-col>
             </ion-row>
           </ion-grid>
         </ion-item>

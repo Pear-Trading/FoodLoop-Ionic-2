@@ -1,15 +1,15 @@
 page-leaderboard{
 
-  // display top three players in red 
+  // display top three players in red
 
 	.topThree{
         p{
-			color: rgba(255, 100, 100, 1); 
+			color: rgba(255, 100, 100, 1);
 			font-weight: 700;
         }
     }
-  
-  // position list 
+
+  // position list
 	.listCtrl{
 		ion-list{
 			margin: 0px;
@@ -17,12 +17,12 @@ page-leaderboard{
 	}
   }
 
-  // position icon 
+  // position icon
 	.pos{
 		margin-left:-30px;
 	}
 
-  // dispaly user in black and highlighted
+  // display user in black and highlighted
 	.user{
 		background-color: red;
 		font-weight: bold;
@@ -30,19 +30,16 @@ page-leaderboard{
 
 		p{
 			font-weight: bold;
-			color:black;    
+			color:black;
 		}
-    
+
 	}
 
 	.item-md {
 		background: none;
 	}
-	
+
 	.leaderboard-segment-button{
 		color: rgba(200, 200, 255, 1);
 	}
 }
-
-
-
