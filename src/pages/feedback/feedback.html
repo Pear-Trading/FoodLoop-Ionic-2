@@ -12,7 +12,7 @@
 
 <!-- fit into one screen -->
 <ion-content>
-  <ion-grid class="grid-feedback">
+  <ion-grid class="grid-submit">
 
     <ion-row>
 			<ion-col text-center>
@@ -21,15 +21,15 @@
 		</ion-row>
 
     <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-      <ion-item class="item-feedback">
+      <ion-item class="item-submit">
         <ion-label stacked>Email</ion-label>
         <ion-input type="text" formControlName="email" [(ngModel)]="loggedInEmail" [readonly]="loggedIn"></ion-input>
       </ion-item>
-      <ion-item class="item-feedback">
+      <ion-item class="item-submit">
         <ion-label stacked>Enter Feedback Here</ion-label>
         <ion-textarea rows="5" type="text" formControlName="feedbacktext"></ion-textarea>
       </ion-item>
-      <button ion-button type="submit" color="secondary" class="button-feedback" [disabled]="feedbackForm.invalid" block>Submit</button>
+      <button ion-button type="submit" color="secondary" class="button-submit" [disabled]="feedbackForm.invalid" block>Submit</button>
     </form>
 
   </ion-grid>

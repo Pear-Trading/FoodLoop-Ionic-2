@@ -27,3 +27,26 @@ body {
 ion-app.md {
 	background: none;
 }
+
+.item-submit {
+	font-size: 1.2em;
+	color: rgba(255, 255, 255, .8);
+	background: rgba(255, 255, 255, .5);
+	margin: 1px auto 20px;
+	width: 90%;
+	border: 3px solid rgba(255, 255, 255, .8);
+	border-radius: 10px;
+}
+
+.button-submit {
+	font-size: 1.1em;
+	color: rgba(255, 255, 255, .8);
+	margin: 5px auto;
+	width: 90%;
+	border: 3px solid rgba(255, 255, 255, .8);
+	border-radius: 10px;
+}
+
+.grid-submit {
+	margin-top: 20%;
+}

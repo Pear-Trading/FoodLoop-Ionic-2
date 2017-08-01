@@ -6,36 +6,36 @@
 
 <ion-content padding>
   <form [formGroup]="signup" (ngSubmit)="onSubmit()">
-    <ion-item class="item-signup">
+    <ion-item class="item-submit">
       <ion-label stacked>Token</ion-label>
       <ion-input type="text" formControlName="token"></ion-input>
     </ion-item>
-    <ion-item class="item-signup">
+    <ion-item class="item-submit">
       <ion-label stacked>Full Name</ion-label>
       <ion-input type="text" formControlName="full_name"></ion-input>
     </ion-item>
-    <ion-item class="item-signup">
+    <ion-item class="item-submit">
       <ion-label stacked>Display Name</ion-label>
       <ion-input type="text" formControlName="display_name"></ion-input>
     </ion-item>
-    <ion-item class="item-signup">
+    <ion-item class="item-submit">
       <ion-label stacked>Email</ion-label>
       <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>
-    <ion-item class="item-signup">
+    <ion-item class="item-submit">
       <ion-label stacked>Postcode</ion-label>
       <ion-input type="text" formControlName="postcode"></ion-input>
     </ion-item>
-    <ion-item class="item-signup">
+    <ion-item class="item-submit">
       <ion-label stacked>Year of Birth</ion-label>
       <ion-select type="text" formControlName="year_of_birth">
         <ion-option *ngFor="let year of years" [value]="year">{{ year }}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item class="item-signup">
+    <ion-item class="item-submit">
       <ion-label stacked>Password</ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
-    <button ion-button full color="secondary" type="submit" [disabled]="signup.invalid">Sign Up</button>
+    <button ion-button full color="secondary" class="button-submit" type="submit" [disabled]="signup.invalid">Sign Up</button>
   </form>
 </ion-content>
