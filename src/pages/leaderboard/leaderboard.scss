@@ -9,18 +9,31 @@ page-leaderboard{
         }
     }
 
+  .leaderboard-list{
+    padding-left: 0px;
+  }
+
+  .leaderboard-item{
+    padding-left: 16px;
+  }
+
   // position list
 	.listCtrl{
 		ion-list{
-			margin: 0px;
-			background-color: rgba(255, 255, 255, .6);
-	}
+			// margin: 0px;
+			// background-color: rgba(255, 255, 255, .6);
+      background: rgba(255, 255, 255, .5);
+    	margin: 1px auto 20px;
+    	border: 3px solid rgba(255, 255, 255, .8);
+    	border-radius: 10px;
+	  }
   }
 
-  // position icon
-	.pos{
-		margin-left:-30px;
-	}
+  // Is this below here redundant???
+  // // position icon
+	// .pos{
+	// 	margin-left:-30px;
+	// }
 
   // display user in black and highlighted
 	.user{

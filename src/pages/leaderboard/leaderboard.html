@@ -12,7 +12,7 @@
 <ion-content>
   <div padding>
 
-    <ion-item>
+    <ion-item no-lines class="itemSelect">
       <ion-label>Leaderboard</ion-label>
       <ion-select  [(ngModel)]="listType" (ionChange)="changeLeaderboard($event)">
         <ion-option value="daily_total">
@@ -44,9 +44,9 @@
 
     <div class="listCtrl">
       <ion-list>
-        <ion-item [ngClass]="getClass(item)" *ngFor="let item of leaderboardData">
+        <ion-item class="leaderboard-list" [ngClass]="getClass(item)" *ngFor="let item of leaderboardData">
           <ion-grid>
-            <ion-row class="leaderboard-list">
+            <ion-row class="leaderboard-item">
               <!-- Current Position -->
               <ion-col col-1><p>{{ item.position }}<p></ion-col>
               <!-- Display position shift using different icon and color -->
