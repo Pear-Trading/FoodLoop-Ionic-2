@@ -42,7 +42,7 @@ export class UserData {
 
   public setReturningEntry() {
     console.log("set returning");
-    this.storage.set('returning',true);
+    // this.storage.set('returning',true);
   }
 
   public getReturningEntry() {

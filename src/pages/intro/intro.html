@@ -1,24 +1,32 @@
 <ion-header>
 	<ion-toolbar color="header" style="text-align: center">
 		<ion-title>
-			Welcome to Local Loop
+			Local Loop
 		</ion-title>
 	</ion-toolbar>
 </ion-header>
 
-<ion-content>
-	<ion-grid class="grid-intro">
-		<ion-row>
-			<ion-col text-center>
-				<h1>LocalLoop</h1>
+<ion-content class="home-intro">
+	<ion-grid>
+
+		<ion-row align-items-start>
+			<ion-col align-self-center text-center>
+				<h1>Welcome to Local Loop</h1>
 			</ion-col>
 		</ion-row>
 
+		<ion-row align-items-center>
+			<ion-col text-center>
+				<h2>Please Register or Login with your account!<br>You will need a token to register.</h2>
+			</ion-col>
 			<button ion-button (click)="goToLogin()"  class="button-submit" color="secondary" block>Login</button>
 			<button ion-button (click)="goToSignup()"  class="button-submit" color="secondary" block>Create an account</button>
 
-	</ion-grid>
+			<img class="icon-intro" src="assets/img/icon1.png">
+		</ion-row>
+		<ion-row align-items-end>
+		</ion-row>
 
-	<img class="icon-intro" src="assets/img/icon1.png">
+	</ion-grid>
 
 </ion-content>
