@@ -60,12 +60,17 @@
   </ion-card>
 
   <!-- Step 2. -->
-  <ion-card *ngIf="currentStep === 2">
+  <ion-card class="card-2" *ngIf="currentStep === 2">
     <!-- Enter amount spent-->
     <ion-item>
       <ion-label stacked>Enter amount spent below(£)</ion-label>
       <ion-input type="number" [(ngModel)]="amount" (ngModelChange)="step2Validate()" step="0.01" placeholder="e.g. 5.00"></ion-input>
     </ion-item>
+
+		<ion-item>
+			<ion-label stacked>Click to Edit Time of Purchase</ion-label>
+			<ion-datetime displayFormat="HH:mm DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+		</ion-item>
     <!-- move onto next -->
     <ion-item>
 			<span class="float-left">
@@ -86,14 +91,14 @@
   <!-- Step 3. -->
   <ion-card *ngIf="currentStep === 3">
     <ion-item>
-      <div class="myLabel">Press the button to add a receipt photo</div>
+      <div class="myLabel">Submit Receipt Photo</div>
       <!-- Switch between different buttons, display add receipt or retake button -->
       <button padding class="camBtn" [hidden]="lastImage !== null" ion-button color="light" large full (click)="uploadImage()" >
         <ion-icon ios="ios-camera" md="md-camera"> Add receipt photo</ion-icon>
-        </button>
+      </button>
       <button padding class="camBtn" [hidden]="lastImage === null" ion-button color="light" large full (click)="uploadImage()" >
         <ion-icon ios="ios-camera" md="md-camera">Retake</ion-icon>
-        </button>
+      </button>
       <!-- Switch end -->
     </ion-item>
 
