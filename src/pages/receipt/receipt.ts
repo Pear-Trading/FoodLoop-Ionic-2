@@ -11,6 +11,7 @@ import { File } from '@ionic-native/file';
 import { Keyboard } from '@ionic-native/keyboard';
 import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
+import { UserPage } from '../user/user';
 
 //  handles image upload on mobile dvices
 declare var cordova: any;
@@ -55,7 +56,7 @@ export class ReceiptPage {
     public actionSheetCtrl: ActionSheetController,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    public nav: NavController,
+    public navCtrl: NavController,
     public platform: Platform,
     public peopleService: PeopleService,
     public userData: UserData,
@@ -283,8 +284,7 @@ export class ReceiptPage {
         console.log('Successful Upload');
         console.log(response);
         this.loading.dismiss();
-        this.presentToast('Receipt succesfully submitted.');
-        this.resetForm();
+        this.readSubmitPrompt();
       },
       err => {
         console.log('Upload Error');
@@ -324,6 +324,31 @@ export class ReceiptPage {
       this.presentToast('Error while storing file.');
     });
   }
+
+  private readSubmitPrompt() {
+  let alert = this.alertCtrl.create({
+    title: 'Submitted Receipt!',
+    message: 'Would you like to submit another receipt?',
+    buttons: [
+      {
+        text: 'No Thanks',
+        role: 'Yes I do!',
+        handler: () => {
+          console.log('Cancel clicked');
+          this.navCtrl.setRoot(UserPage);
+        }
+      },
+      {
+        text: 'Yes!',
+        handler: () => {
+          console.log('Form reset clicked');
+          this.resetForm();
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 
   private presentToast(text) {
     let toast = this.toastCtrl.create({
