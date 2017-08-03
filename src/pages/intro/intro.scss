@@ -1,0 +1,40 @@
+page-intro {
+	h1 {
+  	font-size: 3em;
+  	color: rgba(255, 255, 255, .8);
+  	margin: 0px 0px 10px 0px;
+		vertical-align: middle;
+  }
+
+	h2 {
+  	font-size: 1.2em;
+		line-height: 1.2em;
+  	color: rgba(255, 255, 255, .8);
+  	margin: 0px 0px 10px 0px;
+  }
+
+	.home-intro {
+		scroll-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    ion-grid {
+			margin-top: 20px;
+      padding: 0;
+      height: 100%;
+    }
+
+    ion-row {
+      flex: 1;
+			overflow: 0;
+    }
+	}
+
+	.icon-intro {
+		height: 100%;
+		// width: 25%;
+		margin: 50px auto;
+		display: block;
+	}
+}

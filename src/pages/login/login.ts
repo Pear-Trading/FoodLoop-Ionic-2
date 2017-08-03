@@ -15,6 +15,7 @@ import 'rxjs/add/operator/timeout';
 
 /* interface of home page*/
 @Component({
+  selector: 'login',
   templateUrl: 'login.html',
   providers: [ UserData, PeopleService ]
 })
@@ -57,7 +58,20 @@ export class LoginPage {
           this.userData.setUserInfo(
             this.login.value.email,
             result.display_name,
-            );
+          );
+          this.userData.getReturningEntry().subscribe(
+            result => {
+              if (result == true) {
+                console.log('Returning login, do not set');
+              } else {
+                console.log('First time login, set returning login');
+                this.userData.setReturningEntry();
+              }
+            },
+            err => {
+              console.log('Error checking if returning user');
+            }
+          );
           this.events.publish('user:login')
           loading.dismiss();
           this.navCtrl.setRoot(UserPage);
@@ -67,7 +81,7 @@ export class LoginPage {
           this.events.publish('user:logout')
           let toast = this.toastCtrl.create({
             message: JSON.parse(error._body).message,
-            duration: 3000,
+            duration: 6000,
             position: 'top'
           });
           toast.present();

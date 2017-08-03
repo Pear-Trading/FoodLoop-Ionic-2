@@ -38,6 +38,34 @@ export class UserData {
     this.storage.remove('SessionKey');
   }
 
+  // Checks for first time entering app status
+
+  public setReturningEntry() {
+    console.log("set returning");
+    // this.storage.set('returning',true);
+  }
+
+  public getReturningEntry() {
+    console.log("get returning");
+    return Observable.fromPromise(
+      this.storage.get('returning')
+    );
+  }
+
+  // Checks for first time login
+
+  public setReturningLogin() {
+    console.log("set returninglogin");
+    this.storage.set('returninglogin',true);
+  }
+
+  public getReturningLogin() {
+    console.log("get returninglogin");
+    return Observable.fromPromise(
+      this.storage.get('returninglogin')
+    );
+  }
+
   // Checks for login status
 
   public hasLoggedIn() {

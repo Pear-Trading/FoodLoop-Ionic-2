@@ -84,7 +84,7 @@ export class FeedbackPage {
   private presentToast(text) {
     let toast = this.toastCtrl.create({
       message: text,
-      duration: 3000,
+      duration: 6000,
       position: 'top'
     });
     toast.present();

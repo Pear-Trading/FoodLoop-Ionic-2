@@ -11,6 +11,7 @@ import { File } from '@ionic-native/file';
 import { Keyboard } from '@ionic-native/keyboard';
 import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
+import { UserPage } from '../user/user';
 
 //  handles image upload on mobile dvices
 declare var cordova: any;
@@ -51,11 +52,13 @@ export class ReceiptPage {
 
   currentStep: number = 1;
 
+  myDate: String = new Date().toISOString();
+
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    public nav: NavController,
+    public navCtrl: NavController,
     public platform: Platform,
     public peopleService: PeopleService,
     public userData: UserData,
@@ -66,7 +69,32 @@ export class ReceiptPage {
     private transfer: Transfer,
     private file: File,
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
-  ) {}
+  ) {
+    // If it is British Summer Time
+    if (this.dst(new Date())) {
+      this.myDate = this.calculateTime('+1');
+    }
+  }
+
+  calculateTime(offset: any) {
+    // create Date object for current location
+   let d = new Date();
+
+   // create new Date object using supplied offset
+   let nd = new Date(d.getTime() + (3600000 * offset));
+
+   return nd.toISOString();
+  }
+
+  stdTimezoneOffset(today: any) {
+    let jan = new Date(today.getFullYear(), 0, 1);
+    let jul = new Date(today.getFullYear(), 6, 1);
+    return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+  }
+
+  dst(today: any) {
+    return today.getTimezoneOffset() < this.stdTimezoneOffset(today);
+  }
 
   ionViewDidEnter(){
     this.platform.ready().then(() => {
@@ -202,13 +230,15 @@ export class ReceiptPage {
     console.log(this.platform);
     // Create options for the Camera Dialog
     var options: CameraOptions = {
-      quality: 100,
+      quality: 50,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
-      correctOrientation: true
+      correctOrientation: true,
+      targetWidth: 1200,
+      targetHeight: 1200
     };
 
     // Get the data of an image
@@ -248,6 +278,7 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
+          purchase_time     : this.myDate,
           organisation_id   : this.organisationId,
         };
         break;
@@ -255,6 +286,7 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
+          purchase_time     : this.myDate,
           organisation_id   : this.organisationId,
         };
         break;
@@ -262,6 +294,7 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
+          purchase_time     : this.myDate,
           organisation_name : this.submitOrg.name,
           street_name       : this.submitOrg.street_name,
           town              : this.submitOrg.town,
@@ -281,8 +314,7 @@ export class ReceiptPage {
         console.log('Successful Upload');
         console.log(response);
         this.loading.dismiss();
-        this.presentToast('Receipt succesfully submitted.');
-        this.resetForm();
+        this.readSubmitPrompt();
       },
       err => {
         console.log('Upload Error');
@@ -323,10 +355,35 @@ export class ReceiptPage {
     });
   }
 
+  private readSubmitPrompt() {
+  let alert = this.alertCtrl.create({
+    title: 'Submitted Receipt!',
+    message: 'Would you like to submit another receipt?',
+    buttons: [
+      {
+        text: 'No Thanks',
+        role: 'Yes I do!',
+        handler: () => {
+          console.log('Cancel clicked');
+          this.navCtrl.setRoot(UserPage);
+        }
+      },
+      {
+        text: 'Yes!',
+        handler: () => {
+          console.log('Form reset clicked');
+          this.resetForm();
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+
   private presentToast(text) {
     let toast = this.toastCtrl.create({
       message: text,
-      duration: 3000,
+      duration: 6000,
       position: 'top'
     });
     toast.present();

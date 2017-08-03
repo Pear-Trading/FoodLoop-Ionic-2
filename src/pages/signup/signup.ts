@@ -52,7 +52,7 @@ export class SignupPage {
           loading.dismiss();
           let toast = this.toastCtrl.create({
             message: 'Registered Successfully',
-            duration: 3000,
+            duration: 6000,
             position: 'top'
           });
           toast.present();
@@ -63,7 +63,7 @@ export class SignupPage {
           console.log( error._body );
           let toast = this.toastCtrl.create({
             message: JSON.parse(error._body).message,
-            duration: 3000,
+            duration: 6000,
             position: 'top'
           });
           toast.present();

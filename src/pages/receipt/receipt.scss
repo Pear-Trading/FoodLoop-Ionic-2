@@ -4,29 +4,47 @@ page-receipt {
         font-size: 1em;
 		color: rgba(255, 255, 255, 1);
 	}
-	
+
 	.item-input .label-md,  {
 		font-size: 1em;
-		color: rgba(200, 255, 255, .8)
+		color: rgba(200, 255, 255, .8);
+    ion-item{
+      color: rgba(255, 255, 255, .8);
+    }
 	}
-	
+
+  .item-datetime .label-md,  {
+		font-size: 1em;
+		color: rgba(200, 255, 255, .8);
+    ion-item{
+      color: white;
+    }
+	}
+
 	.float-right {
 	 float: right;
 	}
-	
+
+  // Makes Date text white
+  .card-2 {
+   ion-item{
+     color: white;
+    }
+	}
+
 	.item-md .item-button {
     padding: 5px 30px;
     height: 36px;
     font-size: 1.6rem;
 	border: 1px solid rgba(255, 255, 255, .6);
 	}
-	
+
 	ion-label, .labelreceipt {
 		color: rgba(255, 255, 255, 1);
 		font-size: 1.5em;
 		font-weight: 500;
 	}
-	
+
 	.card-md {
 		border: 3px solid rgba(255, 255, 255, 1);
 		background-color: rgba(255, 255, 255, .2);
@@ -34,22 +52,22 @@ page-receipt {
 		width: 86%;
 		margin: 15px auto;
 	}
-	
+
 	.cardContent, .item-md {
 		background-color: rgba(255, 255, 255, 0);
 	}
-	
+
 
     .cardContent{
       background-color: none;
 	  color: rgba(255, 255, 255, 1);
     }
- 
+
 	.cardItem{
 
       .cardItemHeader{
         background-color: red;
-        color:black; 
+        color:black;
         font-size: 1.3em;
         padding: 5px;
       }
@@ -62,21 +80,21 @@ page-receipt {
       .cardItemContent{
         background-color: red;
         color:darkgray;
-        font-size: 1.0em; 
-        padding:5px; 
+        font-size: 1.0em;
+        padding:5px;
       }
-      border-bottom: 1px solid lightgray; 
+      border-bottom: 1px solid lightgray;
 
     }
 
     .btnColor{
         color:white;
-        font-size: 1.5em; 
+        font-size: 1.5em;
         width:100%;
     }
-	
+
 	.pearUpCtrl{
-	
+
 		width: 100%;
 		background: none;
 		padding: 0px;
@@ -86,7 +104,7 @@ page-receipt {
 			width: 8em;
 			background: none;
 		}
-		
+
 		button{
 			z-index: 99;
 			background-color: #f5f5f5;
@@ -101,7 +119,7 @@ page-receipt {
 			align-items: center;
 		}
 	}
-	
+
     .receiptCtrl{
         margin-top: 20%;
     }
@@ -111,13 +129,13 @@ page-receipt {
 		color:  rgba(255, 255, 255, 1);
 		line-height: .4em;
 	}
-	
+
 	.address-street {
 		font-size: .7em;
 		color:  rgba(255, 255, 255, .7);
 		line-height: .6em;
 	}
-	
+
 	.address-town {
 		 font-size: .6em;
 		color:  rgba(255, 255, 255, .5);
