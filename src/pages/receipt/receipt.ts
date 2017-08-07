@@ -12,6 +12,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
 import { UserPage } from '../user/user';
+import * as moment from 'moment';
 
 //  handles image upload on mobile dvices
 declare var cordova: any;
@@ -52,7 +53,7 @@ export class ReceiptPage {
 
   currentStep: number = 1;
 
-  myDate: String = new Date().toISOString();
+  myDate: String;// = '2017-08-07T12:59:57+01:00';
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -70,31 +71,35 @@ export class ReceiptPage {
     private file: File,
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
   ) {
+    console.log(moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ'));
+    let now = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
+    //this.myDate = '2017-08-07T12:59:57+01:00';
+    this.myDate = now;
     // If it is British Summer Time
-    if (this.dst(new Date())) {
-      this.myDate = this.calculateTime('+1');
-    }
+    // if (this.dst(new Date())) {
+    //   this.myDate = this.calculateTime('+1');
+    // }
   }
 
-  calculateTime(offset: any) {
-    // create Date object for current location
-   let d = new Date();
-
-   // create new Date object using supplied offset
-   let nd = new Date(d.getTime() + (3600000 * offset));
-
-   return nd.toISOString();
-  }
-
-  stdTimezoneOffset(today: any) {
-    let jan = new Date(today.getFullYear(), 0, 1);
-    let jul = new Date(today.getFullYear(), 6, 1);
-    return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-  }
-
-  dst(today: any) {
-    return today.getTimezoneOffset() < this.stdTimezoneOffset(today);
-  }
+  // calculateTime(offset: any) {
+  //   // create Date object for current location
+  //  let d = new Date();
+  //
+  //  // create new Date object using supplied offset
+  //  let nd = new Date(d.getTime() + (3600000 * offset));
+  //
+  //  return nd.toISOString();
+  // }
+  //
+  // stdTimezoneOffset(today: any) {
+  //   let jan = new Date(today.getFullYear(), 0, 1);
+  //   let jul = new Date(today.getFullYear(), 6, 1);
+  //   return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+  // }
+  //
+  // dst(today: any) {
+  //   return today.getTimezoneOffset() < this.stdTimezoneOffset(today);
+  // }
 
   ionViewDidEnter(){
     this.platform.ready().then(() => {
