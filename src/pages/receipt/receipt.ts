@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   NavController, NavParams, Platform,
   LoadingController, Loading, ToastController
@@ -53,7 +53,7 @@ export class ReceiptPage {
 
   currentStep: number = 1;
 
-  myDate: String;// = '2017-08-07T12:59:57+01:00';
+  myDate: string;
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -71,14 +71,7 @@ export class ReceiptPage {
     private file: File,
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
   ) {
-    console.log(moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ'));
-    let now = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
-    //this.myDate = '2017-08-07T12:59:57+01:00';
-    this.myDate = now;
-    // If it is British Summer Time
-    // if (this.dst(new Date())) {
-    //   this.myDate = this.calculateTime('+1');
-    // }
+    this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
   }
 
   // calculateTime(offset: any) {
