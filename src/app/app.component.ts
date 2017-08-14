@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FeedbackPage } from '../pages/feedback/feedback';
+import { IntroPage } from '../pages/intro/intro';
 import { LoginPage } from '../pages/login/login';
 import { AboutPage } from '../pages/about/about';
 import { UserPage} from '../pages/user/user';
 import { ReceiptPage } from '../pages/receipt/receipt';
-import { RankingPage } from '../pages/ranking/ranking';
+import { LeaderboardPage } from '../pages/leaderboard/leaderboard';
 import { SettingPage} from '../pages/setting/setting';
 // import { StatPage} from '../pages/stat/stat';
 // import { AccountPage } from '../pages/account/account';
@@ -42,7 +43,7 @@ export class MyApp {
   loggedInPages: PageInterface[]= [
   { title: 'Home', component: UserPage, icon: 'home' },
   { title: 'Add Receipt',component: ReceiptPage, index:3,icon: 'filing'},
-  { title: 'Leaderboard',component: RankingPage, index:5,icon: 'stats'},
+  { title: 'Leaderboard',component: LeaderboardPage, index:5,icon: 'stats'},
   // Commented out until it has data
   // { title: 'Graphs',component: StatPage, index:7,icon: 'analytics'},
 	{ title: 'Account',component: SettingPage, index:9,icon: 'person'},
@@ -97,6 +98,24 @@ export class MyApp {
   }
 
   renderLoginPage() {
+    this.userData.getReturningEntry().subscribe(
+      result => {
+        if (result == true) {
+          console.log('Returning User, do not show intro page');
+          this.rootPage = LoginPage;
+          this.enableMenu(false);
+          this.platformReady();
+        } else {
+          console.log('First time user, show intro page');
+          this.rootPage = IntroPage;
+          this.enableMenu(false);
+          this.platformReady();
+        }
+      },
+      err => {
+        console.log('Error checking if returning user');
+      }
+    );
     this.rootPage = LoginPage;
     this.enableMenu(false);
     this.platformReady();

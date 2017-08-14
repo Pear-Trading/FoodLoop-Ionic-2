@@ -12,6 +12,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { FilePath } from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
 import { AppVersion } from '@ionic-native/app-version';
+import { TruncateModule } from 'ng2-truncate';
 
 // import { AppProviders } from './app.providers';
 
@@ -23,7 +24,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { AboutPage } from '../pages/about/about';
 import { ReceiptPage } from '../pages/receipt/receipt';
 import { UserPage } from '../pages/user/user';
-import { RankingPage } from '../pages/ranking/ranking';
+import { LeaderboardPage } from '../pages/leaderboard/leaderboard';
 import { SettingPage } from '../pages/setting/setting';
 import { GamePage } from '../pages/game/game';
 import { AchievementPage } from '../pages/achievement/achievement';
@@ -31,6 +32,7 @@ import { OverviewPage } from '../pages/overview/overview';
 import { AccountPage } from '../pages/account/account';
 import { ShopPage } from '../pages/shop/shop';
 import { StatPage } from '../pages/stat/stat';
+import { IntroPage } from '../pages/intro/intro';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { StatPage } from '../pages/stat/stat';
     AboutPage,
     ReceiptPage,
     UserPage,
-    RankingPage,
+    LeaderboardPage,
     SettingPage,
     AccountPage,
     OverviewPage,
@@ -50,12 +52,14 @@ import { StatPage } from '../pages/stat/stat';
     AchievementPage,
     ShopPage,
     StatPage,
+    IntroPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false }),
     IonicStorageModule.forRoot(),
     BrowserModule,
     HttpModule,
+    TruncateModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -67,7 +71,7 @@ import { StatPage } from '../pages/stat/stat';
     AboutPage,
     ReceiptPage,
     UserPage,
-    RankingPage,
+    LeaderboardPage,
     SettingPage,
     AccountPage,
     OverviewPage,
@@ -75,6 +79,7 @@ import { StatPage } from '../pages/stat/stat';
     AchievementPage,
     ShopPage,
     StatPage,
+    IntroPage,
   ],
   providers: [
     Transfer,

@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-	<ion-grid class="grid-login">
+	<ion-grid class="grid-submit">
 		<ion-row>
 			<ion-col text-center>
 				<h1>LocalLoop</h1>
@@ -18,18 +18,18 @@
 		</ion-row>
 
 			<form [formGroup]="login" (ngSubmit)="onSubmit()">
-				<ion-item class="item-login">
+				<ion-item class="item-submit">
 					<ion-label stacked>Email</ion-label>
 					<ion-input type="text" formControlName="email"></ion-input>
 				</ion-item>
-				<ion-item class="item-login">
+				<ion-item class="item-submit">
 					<ion-label stacked>Password</ion-label>
 					<ion-input type="password" formControlName="password"></ion-input>
 				</ion-item>
 <!-- The CSS for the buttons needs fixing so color="secondary" is no longer required -->
-			<button ion-button type="submit" color="secondary" class="button-login" [disabled]="login.invalid" block>Sign In</button>
+			<button ion-button type="submit" color="secondary" class="button-submit" [disabled]="login.invalid" block>Sign In</button>
 				</form>
-			<button ion-button (click)="goToSignup()"  class="button-login" color="secondary" block>Create an account</button>
+			<button ion-button (click)="goToSignup()"  class="button-submit" color="secondary" block>Create an account</button>
 
 
 	</ion-grid>

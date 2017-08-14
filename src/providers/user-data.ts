@@ -19,6 +19,8 @@ export class UserData {
     this.loadTestingData();
   }
 
+  // Session Key transactions
+
   public setSessionKey(key: string) {
     console.log("set sessionKey");
     this.storage.set('SessionKey',key);
@@ -36,32 +38,65 @@ export class UserData {
     this.storage.remove('SessionKey');
   }
 
+  // Checks for first time entering app status
+
+  public setReturningEntry() {
+    console.log("set returning");
+    // this.storage.set('returning',true);
+  }
+
+  public getReturningEntry() {
+    console.log("get returning");
+    return Observable.fromPromise(
+      this.storage.get('returning')
+    );
+  }
+
+  // Checks for first time login
+
+  public setReturningLogin() {
+    console.log("set returninglogin");
+    this.storage.set('returninglogin',true);
+  }
+
+  public getReturningLogin() {
+    console.log("get returninglogin");
+    return Observable.fromPromise(
+      this.storage.get('returninglogin')
+    );
+  }
+
+  // Checks for login status
+
   public hasLoggedIn() {
     return this.getSessionKey().map(
       result => result ? true : false
     );
   }
 
-  public setEmail(email: string) {
-    console.log("set Email");
+  // Pulls user info to store locally on login
+
+  public setUserInfo(
+    email: string,
+    display_name: string) {
+    console.log("set UserInfo");
     this.storage.set('email',email);
+    this.storage.set('displayname',display_name);
   }
 
-  public getEmail() {
-    console.log("get email");
-    return Observable.fromPromise(
-      this.storage.get('email')
-    );
-  }
+  // Deletes account details on logout
 
-  public removeEmail() {
-    console.log("remove email");
+  public removeUserInfo() {
+    console.log("remove UserInfo");
     this.storage.remove('email');
+    this.storage.remove('displayname');
   }
 
-  public setDisplayName(displayname: string) {
-    console.log("set Display Name");
-    this.storage.set('displayname',displayname);
+  public getFullName() {
+    console.log("get Full Name");
+    return Observable.fromPromise(
+      this.storage.get('fullname')
+    );
   }
 
   public getDisplayName() {
@@ -71,9 +106,37 @@ export class UserData {
     );
   }
 
-  public removeDisplayName() {
-    console.log("remove Display Name");
-    this.storage.remove('displayname');
+  public getPostcode() {
+    console.log("get Postcode");
+    return Observable.fromPromise(
+      this.storage.get('postcode')
+    );
+  }
+
+  public getYearOfBirth() {
+    console.log("get Year of Birth");
+    return Observable.fromPromise(
+      this.storage.get('yearofbirth')
+    );
+  }
+
+  public getEmail() {
+    console.log("get email");
+    return Observable.fromPromise(
+      this.storage.get('email')
+    );
+  }
+
+  // Remove below if above code works
+
+  public setEmail(email: string) {
+    console.log("set Email");
+    this.storage.set('email',email);
+  }
+
+  public removeEmail() {
+    console.log("remove email");
+    this.storage.remove('email');
   }
 
   /* Testing purpose, ideally, these variable should be initilizaed via calling */
