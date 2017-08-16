@@ -34,6 +34,7 @@ export class ReceiptPage {
     street_name: '',
     town: '',
     postcode: '',
+    store_type: '',
   };
   organisationId: number;
   organisationTown: string;
@@ -158,9 +159,8 @@ export class ReceiptPage {
 
   step1Validate() {
     if( this.submitOrg.name.length == 0 ||
-        this.submitOrg.street_name.length == 0 ||
         this.submitOrg.town.length == 0 ||
-        this.submitOrg.postcode.length == 0 ) {
+        this.submitOrg.store_type.length == 0 ) {
           this.step1Invalid = true;
         }else{
           this.step1Invalid = false;
@@ -173,6 +173,11 @@ export class ReceiptPage {
         }else{
           this.step2Invalid = false;
         }
+  }
+
+  // Used for if there is no receipt to upload a pic of
+  NoReceiptSubmit() {
+    this.submitReceipt = true;
   }
 
   //  promote a action sheet to ask user to upload image from either
@@ -277,6 +282,7 @@ export class ReceiptPage {
           street_name       : this.submitOrg.street_name,
           town              : this.submitOrg.town,
           postcode          : this.submitOrg.postcode,
+          store_type        : this.submitOrg.store_type,
         };
         break;
     }
@@ -309,6 +315,7 @@ export class ReceiptPage {
       street_name: '',
       town: '',
       postcode: '',
+      store_type: '',
     };
     this.amount = null;
     this.lastImage = null;

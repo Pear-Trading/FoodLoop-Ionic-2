@@ -27,8 +27,9 @@
       <ion-item (click)="addStore(store)" *ngFor="let store of storeList">
         <!-- TODO Make this look better -->
         <span class="address-store">{{store.name}},</span><br />
-		<span class="address-street">{{store.street_name}},</span><br />
-		<span class="address-town">{{ store.town }}, {{ store.postcode }}</span>
+				<span class="address-type">{{store.store_type}},</span><br />
+				<span class="address-street">{{store.street_name}},</span><br />
+				<span class="address-town">{{ store.town }}, {{ store.postcode }}</span>
       </ion-item>
     </ion-list>
 
@@ -98,6 +99,9 @@
       </button>
       <button padding class="camBtn" [hidden]="lastImage === null" ion-button color="light" large full (click)="uploadImage()" >
         <ion-icon ios="ios-camera" md="md-camera">Retake</ion-icon>
+      </button>
+			<button padding ion-button color="light" large full (click)="noReceiptSubmit()" >
+        <ion-icon ios="ios-pricetag" md="md-pricetag">No Receipt Submit</ion-icon>
       </button>
       <!-- Switch end -->
     </ion-item>
