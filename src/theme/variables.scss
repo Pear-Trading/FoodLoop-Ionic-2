@@ -35,6 +35,7 @@ $colors: (
   whitish:    #fefefe,
   button-blue: #248ed0,
   light-grey: #9f9f9f,
+  background-blue: #34688d,
 );
 
 
@@ -64,14 +65,31 @@ $tabs-md-tab-color-active: rgba(255, 255, 255, 1);
 
 $grid-padding-width: 2px;
 
-$alert-md-button-text-color: color($colors, secondary);
+// $alert-md-button-text-color: color($colors, primary);
+$alert-md-background-color: color($colors, background-blue);
+$alert-md-message-text-color: color($colors, primary);
+$alert-md-input-text-color: color($colors, primary);
+$alert-md-radio-label-text-color: darken(color($colors, primary), 25%);
+$alert-md-radio-label-text-color-checked: color($colors, primary);
+$alert-md-button-text-align: center;
+$alert-md-button-group-justify-content: center;
+// These two below should work but are not in 3.4.2
+// $alert-md-button-padding-start: 20px;
+// $alert-md-button-padding-end: 20px;
+$alert-md-button-group-padding: 8px;
+$alert-md-button-padding: 14px;
+$alert-button-font-size: 18px;
+$alert-md-border-radius: 10px;
+
+
 
 $label-md-text-color: color($colors, primary);
 
 $select-md-icon-color: color($colors, whitish);
 
-$picker-md-button-text-color: color($colors, secondary);
-$picker-md-option-selected-color: color($colors, button-blue);
+// $picker-md-button-text-color: color($colors, secondary);
+// $picker-md-option-selected-color: color($colors, button-blue);
+$picker-md-background-color: color($colors, background-blue);
 
 /*$segment-button-md-border-bottom-color-activated: #ff0000;*/
 // App Windows Variables
