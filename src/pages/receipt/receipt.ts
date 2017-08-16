@@ -74,26 +74,6 @@ export class ReceiptPage {
     this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
   }
 
-  // calculateTime(offset: any) {
-  //   // create Date object for current location
-  //  let d = new Date();
-  //
-  //  // create new Date object using supplied offset
-  //  let nd = new Date(d.getTime() + (3600000 * offset));
-  //
-  //  return nd.toISOString();
-  // }
-  //
-  // stdTimezoneOffset(today: any) {
-  //   let jan = new Date(today.getFullYear(), 0, 1);
-  //   let jul = new Date(today.getFullYear(), 6, 1);
-  //   return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-  // }
-  //
-  // dst(today: any) {
-  //   return today.getTimezoneOffset() < this.stdTimezoneOffset(today);
-  // }
-
   ionViewDidEnter(){
     this.platform.ready().then(() => {
       this.keyboard.disableScroll(true);
