@@ -28,6 +28,10 @@ ion-app.md {
 	background: none;
 }
 
+.alert-md .alert-title {
+  color: color($colors, primary);
+}
+
 .item-submit {
 	font-size: 1.2em;
 	color: rgba(255, 255, 255, .8);
