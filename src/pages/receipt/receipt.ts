@@ -305,17 +305,30 @@ export class ReceiptPage {
 
     this.peopleService.upload(myParams, targetPath).subscribe(
       response => {
-        console.log('Successful Upload');
-        console.log(response);
-        this.loading.dismiss();
-        this.readSubmitPrompt();
-        this.resetForm();
+        if( response.success == true ) {
+          console.log('Successful Upload');
+          console.log(response);
+          this.loading.dismiss();
+          this.readSubmitPrompt();
+          this.resetForm();
+        } else {
+          console.log('Upload Error');
+          this.loading.dismiss();
+          this.presentToast(JSON.stringify(response.status) + 'Error, ' + JSON.stringify(response.message));
+        }
       },
       err => {
         console.log('Upload Error');
         console.log(err);
         this.loading.dismiss();
-        this.presentToast('Error while uploading:' + JSON.stringify(err));
+        let errorString;
+        try {
+          let jsonError = JSON.parse(err.body);
+          errorString = JSON.stringify(jsonError.status) + 'Error, ' + JSON.stringify(jsonError.message);
+        } catch(e) {
+          errorString = 'There was a server error, please try again later.';
+        }
+        this.presentToast(errorString);
       }
     );
   }
@@ -330,8 +343,8 @@ export class ReceiptPage {
     this.storeList = null;
     this.amount = null;
     this.lastImage = null;
-    step1Invalid = true;
-    step2Invalid = true;
+    this.step1Invalid = true;
+    this.step2Invalid = true;
     this.currentStep = 1;
     this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
   }
