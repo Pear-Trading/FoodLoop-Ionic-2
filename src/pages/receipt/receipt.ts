@@ -4,6 +4,7 @@ import {
   LoadingController, Loading, ToastController
 } from 'ionic-angular';
 import { AlertController, ActionSheetController } from 'ionic-angular';
+import { convertDataToISO } from 'ionic-angular/util/datetime-util';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FilePath } from '@ionic-native/file-path';
 import { Transfer } from '@ionic-native/transfer';
@@ -267,12 +268,18 @@ export class ReceiptPage {
     // // File name only
     var filename = this.lastImage;
     var myParams: any;
+    let purchaseTime: string;
+    if ( typeof( this.myDate ) === 'string' ) {
+      purchaseTime = this.myDate;
+    } else {
+      purchaseTime = convertDataToISO( this.myDate );
+    }
     switch(this.transactionAdditionType){
       case 1:
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          purchase_time     : this.myDate,
+          purchase_time     : purchaseTime,
           organisation_id   : this.organisationId,
         };
         break;
@@ -280,7 +287,7 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          purchase_time     : this.myDate,
+          purchase_time     : purchaseTime,
           organisation_id   : this.organisationId,
         };
         break;
@@ -288,7 +295,7 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          purchase_time     : this.myDate,
+          purchase_time     : purchaseTime,
           organisation_name : this.submitOrg.name,
           street_name       : this.submitOrg.street_name,
           town              : this.submitOrg.town,
