@@ -90,9 +90,9 @@ export class ReceiptPage {
     // Checks if current time is before April 1st, if so returns true
     let beforeApril = now.isBefore(aprilDate);
     if ( beforeApril == true ) {
-      this.minDate = moment(aprilDate).subtract(2, 'years').format('YYYY-MM-DD');
+      this.minDate = aprilDate.subtract(2, 'years').format('YYYY-MM-DD');
     } else {
-      this.minDate = moment(aprilDate).subtract(1, 'years').format('YYYY-MM-DD');
+      this.minDate = aprilDate.subtract(1, 'years').format('YYYY-MM-DD');
     }
   }
 
