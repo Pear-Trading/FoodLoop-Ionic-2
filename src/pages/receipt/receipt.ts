@@ -309,6 +309,7 @@ export class ReceiptPage {
         console.log(response);
         this.loading.dismiss();
         this.readSubmitPrompt();
+        this.resetForm();
       },
       err => {
         console.log('Upload Error');
@@ -326,9 +327,13 @@ export class ReceiptPage {
       town: '',
       postcode: '',
     };
+    this.storeList = null;
     this.amount = null;
     this.lastImage = null;
+    step1Invalid = true;
+    step2Invalid = true;
     this.currentStep = 1;
+    this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
   }
 
   // Create a new name for the image
@@ -356,7 +361,6 @@ export class ReceiptPage {
     buttons: [
       {
         text: 'No Thanks',
-        role: 'Yes I do!',
         handler: () => {
           console.log('Cancel clicked');
           this.navCtrl.setRoot(UserPage);
@@ -366,7 +370,6 @@ export class ReceiptPage {
         text: 'Yes!',
         handler: () => {
           console.log('Form reset clicked');
-          this.resetForm();
         }
       }
     ]
