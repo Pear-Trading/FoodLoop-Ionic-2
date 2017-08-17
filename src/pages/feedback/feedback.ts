@@ -54,6 +54,9 @@ export class FeedbackPage {
         result => {
           console.log('Form submitted!');
           this.presentToast('Feedback succesfully submitted.');
+          this.feedbackForm.patchValue({
+            feedbacktext: '',
+          });
         },
         error => {
           console.log(JSON.parse(error._body).message);

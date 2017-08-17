@@ -4,6 +4,7 @@ import {
   LoadingController, Loading, ToastController
 } from 'ionic-angular';
 import { AlertController, ActionSheetController } from 'ionic-angular';
+import { convertDataToISO } from 'ionic-angular/util/datetime-util';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FilePath } from '@ionic-native/file-path';
 import { Transfer } from '@ionic-native/transfer';
@@ -54,6 +55,7 @@ export class ReceiptPage {
   currentStep: number = 1;
 
   myDate: string;
+  minDate: any;
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -72,32 +74,27 @@ export class ReceiptPage {
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
   ) {
     this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
-  }
 
-  // calculateTime(offset: any) {
-  //   // create Date object for current location
-  //  let d = new Date();
-  //
-  //  // create new Date object using supplied offset
-  //  let nd = new Date(d.getTime() + (3600000 * offset));
-  //
-  //  return nd.toISOString();
-  // }
-  //
-  // stdTimezoneOffset(today: any) {
-  //   let jan = new Date(today.getFullYear(), 0, 1);
-  //   let jul = new Date(today.getFullYear(), 6, 1);
-  //   return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-  // }
-  //
-  // dst(today: any) {
-  //   return today.getTimezoneOffset() < this.stdTimezoneOffset(today);
-  // }
+  }
 
   ionViewDidEnter(){
     this.platform.ready().then(() => {
       this.keyboard.disableScroll(true);
     });
+    this.getMinDate();
+  }
+
+  getMinDate(){
+    // gets the April 1st date of the current year
+    let aprilDate = moment().month(3).date(1);
+    let now = moment();
+    // Checks if current time is before April 1st, if so returns true
+    let beforeApril = now.isBefore(aprilDate);
+    if ( beforeApril == true ) {
+      this.minDate = aprilDate.subtract(2, 'years').format('YYYY-MM-DD');
+    } else {
+      this.minDate = aprilDate.subtract(1, 'years').format('YYYY-MM-DD');
+    }
   }
 
   previousStep(){
@@ -271,12 +268,18 @@ export class ReceiptPage {
     // // File name only
     var filename = this.lastImage;
     var myParams: any;
+    let purchaseTime: string;
+    if ( typeof( this.myDate ) === 'string' ) {
+      purchaseTime = this.myDate;
+    } else {
+      purchaseTime = convertDataToISO( this.myDate );
+    }
     switch(this.transactionAdditionType){
       case 1:
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          purchase_time     : this.myDate,
+          purchase_time     : purchaseTime,
           organisation_id   : this.organisationId,
         };
         break;
@@ -284,7 +287,7 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          purchase_time     : this.myDate,
+          purchase_time     : purchaseTime,
           organisation_id   : this.organisationId,
         };
         break;
@@ -292,7 +295,7 @@ export class ReceiptPage {
         myParams = {
           transaction_type  : this.transactionAdditionType,
           transaction_value : this.amount,
-          purchase_time     : this.myDate,
+          purchase_time     : purchaseTime,
           organisation_name : this.submitOrg.name,
           street_name       : this.submitOrg.street_name,
           town              : this.submitOrg.town,
@@ -309,16 +312,30 @@ export class ReceiptPage {
 
     this.peopleService.upload(myParams, targetPath).subscribe(
       response => {
-        console.log('Successful Upload');
-        console.log(response);
-        this.loading.dismiss();
-        this.readSubmitPrompt();
+        if( response.success == true ) {
+          console.log('Successful Upload');
+          console.log(response);
+          this.loading.dismiss();
+          this.readSubmitPrompt();
+          this.resetForm();
+        } else {
+          console.log('Upload Error');
+          this.loading.dismiss();
+          this.presentToast(JSON.stringify(response.status) + 'Error, ' + JSON.stringify(response.message));
+        }
       },
       err => {
         console.log('Upload Error');
         console.log(err);
         this.loading.dismiss();
-        this.presentToast('Error while uploading:' + JSON.stringify(err));
+        let errorString;
+        try {
+          let jsonError = JSON.parse(err.body);
+          errorString = JSON.stringify(jsonError.status) + 'Error, ' + JSON.stringify(jsonError.message);
+        } catch(e) {
+          errorString = 'There was a server error, please try again later.';
+        }
+        this.presentToast(errorString);
       }
     );
   }
@@ -330,9 +347,13 @@ export class ReceiptPage {
       town: '',
       postcode: '',
     };
+    this.storeList = null;
     this.amount = null;
     this.lastImage = null;
+    this.step1Invalid = true;
+    this.step2Invalid = true;
     this.currentStep = 1;
+    this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
   }
 
   // Create a new name for the image
@@ -360,7 +381,6 @@ export class ReceiptPage {
     buttons: [
       {
         text: 'No Thanks',
-        role: 'Yes I do!',
         handler: () => {
           console.log('Cancel clicked');
           this.navCtrl.setRoot(UserPage);
@@ -370,7 +390,6 @@ export class ReceiptPage {
         text: 'Yes!',
         handler: () => {
           console.log('Form reset clicked');
-          this.resetForm();
         }
       }
     ]
