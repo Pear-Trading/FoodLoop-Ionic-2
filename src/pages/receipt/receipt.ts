@@ -54,6 +54,7 @@ export class ReceiptPage {
   currentStep: number = 1;
 
   myDate: string;
+  minDate: any;
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -72,12 +73,27 @@ export class ReceiptPage {
     public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
   ) {
     this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
+
   }
 
   ionViewDidEnter(){
     this.platform.ready().then(() => {
       this.keyboard.disableScroll(true);
     });
+    this.getMinDate();
+  }
+
+  getMinDate(){
+    // gets the April 1st date of the current year
+    let aprilDate = moment().month(3).date(1);
+    let now = moment();
+    // Checks if current time is before April 1st, if so returns true
+    let beforeApril = now.isBefore(aprilDate);
+    if ( beforeApril == true ) {
+      this.minDate = moment(aprilDate).subtract(2, 'years').format('YYYY-MM-DD');
+    } else {
+      this.minDate = moment(aprilDate).subtract(1, 'years').format('YYYY-MM-DD');
+    }
   }
 
   previousStep(){

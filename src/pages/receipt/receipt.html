@@ -69,7 +69,7 @@
 
 		<ion-item>
 			<ion-label stacked>Click to Edit Time of Purchase</ion-label>
-			<ion-datetime displayFormat="HH:mm DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+			<ion-datetime displayFormat="HH:mm DD/MM/YYYY" [min]="minDate" [(ngModel)]="myDate"></ion-datetime>
 		</ion-item>
     <!-- move onto next -->
     <ion-item>
