@@ -18,8 +18,8 @@
 
     <!-- Enter storename and search -->
     <ion-item>
-      <ion-label stacked><span class="labelreceipt">Enter store name below</span></ion-label>
-      <ion-input [(ngModel)]="submitOrg.name" (input)="organisationSearch($event)" (ngModelChange)="step1Validate()" placeholder="For example: BT Ltd"></ion-input>
+      <ion-label stacked><span class="labelreceipt">Enterb the store name:</span></ion-label>
+      <ion-input [(ngModel)]="submitOrg.name" (input)="organisationSearch($event)" (ngModelChange)="step1Validate()" placeholder="Name of Company"></ion-input>
     </ion-item>
 
     <!-- Display search result -->
@@ -36,15 +36,15 @@
     <ion-list *ngIf="showAddStore">
       <ion-item>
         <ion-label stacked>Street Address</ion-label>
-        <ion-input [(ngModel)]="submitOrg.street_name" (ngModelChange)="step1Validate()"></ion-input>
+        <ion-input [(ngModel)]="submitOrg.street_name" (ngModelChange)="step1Validate()" placeholder="Which Street?"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label stacked>Town*</ion-label>
-          <ion-input [(ngModel)]="submitOrg.town" (ngModelChange)="step1Validate()"></ion-input>
+          <ion-input [(ngModel)]="submitOrg.town" (ngModelChange)="step1Validate()" placeholder="Which Town"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label stacked>Postcode</ion-label>
-          <ion-input [(ngModel)]="submitOrg.postcode" (ngModelChange)="step1Validate()"></ion-input>
+          <ion-input [(ngModel)]="submitOrg.postcode" (ngModelChange)="step1Validate()" placeholder="Postcode if Known"></ion-input>
       </ion-item>
     </ion-list>
 
@@ -63,12 +63,12 @@
   <ion-card class="card-2" *ngIf="currentStep === 2">
     <!-- Enter amount spent-->
     <ion-item>
-      <ion-label stacked>Enter amount spent below(£)</ion-label>
-      <ion-input type="number" [(ngModel)]="amount" (ngModelChange)="step2Validate()" step="0.01" placeholder="e.g. 5.00"></ion-input>
+      <ion-label stacked>Enter the amount spent below</ion-label>
+      <ion-input type="number" [(ngModel)]="amount" (ngModelChange)="step2Validate()" step="0.01" placeholder="Numbers Only"></ion-input>
     </ion-item>
 
 		<ion-item>
-			<ion-label stacked>Click to Edit Time of Purchase</ion-label>
+			<ion-label stacked>Time of Purchase (click next if now)</ion-label>
 			<ion-datetime displayFormat="HH:mm DD/MM/YYYY" [min]="minDate" [(ngModel)]="myDate"></ion-datetime>
 		</ion-item>
     <!-- move onto next -->
