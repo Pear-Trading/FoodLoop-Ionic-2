@@ -29,7 +29,6 @@ import { SettingPage } from '../pages/setting/setting';
 import { GamePage } from '../pages/game/game';
 import { AchievementPage } from '../pages/achievement/achievement';
 import { OverviewPage } from '../pages/overview/overview';
-import { AccountPage } from '../pages/account/account';
 import { ShopPage } from '../pages/shop/shop';
 import { StatPage } from '../pages/stat/stat';
 import { IntroPage } from '../pages/intro/intro';
@@ -46,7 +45,6 @@ import { IntroPage } from '../pages/intro/intro';
     UserPage,
     LeaderboardPage,
     SettingPage,
-    AccountPage,
     OverviewPage,
     GamePage,
     AchievementPage,
@@ -73,7 +71,6 @@ import { IntroPage } from '../pages/intro/intro';
     UserPage,
     LeaderboardPage,
     SettingPage,
-    AccountPage,
     OverviewPage,
     GamePage,
     AchievementPage,
