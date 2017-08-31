@@ -27,8 +27,8 @@
       <ion-item (click)="addStore(store)" *ngFor="let store of storeList">
         <!-- TODO Make this look better -->
         <span class="address-store">{{store.name}},</span><br />
-		<span class="address-street">{{store.street_name}},</span><br />
-		<span class="address-town">{{ store.town }}, {{ store.postcode }}</span>
+		 		<span class="address-street">{{store.street_name}},</span><br />
+				<span class="address-town">{{ store.town }}, {{ store.postcode }}</span>
       </ion-item>
     </ion-list>
 
@@ -121,7 +121,7 @@
 
 	<div padding class="pearUpCtrl">
 		<div class="boxforbutton">
-			<button ion-button [disabled]="!submitReceipt" (click) ="postImage()" >
+			<button ion-button [disabled]="currentStep != 3" (click) ="postImage()" >
 				submit
 			</button>
 		</div>
