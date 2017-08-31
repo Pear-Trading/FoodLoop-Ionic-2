@@ -9,7 +9,6 @@ import { ReceiptPage } from '../pages/receipt/receipt';
 import { LeaderboardPage } from '../pages/leaderboard/leaderboard';
 import { SettingPage} from '../pages/setting/setting';
 // import { StatPage} from '../pages/stat/stat';
-// import { AccountPage } from '../pages/account/account';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 
 import { PeopleService } from '../providers/people-service';
