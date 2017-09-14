@@ -414,27 +414,27 @@ export class ReceiptPage {
   }
 
   private readSubmitPrompt() {
-  let alert = this.alertCtrl.create({
-    title: 'Submitted Receipt!',
-    message: 'Would you like to submit another receipt?',
-    buttons: [
-      {
-        text: 'No Thanks',
-        handler: () => {
-          console.log('Cancel clicked');
-          this.navCtrl.setRoot(UserPage);
+    let alert = this.alertCtrl.create({
+      title: 'Submitted Receipt!',
+      message: 'Would you like to submit another receipt?',
+      buttons: [
+        {
+          text: 'No Thanks',
+          handler: () => {
+            console.log('Cancel clicked');
+            this.navCtrl.setRoot(UserPage);
+          }
+        },
+        {
+          text: 'Yes!',
+          handler: () => {
+            console.log('Form reset clicked');
+          }
         }
-      },
-      {
-        text: 'Yes!',
-        handler: () => {
-          console.log('Form reset clicked');
-        }
-      }
-    ]
-  });
-  alert.present();
-}
+      ]
+    });
+    alert.present();
+  }
 
   private presentToast(text) {
     let toast = this.toastCtrl.create({
