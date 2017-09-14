@@ -1,5 +1,14 @@
 # Changelog
 
+# Next Release
+
+# v0.0.4
+
+* UI Tweaks
+* Allow for markets in transaction submission
+* Refactoring and removing redundant code
+* Redirect to trader portal for organisations
+
 # v0.0.3
 
 * Improve Feedback submission
