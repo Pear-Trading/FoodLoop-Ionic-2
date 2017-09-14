@@ -73,10 +73,23 @@ export class PeopleService {
             { session_key : key }
           );
         }
-      ).map( response => response.json );
+      ).map( response => response.json() );
   }
 
-  public upload(data, filePath) {
+  public upload(data) {
+    return this.userData.getSessionKey()
+      .flatMap(
+        value => {
+          data.session_key = value;
+          return this.http.post(
+            this.apiUrl + '/upload',
+            data
+          );
+        }
+      ).map( response => response.json() );
+  }
+
+  public uploadImage(data, filePath) {
     return this.userData.getSessionKey()
       .flatMap(
         key => {

@@ -1,9 +1,14 @@
 import { Component, Input } from '@angular/core';
 import {
-  NavController, NavParams, Platform,
-  LoadingController, Loading, ToastController
+  NavController,
+  NavParams,
+  Platform,
+  LoadingController,
+  Loading,
+  ToastController,
+  AlertController,
+  ActionSheetController
 } from 'ionic-angular';
-import { AlertController, ActionSheetController } from 'ionic-angular';
 import { convertDataToISO } from 'ionic-angular/util/datetime-util';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FilePath } from '@ionic-native/file-path';
@@ -71,7 +76,7 @@ export class ReceiptPage {
     private filePath: FilePath,
     private transfer: Transfer,
     private file: File,
-    public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
+    public alertCtrl: AlertController
   ) {
     this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
 
@@ -174,10 +179,7 @@ export class ReceiptPage {
   }
 
   step1Validate() {
-    if( this.submitOrg.name.length == 0 ||
-        this.submitOrg.street_name.length == 0 ||
-        this.submitOrg.town.length == 0 ||
-        this.submitOrg.postcode.length == 0 ) {
+    if( this.submitOrg.name.length == 0 ) {
           this.step1Invalid = true;
         }else{
           this.step1Invalid = false;
@@ -253,7 +255,6 @@ export class ReceiptPage {
         var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
         this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
       }
-      this.submitReceipt = true;
     }, (err) => {
       this.presentToast('Error while selecting image.');
     });
@@ -262,11 +263,6 @@ export class ReceiptPage {
 
   public postImage() {
 
-    // // File for Upload
-    var targetPath = this.pathForImage(this.lastImage);
-
-    // // File name only
-    var filename = this.lastImage;
     var myParams: any;
     let purchaseTime: string;
     if ( typeof( this.myDate ) === 'string' ) {
@@ -305,39 +301,82 @@ export class ReceiptPage {
     }
     /******************************/
 
-    this.loading = this.loadingCtrl.create({
-      content: 'Uploading...' + filename,
-    });
-    this.loading.present();
+    if ( this.lastImage != null ) {
+      // // File for Upload
+      var targetPath = this.pathForImage(this.lastImage);
+      // // File name only
+      var filename = this.lastImage;
 
-    this.peopleService.upload(myParams, targetPath).subscribe(
-      response => {
-        if( response.success == true ) {
-          console.log('Successful Upload');
-          console.log(response);
-          this.loading.dismiss();
-          this.readSubmitPrompt();
-          this.resetForm();
-        } else {
+      this.loading = this.loadingCtrl.create({
+        content: 'Uploading...' + filename,
+      });
+      this.loading.present();
+
+      this.peopleService.uploadImage(myParams, targetPath).subscribe(
+        response => {
+          if( response.success == true ) {
+            console.log('Successful Upload');
+            console.log(response);
+            this.loading.dismiss();
+            this.readSubmitPrompt();
+            this.resetForm();
+          } else {
+            console.log('Upload Error');
+            this.loading.dismiss();
+            this.presentToast(JSON.stringify(response.status) + 'Error, ' + JSON.stringify(response.message));
+          }
+        },
+        err => {
           console.log('Upload Error');
+          console.log(err);
           this.loading.dismiss();
-          this.presentToast(JSON.stringify(response.status) + 'Error, ' + JSON.stringify(response.message));
+          let errorString;
+          try {
+            let jsonError = JSON.parse(err.body);
+            errorString = JSON.stringify(jsonError.status) + 'Error, ' + JSON.stringify(jsonError.message);
+          } catch(e) {
+            errorString = 'There was a server error, please try again later.';
+          }
+          this.presentToast(errorString);
         }
-      },
-      err => {
-        console.log('Upload Error');
-        console.log(err);
-        this.loading.dismiss();
-        let errorString;
-        try {
-          let jsonError = JSON.parse(err.body);
-          errorString = JSON.stringify(jsonError.status) + 'Error, ' + JSON.stringify(jsonError.message);
-        } catch(e) {
-          errorString = 'There was a server error, please try again later.';
+      );
+    } else {
+      this.loading = this.loadingCtrl.create({
+        content: 'Uploading...',
+      });
+      this.loading.present();
+
+      this.peopleService.upload(myParams).subscribe(
+        response => {
+          if( response.success == true ) {
+            console.log('Successful Upload');
+            console.log(response);
+            this.loading.dismiss();
+            this.readSubmitPrompt();
+            this.resetForm();
+          } else {
+            console.log('Upload Error');
+            this.loading.dismiss();
+            this.presentToast(JSON.stringify(response.status) + 'Error, ' + JSON.stringify(response.message));
+          }
+        },
+        err => {
+          console.log('Upload Error');
+          console.log(err);
+          this.loading.dismiss();
+          let errorString;
+          try {
+            let jsonError = JSON.parse(err.body);
+            errorString = JSON.stringify(jsonError.status) + 'Error, ' + JSON.stringify(jsonError.message);
+          } catch(e) {
+            errorString = 'There was a server error, please try again later.';
+          }
+          this.presentToast(errorString);
         }
-        this.presentToast(errorString);
-      }
-    );
+      );
+    }
+
+
   }
 
   private resetForm() {
@@ -375,27 +414,27 @@ export class ReceiptPage {
   }
 
   private readSubmitPrompt() {
-  let alert = this.alertCtrl.create({
-    title: 'Submitted Receipt!',
-    message: 'Would you like to submit another receipt?',
-    buttons: [
-      {
-        text: 'No Thanks',
-        handler: () => {
-          console.log('Cancel clicked');
-          this.navCtrl.setRoot(UserPage);
+    let alert = this.alertCtrl.create({
+      title: 'Submitted Receipt!',
+      message: 'Would you like to submit another receipt?',
+      buttons: [
+        {
+          text: 'No Thanks',
+          handler: () => {
+            console.log('Cancel clicked');
+            this.navCtrl.setRoot(UserPage);
+          }
+        },
+        {
+          text: 'Yes!',
+          handler: () => {
+            console.log('Form reset clicked');
+          }
         }
-      },
-      {
-        text: 'Yes!',
-        handler: () => {
-          console.log('Form reset clicked');
-        }
-      }
-    ]
-  });
-  alert.present();
-}
+      ]
+    });
+    alert.present();
+  }
 
   private presentToast(text) {
     let toast = this.toastCtrl.create({

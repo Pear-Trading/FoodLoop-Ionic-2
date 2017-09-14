@@ -12,6 +12,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { FilePath } from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
 import { AppVersion } from '@ionic-native/app-version';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TruncateModule } from 'ng2-truncate';
 
 // import { AppProviders } from './app.providers';
@@ -29,7 +30,6 @@ import { SettingPage } from '../pages/setting/setting';
 import { GamePage } from '../pages/game/game';
 import { AchievementPage } from '../pages/achievement/achievement';
 import { OverviewPage } from '../pages/overview/overview';
-import { AccountPage } from '../pages/account/account';
 import { ShopPage } from '../pages/shop/shop';
 import { StatPage } from '../pages/stat/stat';
 import { IntroPage } from '../pages/intro/intro';
@@ -46,7 +46,6 @@ import { IntroPage } from '../pages/intro/intro';
     UserPage,
     LeaderboardPage,
     SettingPage,
-    AccountPage,
     OverviewPage,
     GamePage,
     AchievementPage,
@@ -73,7 +72,6 @@ import { IntroPage } from '../pages/intro/intro';
     UserPage,
     LeaderboardPage,
     SettingPage,
-    AccountPage,
     OverviewPage,
     GamePage,
     AchievementPage,
@@ -89,6 +87,7 @@ import { IntroPage } from '../pages/intro/intro';
     File,
     Camera,
     AppVersion,
+    InAppBrowser,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

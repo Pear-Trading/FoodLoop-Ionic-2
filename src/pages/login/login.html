@@ -20,11 +20,11 @@
 			<form [formGroup]="login" (ngSubmit)="onSubmit()">
 				<ion-item class="item-submit">
 					<ion-label stacked>Email</ion-label>
-					<ion-input type="text" formControlName="email"></ion-input>
+					<ion-input type="text" formControlName="email" placeholder="Iam@example.com"></ion-input>
 				</ion-item>
 				<ion-item class="item-submit">
 					<ion-label stacked>Password</ion-label>
-					<ion-input type="password" formControlName="password"></ion-input>
+					<ion-input type="password" formControlName="password"  placeholder="Insert Password"></ion-input>
 				</ion-item>
 <!-- The CSS for the buttons needs fixing so color="secondary" is no longer required -->
 			<button ion-button type="submit" color="secondary" class="button-submit" [disabled]="login.invalid" block>Sign In</button>
