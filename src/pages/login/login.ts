@@ -7,7 +7,9 @@ import {
   Events,
   AlertController
 } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { UserPage } from '../user/user';
+import { FeedbackPage } from '../feedback/feedback';
 import { SignupPage } from '../signup/signup';
 import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
@@ -32,7 +34,8 @@ export class LoginPage {
     private events: Events,
     private peopleService: PeopleService,
     private userData: UserData,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    private iab: InAppBrowser
   ) {
     this.login = this.formBuilder.group({
       email:    ['', [Validators.required]],
@@ -79,7 +82,8 @@ export class LoginPage {
             loading.dismiss();
             this.navCtrl.setRoot(UserPage);
           } else if( result.user_type == "organisation") {
-            loginOrgPrompt();
+            loading.dismiss();
+            this.loginOrgPrompt();
           } else {
             let toast = this.toastCtrl.create({
               message: 'Your account has no user type, please contact an admin regarding this issue.',
@@ -87,6 +91,7 @@ export class LoginPage {
               position: 'top'
             });
             toast.present();
+            this.navCtrl.setRoot(FeedbackPage);
           }
         },
         error => {
@@ -121,6 +126,7 @@ export class LoginPage {
           text: 'Yes!',
           handler: () => {
             console.log('Routing clicked');
+            this.iab.create('http://dev.peartrade.org', '_system');
           }
         }
       ]

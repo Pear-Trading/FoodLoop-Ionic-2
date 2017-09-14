@@ -12,6 +12,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { FilePath } from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
 import { AppVersion } from '@ionic-native/app-version';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TruncateModule } from 'ng2-truncate';
 
 // import { AppProviders } from './app.providers';
@@ -86,6 +87,7 @@ import { IntroPage } from '../pages/intro/intro';
     File,
     Camera,
     AppVersion,
+    InAppBrowser,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
