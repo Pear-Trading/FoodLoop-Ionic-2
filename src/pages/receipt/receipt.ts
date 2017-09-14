@@ -1,9 +1,14 @@
 import { Component, Input } from '@angular/core';
 import {
-  NavController, NavParams, Platform,
-  LoadingController, Loading, ToastController
+  NavController,
+  NavParams,
+  Platform,
+  LoadingController,
+  Loading,
+  ToastController,
+  AlertController,
+  ActionSheetController
 } from 'ionic-angular';
-import { AlertController, ActionSheetController } from 'ionic-angular';
 import { convertDataToISO } from 'ionic-angular/util/datetime-util';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FilePath } from '@ionic-native/file-path';
@@ -71,7 +76,7 @@ export class ReceiptPage {
     private filePath: FilePath,
     private transfer: Transfer,
     private file: File,
-    public alertCtrl: AlertController  // alert screen for confirmation of receipt entries
+    public alertCtrl: AlertController
   ) {
     this.myDate = moment().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
 
