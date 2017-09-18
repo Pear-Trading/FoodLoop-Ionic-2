@@ -179,7 +179,8 @@ export class ReceiptPage {
   }
 
   step1Validate() {
-    if( this.submitOrg.name.length == 0 ) {
+    if( this.submitOrg.name.length == 0 ||
+        this.submitOrg.town.length == 0 ) {
           this.step1Invalid = true;
         }else{
           this.step1Invalid = false;
