@@ -14,6 +14,7 @@ import { File } from '@ionic-native/file';
 import { AppVersion } from '@ionic-native/app-version';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GoogleMaps } from '@ionic-native/google-maps'
+import { Geolocation } from '@ionic-native/geolocation';
 import { TruncateModule } from 'ng2-truncate';
 
 // import { AppProviders } from './app.providers';
@@ -93,6 +94,7 @@ import { MapPage } from '../pages/map/map';
     AppVersion,
     InAppBrowser,
     GoogleMaps,
+    Geolocation,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler

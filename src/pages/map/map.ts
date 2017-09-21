@@ -6,9 +6,12 @@ import {
  GoogleMapsEvent,
  GoogleMapOptions,
  CameraPosition,
+ LatLng,
+ LatLngBounds,
  MarkerOptions,
  Marker
 } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
 import { PeopleService } from '../../providers/people-service';
 
@@ -21,12 +24,24 @@ export class MapPage {
   mapElement: HTMLElement;
   constructor(
     private googleMaps: GoogleMaps,
-    public platform: Platform
+    public platform: Platform,
+    private geolocation: Geolocation,
   ) {
-
     // Wait the native plugin is ready.
     platform.ready().then(() => {
       this.loadMap();
+      let watch = this.geolocation.watchPosition();
+        watch.subscribe((data) => {
+          let location = new LatLng(data.coords.latitude, data.coords.longitude);
+          map.animateCamera({
+           target: {lat: data.coords.latitude, lng: data.coords.longitude},
+           zoom: 18,
+           tilt: 30,
+           bearing: 140,
+           duration: 5000,
+           padding: 0  // default = 20px
+         });
+      });
     });
   }
 
@@ -36,43 +51,50 @@ export class MapPage {
   //}
 
  loadMap() {
-    this.mapElement = document.getElementById('map');
+  this.geolocation.getCurrentPosition({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true })
+    .then((resp) => {
+      this.mapElement = document.getElementById('map_orgs');
 
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 43.0741904,
-          lng: -89.3809802
-        },
-        zoom: 18,
-        tilt: 30
-      }
-    };
+      let mapOptions: GoogleMapOptions = {
+        camera: {
+          target: {
+            lat: resp.coords.latitude,
+            lng: resp.coords.longitude
+          },
+          zoom: 18,
+          tilt: 30
+        }
+      };
 
-    this.map = this.googleMaps.create(this.mapElement, mapOptions);
+      this.map = this.googleMaps.create(this.mapElement, mapOptions);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+  });
 
-    // Wait the MAP_READY before using any methods.
-    this.map.one(GoogleMapsEvent.MAP_READY)
-      .then(() => {
-        console.log('Map is ready!');
+  // Wait the MAP_READY before using any methods.
+  this.map.one(GoogleMapsEvent.MAP_READY)
+    .then(() => {
+      console.log('Map is ready!');
 
-        // Now you can use all methods safely.
-        this.map.addMarker({
-            title: 'Ionic',
-            icon: 'blue',
-            animation: 'DROP',
-            position: {
-              lat: 43.0741904,
-              lng: -89.3809802
-            }
-          })
-          .then(marker => {
-            marker.on(GoogleMapsEvent.MARKER_CLICK)
-              .subscribe(() => {
-                alert('clicked');
-              });
-          });
+      let mapBox = new this.LatLngBounds
 
-      });
+      // Now you can use all methods safely.
+      this.map.addMarker({
+          title: 'Ionic',
+          icon: 'blue',
+          animation: 'DROP',
+          position: {
+            lat: 43.0741904,
+            lng: -89.3809802
+          }
+        })
+        .then(marker => {
+          marker.on(GoogleMapsEvent.MARKER_CLICK)
+            .subscribe(() => {
+              alert('clicked');
+            });
+        });
+
+    });
   }
 }
