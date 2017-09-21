@@ -34,6 +34,7 @@ import { OverviewPage } from '../pages/overview/overview';
 import { ShopPage } from '../pages/shop/shop';
 import { StatPage } from '../pages/stat/stat';
 import { IntroPage } from '../pages/intro/intro';
+import { MapPage } from '../pages/map/map';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { IntroPage } from '../pages/intro/intro';
     ShopPage,
     StatPage,
     IntroPage,
+    MapPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false }),
@@ -79,6 +81,7 @@ import { IntroPage } from '../pages/intro/intro';
     ShopPage,
     StatPage,
     IntroPage,
+    MapPage,
   ],
   providers: [
     Transfer,

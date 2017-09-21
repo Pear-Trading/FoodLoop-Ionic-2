@@ -8,6 +8,7 @@ import { UserPage} from '../pages/user/user';
 import { ReceiptPage } from '../pages/receipt/receipt';
 import { LeaderboardPage } from '../pages/leaderboard/leaderboard';
 import { SettingPage} from '../pages/setting/setting';
+import { MapPage} from '../pages/map/map';
 // import { StatPage} from '../pages/stat/stat';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 
@@ -49,6 +50,7 @@ export class MyApp {
 	// The about page is currently the Guide page, need a whole guide page and About be about the app
 	{ title: 'Guide',component: AboutPage, index:11,icon: 'globe'},
   { title: 'Feedback', component: FeedbackPage, index:13,icon: 'mail' },
+  { title: 'Map', component: MapPage, index:15,icon: 'map' },
   { title: 'Logout', component: LoginPage, icon: 'log-out',index:30, logsOut: true }
   ];
 
