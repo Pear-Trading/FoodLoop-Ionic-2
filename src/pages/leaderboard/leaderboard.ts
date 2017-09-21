@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController} from 'ionic-angular';
 import { PeopleService } from '../../providers/people-service';
 
 /*
@@ -18,9 +17,6 @@ export class LeaderboardPage {
   listType: any = 'weekly_total';
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams ,
-    private toastCtrl: ToastController,
     private peopleService : PeopleService,
   ) {}
 
