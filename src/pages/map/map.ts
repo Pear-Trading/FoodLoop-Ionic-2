@@ -13,7 +13,6 @@ import {
 } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
-import { PeopleService } from '../../providers/people-service';
 
 @Component({
   selector: 'map',
@@ -33,7 +32,7 @@ export class MapPage {
       let watch = this.geolocation.watchPosition();
         watch.subscribe((data) => {
           let location = new LatLng(data.coords.latitude, data.coords.longitude);
-          map.animateCamera({
+          this.map.animateCamera({
            target: {lat: data.coords.latitude, lng: data.coords.longitude},
            zoom: 18,
            tilt: 30,
@@ -76,7 +75,8 @@ export class MapPage {
     .then(() => {
       console.log('Map is ready!');
 
-      let mapBox = new this.LatLngBounds
+      let mapBox = this.map.getVisibleRegion();
+      console.log(mapBox);
 
       // Now you can use all methods safely.
       this.map.addMarker({
