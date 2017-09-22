@@ -52,10 +52,21 @@ export class MapPage {
   //}
 
  loadMap() {
+   this.mapElement = document.getElementById('map_orgs');
+
+   let mapOptions: GoogleMapOptions = {
+     camera: {
+       target: {
+         lat: 0,
+         lng: 0
+       },
+       zoom: 18,
+       tilt: 30
+     }
+   };
+
   this.geolocation.getCurrentPosition({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true })
     .then((resp) => {
-      this.mapElement = document.getElementById('map_orgs');
-
       let mapOptions: GoogleMapOptions = {
         camera: {
           target: {
@@ -67,10 +78,13 @@ export class MapPage {
         }
       };
 
+
       this.map = this.googleMaps.create(this.mapElement, mapOptions);
     }).catch((error) => {
       console.log('Error getting location', error);
   });
+
+  this.map = this.googleMaps.create(this.mapElement, mapOptions);
 
   // Wait the MAP_READY before using any methods.
   this.map.one(GoogleMapsEvent.MAP_READY)
