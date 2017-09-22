@@ -22,7 +22,6 @@ import { TruncateModule } from 'ng2-truncate';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { FeedbackPage } from '../pages/feedback/feedback';
-import { TokenPage } from '../pages/token/token';
 import { SignupPage } from '../pages/signup/signup';
 import { AboutPage } from '../pages/about/about';
 import { ReceiptPage } from '../pages/receipt/receipt';
@@ -42,7 +41,6 @@ import { MapPage } from '../pages/map/map';
     MyApp,
     LoginPage,
     FeedbackPage,
-    TokenPage,
     SignupPage,
     AboutPage,
     ReceiptPage,
@@ -69,7 +67,6 @@ import { MapPage } from '../pages/map/map';
     MyApp,
     LoginPage,
     FeedbackPage,
-    TokenPage,
     SignupPage,
     AboutPage,
     ReceiptPage,

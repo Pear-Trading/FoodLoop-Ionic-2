@@ -174,7 +174,7 @@ export class MyApp {
   }
 
   isActive(page: PageInterface) {
-    let childNav = this.nav.getActiveChildNav();
+    let childNav = this.nav.getActiveChildNavs()[0];
 
     // Tabs are a special case because they have their own navigation
     if (childNav) {

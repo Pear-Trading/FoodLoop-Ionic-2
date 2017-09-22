@@ -17,7 +17,6 @@ export class AboutPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private peopleService: PeopleService,
     private userData: UserData,
   ) {
     this.userData.hasLoggedIn().subscribe(

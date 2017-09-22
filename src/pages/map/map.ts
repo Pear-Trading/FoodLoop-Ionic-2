@@ -16,7 +16,8 @@ import { Platform } from 'ionic-angular';
 
 @Component({
   selector: 'map',
-  templateUrl: 'map.html'
+  templateUrl: 'map.html',
+  providers: [PeopleService]
 })
 export class MapPage {
   map: GoogleMap;
@@ -33,13 +34,14 @@ export class MapPage {
         watch.subscribe((data) => {
           let location = new LatLng(data.coords.latitude, data.coords.longitude);
           this.map.animateCamera({
-           target: {lat: data.coords.latitude, lng: data.coords.longitude},
-           zoom: 18,
-           tilt: 30,
-           bearing: 140,
-           duration: 5000,
-           padding: 0  // default = 20px
-         });
+          target: {lat: data.coords.latitude, lng: data.coords.longitude},
+          //target: {lat: data.coords.latitude, lng: data.coords.longitude},
+          zoom: 18,
+          tilt: 30,
+          bearing: 140,
+          duration: 5000,
+          padding: 0  // default = 20px
+        });
       });
     });
   }
