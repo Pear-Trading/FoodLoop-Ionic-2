@@ -1,5 +1,8 @@
 {
   "name": "Foodloop",
   "app_id": "e2f5be24",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
