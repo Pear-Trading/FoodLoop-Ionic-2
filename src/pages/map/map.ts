@@ -1,18 +1,11 @@
-import { Component } from '@angular/core';
-import { PeopleService } from '../../providers/people-service';
-import {
- GoogleMaps,
- GoogleMap,
- GoogleMapsEvent,
- GoogleMapOptions,
- CameraPosition,
- LatLng,
- LatLngBounds,
- MarkerOptions,
- Marker
-} from '@ionic-native/google-maps';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { ConnectivityServiceProvider } from '../../providers/connectivity-service/connectivity-service';
 import { Geolocation } from '@ionic-native/geolocation';
-import { Platform } from 'ionic-angular';
+import { PeopleService } from '../../providers/people-service';
+import { ConfigurationService } from '../../providers/configuration.service';
+
+declare var google;
 
 @Component({
   selector: 'map',
@@ -20,97 +13,96 @@ import { Platform } from 'ionic-angular';
   providers: [PeopleService]
 })
 export class MapPage {
-  map: GoogleMap;
-  mapElement: HTMLElement;
-  constructor(
-    private googleMaps: GoogleMaps,
-    public platform: Platform,
-    private geolocation: Geolocation,
-  ) {
-    // Wait the native plugin is ready.
-    platform.ready().then(() => {
-      this.loadMap();
-      let watch = this.geolocation.watchPosition();
-        watch.subscribe((data) => {
-          let location = new LatLng(data.coords.latitude, data.coords.longitude);
-          this.map.animateCamera({
-          target: {lat: data.coords.latitude, lng: data.coords.longitude},
-          //target: {lat: data.coords.latitude, lng: data.coords.longitude},
-          zoom: 18,
-          tilt: 30,
-          bearing: 140,
-          duration: 5000,
-          padding: 0  // default = 20px
-        });
-      });
-    });
-  }
 
-  // Don't use the ngAfterViewInit(). The native plugin is not ready.
-  //ngAfterViewInit() {
-  // this.loadMap();
-  //}
+  @ViewChild('map') mapElement: ElementRef;
 
- loadMap() {
-   this.mapElement = document.getElementById('map_orgs');
+    map: any;
+    mapInitialised: boolean = false;
+    private apiKey = ConfigurationService.mapApiKey;
 
-   let mapOptions: GoogleMapOptions = {
-     camera: {
-       target: {
-         lat: 0,
-         lng: 0
-       },
-       zoom: 18,
-       tilt: 30
-     }
-   };
+    constructor(
+    public nav: NavController,
+    public connectivityService: ConnectivityServiceProvider,
+    private geolocation: Geolocation
+    ) {
+      this.loadGoogleMaps();
+    }
 
-  this.geolocation.getCurrentPosition({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true })
-    .then((resp) => {
-      let mapOptions: GoogleMapOptions = {
-        camera: {
-          target: {
-            lat: resp.coords.latitude,
-            lng: resp.coords.longitude
-          },
-          zoom: 18,
-          tilt: 30
+    loadGoogleMaps(){
+      this.addConnectivityListeners();
+    if(typeof google == "undefined" || typeof google.maps == "undefined"){
+      console.log("Google maps JavaScript needs to be loaded.");
+      this.disableMap();
+      if(this.connectivityService.isOnline()){
+        console.log("online, loading map");
+        //Load the SDK
+        window['mapInit'] = () => {
+          this.initMap();
+          this.enableMap();
         }
-      };
+        let script = document.createElement("script");
+        script.id = "googleMaps";
+        if(this.apiKey){
+          script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
+        } else {
+          script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
+        }
+        document.body.appendChild(script);
+      }
+    }
+    else {
+      if(this.connectivityService.isOnline()){
+        console.log("showing map");
+        this.initMap();
+        this.enableMap();
+      }
+      else {
+        console.log("disabling map");
+        this.disableMap();
+      }
+    }
+    }
 
+    initMap(){
+      this.mapInitialised = true;
+      this.geolocation.getCurrentPosition().then((position) => {
+        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        let mapOptions = {
+          center: latLng,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      });
+    }
 
-      this.map = this.googleMaps.create(this.mapElement, mapOptions);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-  });
+    // connection lost
+    disableMap(){
+      console.log("disable map");
+    }
 
-  this.map = this.googleMaps.create(this.mapElement, mapOptions);
+    // connection established
+    enableMap(){
+      console.log("enable map");
+    }
 
-  // Wait the MAP_READY before using any methods.
-  this.map.one(GoogleMapsEvent.MAP_READY)
-    .then(() => {
-      console.log('Map is ready!');
-
-      let mapBox = this.map.getVisibleRegion();
-      console.log(mapBox);
-
-      // Now you can use all methods safely.
-      this.map.addMarker({
-          title: 'Ionic',
-          icon: 'blue',
-          animation: 'DROP',
-          position: {
-            lat: 43.0741904,
-            lng: -89.3809802
+    addConnectivityListeners(){
+      let onOnline = () => {
+        setTimeout(() => {
+          if(typeof google == "undefined" || typeof google.maps == "undefined"){
+            this.loadGoogleMaps();
+          } else {
+            if(!this.mapInitialised){
+              this.initMap();
+            }
+            this.enableMap();
           }
-        })
-        .then(marker => {
-          marker.on(GoogleMapsEvent.MARKER_CLICK)
-            .subscribe(() => {
-              alert('clicked');
-            });
-        });
-
-    });
+        }, 2000);
+      };
+      let onOffline = () => {
+        this.disableMap();
+      };
+      document.addEventListener('online', onOnline, false);
+      document.addEventListener('offline', onOffline, false);
+    }
   }
-}
