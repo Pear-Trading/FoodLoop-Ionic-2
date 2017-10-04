@@ -13,6 +13,8 @@ import { FilePath } from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
 import { AppVersion } from '@ionic-native/app-version';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Network } from '@ionic-native/network';
 import { TruncateModule } from 'ng2-truncate';
 
 // import { AppProviders } from './app.providers';
@@ -33,6 +35,8 @@ import { OverviewPage } from '../pages/overview/overview';
 import { ShopPage } from '../pages/shop/shop';
 import { StatPage } from '../pages/stat/stat';
 import { IntroPage } from '../pages/intro/intro';
+import { MapPage } from '../pages/map/map';
+import { ConnectivityServiceProvider } from '../providers/connectivity-service/connectivity-service';
 
 @NgModule({
   declarations: [
@@ -87,11 +91,15 @@ import { IntroPage } from '../pages/intro/intro';
     File,
     Camera,
     AppVersion,
+    Network,
     InAppBrowser,
+    Geolocation,
+    ConnectivityServiceProvider,
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
-    }
+    },
+    ConnectivityServiceProvider
   ],
 })
 export class AppModule {}
