@@ -45,6 +45,7 @@
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-filepath": "^1.0.2",
+        "cordova-plugin-geolocation": "^2.4.3",
         "cordova-plugin-inappbrowser": "^1.7.1",
         "cordova-plugin-network-information": "^1.3.3",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -93,7 +94,8 @@
             "cordova-plugin-camera": {},
             "cordova-plugin-inappbrowser": {},
             "cordova-plugin-compat": {},
-            "cordova-plugin-network-information": {}
+            "cordova-plugin-network-information": {},
+            "cordova-plugin-geolocation": {}
         },
         "platforms": [
             "android"

@@ -43,9 +43,9 @@ export class MapPage {
         let script = document.createElement("script");
         script.id = "googleMaps";
         if(this.apiKey){
-          script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
+          script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
         } else {
-          script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
+          script.src = 'https://maps.googleapis.com/maps/api/js?callback=mapInit';
         }
         document.body.appendChild(script);
       }
@@ -71,7 +71,7 @@ export class MapPage {
           center: latLng,
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+        };
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       });
     }
