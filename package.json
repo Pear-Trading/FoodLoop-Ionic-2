@@ -90,7 +90,9 @@
             "ionic-plugin-keyboard": {},
             "cordova-plugin-app-version": {},
             "cordova-plugin-camera": {},
-            "cordova-plugin-inappbrowser": {}
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-compat": {},
+            "cordova-plugin-network-information": {}
         },
         "platforms": [
             "android"
