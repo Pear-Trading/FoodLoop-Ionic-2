@@ -9,6 +9,7 @@ import { ReceiptPage } from '../pages/receipt/receipt';
 import { LeaderboardPage } from '../pages/leaderboard/leaderboard';
 import { SettingPage} from '../pages/setting/setting';
 import { MapPage} from '../pages/map/map';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 // import { StatPage} from '../pages/stat/stat';
 import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 
@@ -72,11 +73,16 @@ export class MyApp {
     public userData: UserData,
     public splashScreen: SplashScreen,
     public peopleService: PeopleService,
-
+    private androidPermissions: AndroidPermissions,
   ) {
 
   /* Check if localCache exsit, if yes, auto-login */
   /* if not, redirect to the home page for login or sign up*/
+
+  this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.INTERNET).then(
+    success => console.log('Permission granted'),
+    err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.INTERNET)
+  );
 
 
     this.userData.hasLoggedIn().subscribe(

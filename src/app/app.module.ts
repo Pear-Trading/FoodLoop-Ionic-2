@@ -15,6 +15,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from '@ionic-native/network';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { TruncateModule } from 'ng2-truncate';
 
 // import { AppProviders } from './app.providers';
@@ -93,6 +94,7 @@ import { ConnectivityServiceProvider } from '../providers/connectivity-service/c
     Network,
     InAppBrowser,
     Geolocation,
+    AndroidPermissions,
     ConnectivityServiceProvider,
     {
       provide: ErrorHandler,
