@@ -56,6 +56,7 @@ import { ConnectivityServiceProvider } from '../providers/connectivity-service/c
     ShopPage,
     StatPage,
     IntroPage,
+    MapPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp,{ scrollAssist: false, autoFocusAssist: false }),
@@ -82,6 +83,7 @@ import { ConnectivityServiceProvider } from '../providers/connectivity-service/c
     ShopPage,
     StatPage,
     IntroPage,
+    MapPage,
   ],
   providers: [
     Transfer,
