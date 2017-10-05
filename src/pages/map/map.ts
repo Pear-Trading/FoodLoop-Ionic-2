@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ConnectivityServiceProvider } from '../../providers/connectivity-service/connectivity-service';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { ConnectivityServiceProvider } from '../../providers/connectivity-service/connectivity-service';
 import { PeopleService } from '../../providers/people-service';
 import { ConfigurationService } from '../../providers/configuration.service';
 
@@ -19,13 +20,39 @@ export class MapPage {
     map: any;
     mapInitialised: boolean = false;
     private apiKey = ConfigurationService.mapApiKey;
+    mapStatus: boolean = false;
+    locationStatus : any = "loading";
 
     constructor(
     public nav: NavController,
     public connectivityService: ConnectivityServiceProvider,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private diagnostic: Diagnostic
     ) {
       this.loadGoogleMaps();
+      this.diagnostic.isLocationEnabled().then(
+      (isAvailable) => {
+        console.log('Is available? ' + isAvailable);
+        this.locationStatus = "found";
+      }).catch( (e) => {
+        console.log(e);
+      });
+
+
+
+
+      let watch = this.geolocation.watchPosition();
+        watch.subscribe((data) => {
+          let location = new LatLng(data.coords.latitude, data.coords.longitude);
+          this.map.animateCamera({
+          target: {lat: data.coords.latitude, lng: data.coords.longitude},
+          //target: {lat: data.coords.latitude, lng: data.coords.longitude},
+          zoom: 18,
+          tilt: 30,
+          duration: 5000,
+          padding: 0  // default = 20px
+        });
+      });
     }
 
     loadGoogleMaps(){
@@ -65,25 +92,27 @@ export class MapPage {
 
     initMap(){
       this.mapInitialised = true;
-      this.geolocation.getCurrentPosition().then((position) => {
-        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      // this.geolocation.getCurrentPosition().then((position) => {
+        let latLng = new google.maps.LatLng(54,-2);
         let mapOptions = {
           center: latLng,
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      });
+      // });
     }
 
     // connection lost
     disableMap(){
       console.log("disable map");
+      this.mapStatus = false;
     }
 
     // connection established
     enableMap(){
       console.log("enable map");
+      this.mapStatus = true;
     }
 
     addConnectivityListeners(){

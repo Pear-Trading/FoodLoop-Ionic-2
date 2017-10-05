@@ -9,6 +9,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <div #map id="map"></div>
-</ion-content>
+<div [ngSwitch]="locationStatus">
+  <div *ngSwitchcase="'loading'">
+    Loading location
+  </div>
+  <div *ngSwitchcase="'found'">
+    <ion-content *ngIf="mapStatus" padding>
+      <div #map id="map"></div>
+    </ion-content>
+    <ion-content *ngIf="!mapStatus" padding>
+      No internet connection available
+    </ion-content>
+  </div>
+  <div *ngSwitchcase="'not found'">
+    Location cannot be found. Please enable location settings, then reload this page.
+  </div>
+</div>
