@@ -28,94 +28,99 @@ export class MapPage {
     public connectivityService: ConnectivityServiceProvider,
     private geolocation: Geolocation,
     private diagnostic: Diagnostic
-    ) {
+    ) { }
+
+    ionViewDidEnter() {
       this.loadGoogleMaps();
-      this.diagnostic.isLocationEnabled().then(
-      (isAvailable) => {
-        console.log('Is available? ' + isAvailable);
-        this.locationStatus = "found";
-      }).catch( (e) => {
-        console.log(e);
-      });
-
-
-
-
-      let watch = this.geolocation.watchPosition();
-        watch.subscribe((data) => {
-          let location = new LatLng(data.coords.latitude, data.coords.longitude);
-          this.map.animateCamera({
-          target: {lat: data.coords.latitude, lng: data.coords.longitude},
-          //target: {lat: data.coords.latitude, lng: data.coords.longitude},
-          zoom: 18,
-          tilt: 30,
-          duration: 5000,
-          padding: 0  // default = 20px
-        });
-      });
     }
 
-    loadGoogleMaps(){
+    loadGoogleMaps() {
       this.addConnectivityListeners();
-    if(typeof google == "undefined" || typeof google.maps == "undefined"){
-      console.log("Google maps JavaScript needs to be loaded.");
-      this.disableMap();
-      if(this.connectivityService.isOnline()){
-        console.log("online, loading map");
-        //Load the SDK
-        window['mapInit'] = () => {
+      if(typeof google == "undefined" || typeof google.maps == "undefined"){
+        console.log("Google maps JavaScript needs to be loaded.");
+        this.disableMap();
+        if(this.connectivityService.isOnline()){
+          console.log("online, loading map");
+          //Load the SDK
+          window['mapInit'] = () => {
+            this.initMap();
+            this.enableMap();
+          }
+          let script = document.createElement("script");
+          script.id = "googleMaps";
+          if(this.apiKey){
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
+          } else {
+            script.src = 'https://maps.googleapis.com/maps/api/js?callback=mapInit';
+          }
+          document.body.appendChild(script);
+        }
+      }
+      else {
+        if(this.connectivityService.isOnline()){
+          console.log("showing map");
           this.initMap();
           this.enableMap();
         }
-        let script = document.createElement("script");
-        script.id = "googleMaps";
-        if(this.apiKey){
-          script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
-        } else {
-          script.src = 'https://maps.googleapis.com/maps/api/js?callback=mapInit';
+        else {
+          console.log("disabling map");
+          this.disableMap();
         }
-        document.body.appendChild(script);
       }
-    }
-    else {
-      if(this.connectivityService.isOnline()){
-        console.log("showing map");
-        this.initMap();
-        this.enableMap();
-      }
-      else {
-        console.log("disabling map");
-        this.disableMap();
-      }
-    }
     }
 
-    initMap(){
+    initMap() {
       this.mapInitialised = true;
-      // this.geolocation.getCurrentPosition().then((position) => {
-        let latLng = new google.maps.LatLng(54,-2);
+      this.diagnostic.isLocationEnabled().then(
+      (isAvailable) => {
+        if ( isAvailable == true ) {
+          this.createMap();
+        } else {
+          this.diagnostic.switchToLocationSettings();
+        }
+      }).catch( (e) => {
+        console.log(e);
+        this.locationStatus = "not found";
+      });
+    }
+
+    createMap() {
+      // find position and create map
+      this.geolocation.getCurrentPosition(0,10000,false).then((position) => {
+        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         let mapOptions = {
           center: latLng,
-          zoom: 15,
+          zoom: 13,
+          gestureHandling: "cooperative",
           mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+        }
+        this.locationStatus = "found";
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      // });
+
+        // watch position and move to location
+        let watch = this.geolocation.watchPosition();
+        watch.subscribe((data) => {
+         let latLng = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
+         this.map.panTo(latLng);
+        });
+      }, (err) => {
+        console.log(err);
+      });
     }
 
     // connection lost
-    disableMap(){
+    disableMap() {
       console.log("disable map");
       this.mapStatus = false;
     }
 
     // connection established
-    enableMap(){
+    enableMap() {
       console.log("enable map");
       this.mapStatus = true;
     }
 
-    addConnectivityListeners(){
+    addConnectivityListeners() {
       let onOnline = () => {
         setTimeout(() => {
           if(typeof google == "undefined" || typeof google.maps == "undefined"){
