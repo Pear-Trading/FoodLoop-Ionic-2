@@ -1,4 +1,4 @@
 {
-  "api_url": "http://dev.peartrade.org/api",
+  "api_url": "https://dev.peartrade.org/api",
   "api_key": "CHANGEME"
 }

@@ -87,9 +87,9 @@ export class MapPage {
     createMap() {
       console.log("loading location");
       let posOptions = {
-        maximumAge: 0,
+        maximumAge: 300000,
         timeout: 30000,
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
       }
       // find position and create map
       this.geolocation.getCurrentPosition(posOptions).then((position) => {
