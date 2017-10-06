@@ -85,8 +85,14 @@ export class MapPage {
     }
 
     createMap() {
+      console.log("loading location");
+      let posOptions = {
+        maximumAge: 0,
+        timeout: 30000,
+        enableHighAccuracy: false,
+      }
       // find position and create map
-      this.geolocation.getCurrentPosition(0,10000,false).then((position) => {
+      this.geolocation.getCurrentPosition(posOptions).then((position) => {
         let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         let mapOptions = {
           center: latLng,
@@ -95,6 +101,7 @@ export class MapPage {
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         this.locationStatus = "found";
+        console.log("found location");
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
         // watch position and move to location
@@ -105,6 +112,7 @@ export class MapPage {
         });
       }, (err) => {
         console.log(err);
+        console.log("location not found");
       });
     }
 

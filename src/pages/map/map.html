@@ -11,17 +11,39 @@
 
 <div [ngSwitch]="locationStatus">
   <div *ngSwitchCase="'loading'">
-    Loading location
+    <ion-content>
+    	<ion-grid class="grid-submit">
+    		<ion-row>
+    			<ion-col text-center>
+    				<h1>Loading Location</h1>
+    			</ion-col>
+    		</ion-row>
+      </ion-grid>
+    </ion-content>
   </div>
   <div *ngSwitchCase="'found'">
     <ion-content *ngIf="mapStatus" padding>
       <div #map id="map"></div>
     </ion-content>
     <ion-content *ngIf="!mapStatus" padding>
-      No internet connection available.
+      <ion-grid class="grid-submit">
+    		<ion-row>
+    			<ion-col text-center>
+    				<h1>No internet connection available.</h1>
+    			</ion-col>
+    		</ion-row>
+      </ion-grid>
     </ion-content>
   </div>
   <div *ngSwitchCase="'not found'">
-    Location cannot be found. Please enable location settings, then reload this page.
+    <ion-content>
+      <ion-grid class="grid-submit">
+        <ion-row>
+          <ion-col text-center>
+            <h1>Location cannot be found. Please enable location settings, then reload this page.</h1>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
   </div>
 </div>
