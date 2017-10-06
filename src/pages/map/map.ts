@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-import { Diagnostic } from '@ionic-native/diagnostic';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { ConnectivityServiceProvider } from '../../providers/connectivity-service/connectivity-service';
 import { PeopleService } from '../../providers/people-service';
 import { ConfigurationService } from '../../providers/configuration.service';
@@ -27,7 +27,7 @@ export class MapPage {
     public nav: NavController,
     public connectivityService: ConnectivityServiceProvider,
     private geolocation: Geolocation,
-    private diagnostic: Diagnostic
+    private locationAccuracy: LocationAccuracy
     ) { }
 
     ionViewDidEnter() {
@@ -71,16 +71,17 @@ export class MapPage {
 
     initMap() {
       this.mapInitialised = true;
-      this.diagnostic.isLocationEnabled().then(
-      (isAvailable) => {
-        if ( isAvailable == true ) {
-          this.createMap();
+      this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+        if(canRequest) {
+          // the accuracy option will be ignored by iOS
+          this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+            () => this.createMap(),
+            error => console.log('Error requesting location permissions', error)
+          );
         } else {
-          this.diagnostic.switchToLocationSettings();
+          console.log("cannot request location accuracy settings");
+          this.locationStatus = "not found";
         }
-      }).catch( (e) => {
-        console.log(e);
-        this.locationStatus = "not found";
       });
     }
 
