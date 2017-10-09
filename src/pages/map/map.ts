@@ -72,42 +72,32 @@ export class MapPage {
     }
 
     initMap() {
+      this.createMap();
       this.mapInitialised = true;
       this.locationAccuracy.canRequest().then((canRequest: boolean) => {
         if(canRequest) {
           // the accuracy option will be ignored by iOS
           this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-            () => this.createGeoMap(),
+            () => this.geoPan(),
             error => console.log('Error requesting location permissions', error)
           );
         } else {
           console.log("cannot request location accuracy settings");
-          this.createStaticMap();
         }
       });
     }
 
-    createGeoMap() {
+    geoPan() {
       console.log("loading location");
       let posOptions = {
         maximumAge: 300000,
-        timeout: 30000,
+        timeout: 20000,
         enableHighAccuracy: true,
       }
       // find position and create map
       this.geolocation.getCurrentPosition(posOptions).then((position) => {
         let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        let mapOptions = {
-          center: latLng,
-          zoom: 13,
-          gestureHandling: "cooperative",
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        this.locationStatus = "found";
-        this.mapStatus = true;
-        console.log("found location");
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
+        this.map.panTo(latLng);
         // watch position and move to location
         let watch = this.geolocation.watchPosition();
         watch.subscribe((data) => {
@@ -118,11 +108,10 @@ export class MapPage {
         console.log(err);
         console.log("location not found");
         this.locationStatus = "not found";
-        this.createStaticMap();
       });
     }
 
-    createStaticMap() {
+    createMap() {
       // find position and create map
       this.peopleService.loadMap().subscribe(
         result => {
@@ -134,7 +123,6 @@ export class MapPage {
               gestureHandling: "cooperative",
               mapTypeId: google.maps.MapTypeId.ROADMAP
             }
-            this.locationStatus = "found";
             this.mapStatus = true;
             console.log("found location");
             this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
