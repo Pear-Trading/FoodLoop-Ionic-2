@@ -101,8 +101,8 @@ export class MapPage {
         // watch position and move to location
         let watch = this.geolocation.watchPosition();
         watch.subscribe((data) => {
-         let latLng = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
-         this.map.panTo(latLng);
+          let latLng = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
+          this.map.panTo(latLng);
         });
       }, (err) => {
         console.log(err);
