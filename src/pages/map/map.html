@@ -9,41 +9,26 @@
   </ion-toolbar>
 </ion-header>
 
-<div [ngSwitch]="locationStatus">
-  <div *ngSwitchCase="'loading'">
-    <ion-content>
-    	<ion-grid class="grid-submit">
-    		<ion-row>
-    			<ion-col text-center>
-    				<h1>Loading Location</h1>
-    			</ion-col>
-    		</ion-row>
-      </ion-grid>
-    </ion-content>
+<ion-content *ngIf="mapStatus" padding>
+  <div *ngIf="connectionStatus">
+    <div #map id="map"></div>
   </div>
-  <div *ngSwitchCase="'found'">
-    <ion-content *ngIf="mapStatus" padding>
-      <div #map id="map"></div>
-    </ion-content>
-    <ion-content *ngIf="!mapStatus" padding>
-      <ion-grid class="grid-submit">
-    		<ion-row>
-    			<ion-col text-center>
-    				<h1>No internet connection available.</h1>
-    			</ion-col>
-    		</ion-row>
-      </ion-grid>
-    </ion-content>
+  <div *ngIf="!connectionStatus">
+    <ion-grid class="grid-submit">
+  		<ion-row>
+  			<ion-col text-center>
+  				<h1>No connection found</h1>
+  			</ion-col>
+  		</ion-row>
+    </ion-grid>
   </div>
-  <div *ngSwitchCase="'not found'">
-    <ion-content>
-      <ion-grid class="grid-submit">
-        <ion-row>
-          <ion-col text-center>
-            <h1>Location cannot be found. Please enable location settings, then reload this page.</h1>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-content>
-  </div>
-</div>
+</ion-content>
+<ion-content *ngIf="!mapStatus" padding>
+  <ion-grid class="grid-submit">
+		<ion-row>
+			<ion-col text-center>
+				<h1>Map not available.</h1>
+			</ion-col>
+		</ion-row>
+  </ion-grid>
+</ion-content>

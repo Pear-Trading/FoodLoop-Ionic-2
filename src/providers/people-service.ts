@@ -143,6 +143,20 @@ export class PeopleService {
 
   // Used for account edit page
 
+  public loadMap() {
+    return this.userData.getSessionKey()
+      .flatMap(
+        key => {
+          return this.http.post(
+            this.apiUrl + '/user/map',
+            { session_key : key },
+          );
+        },
+      ).map( response => response.json() );
+  }
+
+  // Used for account edit page
+
   public accountFullLoad() {
     return this.userData.getSessionKey()
       .flatMap(

@@ -22,12 +22,14 @@ export class MapPage {
     private apiKey = ConfigurationService.mapApiKey;
     mapStatus: boolean = false;
     locationStatus : any = "loading";
+    connectionStatus: boolean = false;
 
     constructor(
     public nav: NavController,
     public connectivityService: ConnectivityServiceProvider,
     private geolocation: Geolocation,
-    private locationAccuracy: LocationAccuracy
+    private locationAccuracy: LocationAccuracy,
+    public peopleService: PeopleService
     ) { }
 
     ionViewDidEnter() {
@@ -75,17 +77,17 @@ export class MapPage {
         if(canRequest) {
           // the accuracy option will be ignored by iOS
           this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-            () => this.createMap(),
+            () => this.createGeoMap(),
             error => console.log('Error requesting location permissions', error)
           );
         } else {
           console.log("cannot request location accuracy settings");
-          this.locationStatus = "not found";
+          this.createStaticMap();
         }
       });
     }
 
-    createMap() {
+    createGeoMap() {
       console.log("loading location");
       let posOptions = {
         maximumAge: 300000,
@@ -102,6 +104,7 @@ export class MapPage {
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         this.locationStatus = "found";
+        this.mapStatus = true;
         console.log("found location");
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
@@ -114,19 +117,48 @@ export class MapPage {
       }, (err) => {
         console.log(err);
         console.log("location not found");
+        this.locationStatus = "not found";
+        this.createStaticMap();
       });
+    }
+
+    createStaticMap() {
+      // find position and create map
+      this.peopleService.loadMap().subscribe(
+        result => {
+          if (result) {
+            let latLng = new google.maps.LatLng(result.coords.latitude, result.coords.longitude);
+            let mapOptions = {
+              center: latLng,
+              zoom: 12,
+              gestureHandling: "cooperative",
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            this.locationStatus = "found";
+            this.mapStatus = true;
+            console.log("found location");
+            this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+          } else {
+            console.log('No data received');
+          }
+        },
+        err => {
+          console.log(err);
+          console.log("Could not load static map");
+        }
+      );
     }
 
     // connection lost
     disableMap() {
       console.log("disable map");
-      this.mapStatus = false;
+      //this.connectionStatus = false;
     }
 
     // connection established
     enableMap() {
       console.log("enable map");
-      this.mapStatus = true;
+      this.connectionStatus = true;
     }
 
     addConnectivityListeners() {
