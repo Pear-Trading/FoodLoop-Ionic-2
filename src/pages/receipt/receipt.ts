@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   NavController,
   NavParams,
@@ -12,7 +12,6 @@ import {
 import { convertDataToISO } from 'ionic-angular/util/datetime-util';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FilePath } from '@ionic-native/file-path';
-import { Transfer } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { Keyboard } from '@ionic-native/keyboard';
 import { PeopleService } from '../../providers/people-service';
@@ -74,7 +73,6 @@ export class ReceiptPage {
     private keyboard: Keyboard,
     private camera: Camera,
     private filePath: FilePath,
-    private transfer: Transfer,
     private file: File,
     public alertCtrl: AlertController
   ) {

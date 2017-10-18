@@ -68,7 +68,6 @@ export class UserPage {
   };
 
   constructor(
-    private  app : App,
     public navCtrl: NavController,
     public navParams: NavParams,
     public peopleService: PeopleService,
