@@ -2,7 +2,6 @@ import { Component,ViewChild } from '@angular/core';
 import {
   NavController,
   NavParams,
-  App,
   Slides,
   ToastController,
   AlertController,
