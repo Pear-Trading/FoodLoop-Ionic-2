@@ -197,24 +197,6 @@ export class PeopleService {
       ).map( response => response.json() );
   }
 
-  /* Links to server, these should be stored in config.js */
-  foodloop_root_url = "http://app.peartrade.org/";
-  foodloop_root_url_edit = this.foodloop_root_url + "edit";
-  foodloop_root_url_token = this.foodloop_root_url + "token";
-  foodloop_root_url_approve = this.foodloop_root_url + "admin-approve";
-
-  edit(data){
-    return this.http.post(this.foodloop_root_url_edit,data);
-  }
-
-  verifyToken(data){
-    return this.http.post(this.foodloop_root_url_token,data);
-  }
-
-  approve(data){
-    return this.http.post(this.foodloop_root_url_approve,data);
-  }
-
 
 /*********************** --  Data representation part -- **************************/
   /* including get request to server to retrieve user data */
