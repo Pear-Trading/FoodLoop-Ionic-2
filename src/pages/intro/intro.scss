@@ -17,12 +17,14 @@ page-intro {
 		scroll-content {
       display: flex;
       flex-direction: column;
+
     }
 
     ion-grid {
-			margin-top: 20px;
+			margin-top: 10px;
       padding: 0;
       height: 100%;
+			overflow: 0;
     }
 
     ion-row {
@@ -32,9 +34,8 @@ page-intro {
 	}
 
 	.icon-intro {
-		height: 100%;
-		// width: 25%;
-		margin: 50px auto;
-		display: block;
+		width: 25vw;
+  	margin: auto;
+  	display: block;
 	}
 }

@@ -34,3 +34,7 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 
 config/config-dev.json
+
+\.sourcemaps/main\.css\.map
+
+\.sourcemaps/main\.js\.map

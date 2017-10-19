@@ -2,7 +2,6 @@ import { Component,ViewChild } from '@angular/core';
 import {
   NavController,
   NavParams,
-  App,
   Slides,
   ToastController,
   AlertController,
@@ -68,7 +67,6 @@ export class UserPage {
   };
 
   constructor(
-    private  app : App,
     public navCtrl: NavController,
     public navParams: NavParams,
     public peopleService: PeopleService,
