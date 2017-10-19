@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { PeopleService } from '../../providers/people-service';
 import { UserData } from '../../providers/user-data';
 import 'rxjs/add/operator/timeout';
 
@@ -17,7 +16,6 @@ export class AboutPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private peopleService: PeopleService,
     private userData: UserData,
   ) {
     this.userData.hasLoggedIn().subscribe(

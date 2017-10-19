@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -13,8 +12,7 @@ import 'rxjs/add/operator/map';
 export class UserData {
 
   constructor(
-    private storage: Storage,
-    private events: Events
+    private storage: Storage
   ) {
     this.loadTestingData();
   }
@@ -205,24 +203,6 @@ export class UserData {
   random_data(username,fullname){
        return   {token:"d","ref":username,"username": fullname,"previousPos":1,"currentPos":1,"pearPoint":620.57,"retailerSpent":20,"receiptSubmitted":161,"firstStart":"20-Jun-15"};
   }
-
-  // /* Login and log out events ****/
-  // login(username: string ){
-  //   this.storage.set(this.HAS_LOGGED_IN,true);
-  //   this.setUsername(username);
-  //   this.events.publish('user:login')
-  // }
-  // signup(username: string) {
-  //   this.storage.set(this.HAS_LOGGED_IN, true);
-  //   this.setUsername(username);
-  //   this.events.publish('user:signup');
-  // };
-  // logout() {
-  //   this.storage.remove(this.HAS_LOGGED_IN);
-  //   this.storage.remove('username');
-  //   this.events.publish('user:logout');
-  // };
-  /* Login and log out events end ****/
 
   /* Storage management and data access method */
   getRankingData(){
